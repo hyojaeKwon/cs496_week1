@@ -9,12 +9,18 @@ import java.util.ArrayList;
 
 public class VPAdapter extends FragmentPagerAdapter {
     private ArrayList<Fragment> items;
+    private ArrayList<String> itext = new ArrayList<String>();
     public VPAdapter(@NonNull FragmentManager fm) {
         super(fm);
         items = new ArrayList<Fragment>();
         items.add(new Fragment1());
         items.add(new Fragment2());
         items.add(new Fragment3());
+
+        itext.add("List");
+        itext.add("Gallery");
+        itext.add("Map");
+
     }
 
     @NonNull
@@ -26,5 +32,10 @@ public class VPAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return items.size();
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return itext.get(position);
     }
 }
