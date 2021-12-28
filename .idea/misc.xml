@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/code/cs496/week1/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/code/cs496/week1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
+        <entry key="..\:/code/cs496/week1/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/code/cs496/week1/app/src/main/res/layout/fragment_1.xml" value="0.1" />
+        <entry key="..\:/code/cs496/week1/app/src/main/res/layout/fragment_2.xml" value="0.20520833333333333" />
+        <entry key="..\:/code/cs496/week1/app/src/main/res/layout/fragment_3.xml" value="0.1" />
+        <entry key="..\:/code/cs496/week1/app/src/main/res/layout/fragment_first.xml" value="0.1" />
       </map>
     </option>
   </component>
