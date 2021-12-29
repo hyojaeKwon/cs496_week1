@@ -3,18 +3,22 @@ package com.example.rudolph_king;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+
 import androidx.fragment.app.ListFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
 
 import java.util.ArrayList;
 
@@ -23,12 +27,14 @@ import java.util.ArrayList;
  * Use the {@link Fragment1#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class Fragment1 extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
 
     // customizing listView
     ArrayList<Actor> actors;
@@ -52,6 +58,7 @@ public class Fragment1 extends Fragment {
      * @return A new instance of fragment Fragment1.
      */
     // TODO: Rename and change types and number of parameters
+
     public static Fragment1 newInstance(String param1, String param2) {
         Fragment1 fragment = new Fragment1();
         Bundle args = new Bundle();
@@ -76,6 +83,7 @@ public class Fragment1 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_1, container, false) ;
+
 
         // add list elements -- test
         actors = new ArrayList<>();

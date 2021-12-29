@@ -2,6 +2,7 @@ package com.example.rudolph_king;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+import 	android.content.res.AssetManager;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,20 +10,29 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.content.res.AssetManager;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.io.InputStream;
+
+
+
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ViewPager vp = findViewById(R.id.viewpager);
+
         VPAdapter adapter = new VPAdapter(getSupportFragmentManager());
         vp.setAdapter(adapter);
+        //json file 받기
+
 
         // connect view pager with tab layout
         TabLayout tab = findViewById(R.id.tab);
