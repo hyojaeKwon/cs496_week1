@@ -91,7 +91,7 @@ public class Fragment1 extends Fragment {
         // add list elements -- test
         shopList = new ArrayList<>();
         JsonRead jr = new JsonRead();
-        JSONObject jo = ((MainActivity)mContext).reading();
+        JSONObject jo = jr.reading(getContext());
         JSONArray ja = null;
         try {
             ja = jo.getJSONArray("Numbers");

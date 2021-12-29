@@ -3,8 +3,10 @@ package com.example.rudolph_king;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,7 +24,28 @@ public class JsonRead extends AppCompatActivity  {
 
 
     public JsonRead(){}
+    public JSONObject reading(Context context){
+//        this.mContext = context;
 
+        AssetManager assetManager = context.getResources().getAssets();
+        InputStream source = null;
+        JSONObject JObject = null;
+        try{
+            source = assetManager.open("shop.json");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(source));
+            String strResult = "";
+            String line = "";
+
+            while((line=reader.readLine()) != null){
+                strResult += line;
+            }
+            JObject = new JSONObject(strResult);
+            return JObject;
+        }catch (IOException | JSONException e){
+            e.printStackTrace();
+        }
+        return JObject;
+    }
 
 //    public JSONObject create(Bundle savedInstanceState){
 //

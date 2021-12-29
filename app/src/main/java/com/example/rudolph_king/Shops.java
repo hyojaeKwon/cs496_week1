@@ -1,5 +1,7 @@
 package com.example.rudolph_king;
 
+import android.util.Log;
+
 import org.json.*;
 
 import java.util.ArrayList;
@@ -17,9 +19,13 @@ public class Shops {
         this.phone = jsonText.getString("phone");
         JSONArray JTags = jsonText.getJSONArray("tag");
 
+        //Tags array list 생성
+        tags = new ArrayList<String>();
         for(int i = 0 ; i < JTags.length() ; i++){
             String tag;
             tag = JTags.getString(i);
+            //찍어보는 방법
+//            Log.e("check", tag.toString());
             this.tags.add(tag);
         }
     }

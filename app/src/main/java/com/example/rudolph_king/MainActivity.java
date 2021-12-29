@@ -29,28 +29,7 @@ import java.io.InputStreamReader;
 public class MainActivity extends AppCompatActivity {
     private Context mContext;
 
-    public JSONObject reading(Context context){
-        this.mContext = context;
-        AssetManager assetManager = getResources().getAssets();
-        InputStream source = null;
-        JSONObject JObject = null;
-        try{
-            source = assetManager.open("shop.json");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(source));
 
-            String strResult = "";
-            String line = "";
-
-            while((line=reader.readLine()) != null){
-                strResult += line;
-            }
-            JObject = new JSONObject(strResult);
-            return JObject;
-        }catch (IOException | JSONException e){
-            e.printStackTrace();
-        }
-        return JObject;
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
