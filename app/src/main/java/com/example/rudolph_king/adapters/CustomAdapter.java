@@ -1,7 +1,6 @@
-package com.example.rudolph_king;
+package com.example.rudolph_king.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.rudolph_king.R;
+import com.example.rudolph_king.Shops;
 
 import java.util.ArrayList;
 
@@ -74,12 +75,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         viewHolder.tv_name.setText(shop.getTitle());
         viewHolder.tv_summary.setText(shop.getPhone());
         Glide
-                .with(context)
-                .load(shop.getThumb_url())
-                .centerCrop()
-                .apply(new RequestOptions().override(250, 250))
-                .into(viewHolder.iv_thumb);
-        Log.e("image load", shop.getThumb_url());
+            .with(context)
+            .load(shop.getThumb_url())
+            .centerCrop()
+            .apply(new RequestOptions().override(180, 180))
+            .into(viewHolder.iv_thumb);
+//        Log.e("image load", String.valueOf(position));
         viewHolder.tv_name.setTag(shop.getTitle());
     }
 

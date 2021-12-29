@@ -1,28 +1,19 @@
-package com.example.rudolph_king;
+package com.example.rudolph_king.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
+import android.content.Intent;
 import 	android.content.res.AssetManager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.content.res.AssetManager;
-import android.widget.Toast;
 
+import com.example.rudolph_king.R;
+import com.example.rudolph_king.adapters.VPAdapter;
 import com.google.android.material.tabs.TabLayout;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -45,4 +36,11 @@ public class MainActivity extends AppCompatActivity {
         tab.setupWithViewPager(vp);
 
     }
+
+//    public void showDetails(View view) {
+//        Log.e("Pressed", String.valueOf(true));
+////        Intent intent = new Intent(this, PhotoActivity.class);
+////        intent.putExtra("img", 1);
+////        startActivity(intent);
+//    }
 }

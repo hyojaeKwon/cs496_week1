@@ -1,10 +1,9 @@
-package com.example.rudolph_king;
+package com.example.rudolph_king.fragments;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import androidx.fragment.app.ListFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,11 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import com.example.rudolph_king.adapters.CustomAdapter;
+import com.example.rudolph_king.activities.JsonRead;
+import com.example.rudolph_king.R;
+import com.example.rudolph_king.Shops;
 
 import org.json.JSONArray;
 import org.json.JSONException;
