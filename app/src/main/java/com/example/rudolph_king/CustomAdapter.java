@@ -103,7 +103,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         ArrayList<String> tagList = new ArrayList<String>();
         tagList = shop.getTags();
         String tagString = new String();
-        //해시태그 개별 textview로 구성하기    
+        //해시태그 개별 textview로 구성하기
         for(int i=0; i<tagList.size();i++){
             tagString = tagString + tagList.get(i) + " ";
         }
