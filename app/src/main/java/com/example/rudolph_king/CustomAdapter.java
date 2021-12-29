@@ -68,7 +68,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                 .with(context)
                 .load(actor.getThumb_url())
                 .centerCrop()
-                .apply(new RequestOptions().override(250, 350))
+                .apply(new RequestOptions().override(250, 250))
                 .into(viewHolder.iv_thumb);
         Log.e("image load", actor.getThumb_url());
         viewHolder.tv_name.setTag(actor.getName());
