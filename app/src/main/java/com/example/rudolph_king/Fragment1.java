@@ -104,6 +104,7 @@ public class Fragment1 extends Fragment {
                 innerJSONObject = ja.getJSONObject(i);
             } catch (JSONException e) {
                 innerJSONObject = null;
+
             }
             try {
                 shopList.add(new Shops(innerJSONObject));
@@ -118,14 +119,6 @@ public class Fragment1 extends Fragment {
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         customAdapter = new CustomAdapter(getContext(),shopList);
         mRecyclerView.setAdapter(customAdapter);
-//        customListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
-//                //각 아이템을 분간 할 수 있는 position과 뷰
-//                String selectedItem = (String) view.findViewById(R.id.textView_name).getTag().toString();
-//                Toast.makeText(getContext(), "Clicked: " + position +" " + selectedItem, Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         return view;
     }

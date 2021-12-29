@@ -5,18 +5,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-//import com.bumptech.glide.Glide;
-//import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> implements AdapterView.OnItemClickListener {
 
     private Context context;
     private ArrayList<Shops> list;
@@ -25,6 +27,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         this.context = context;
         this.list = shopList;
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        String selectedItem = (String) view.findViewById(R.id.textView_name).getTag().toString();
+        Toast.makeText(this.context, "Clicked: " + i +" " + selectedItem, Toast.LENGTH_SHORT).show();
+    }
+
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
@@ -64,14 +73,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         final Shops shop = (Shops) list.get(position);
         viewHolder.tv_name.setText(shop.getTitle());
         viewHolder.tv_summary.setText(shop.getPhone());
-//        Glide
-//                .with(context)
-//                .load(actor.getThumb_url())
-//                .centerCrop()
-//                .apply(new RequestOptions().override(250, 350))
-//                .into(viewHolder.iv_thumb);
-//        Log.e("image load", actor.getThumb_url());
-//        viewHolder.tv_name.setTag(actor.getName());
+        Glide
+                .with(context)
+                .load(shop.getThumb_url())
+                .centerCrop()
+                .apply(new RequestOptions().override(250, 250))
+                .into(viewHolder.iv_thumb);
+        Log.e("image load", shop.getThumb_url());
+        viewHolder.tv_name.setTag(shop.getTitle());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

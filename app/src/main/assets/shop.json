@@ -8,7 +8,8 @@
         "#재밌는"
       ],
       "phone" : "0507-1442-2930",
-      "isOpen" : true
+      "isOpen" : true,
+      "thumb_url" : "http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1472/S1500357361500.jpg"
     },
     {
       "name" : "우리완구",
@@ -21,7 +22,8 @@
 
       ],
       "phone" : "042-523-9642",
-      "isOpen" : false
+      "isOpen" : false,
+      "thumb_url" : "http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1472/S1500357361500.jpg"
     },
     {
       "name" : "토이월드",
@@ -32,7 +34,8 @@
         "#토이대전매장"
       ],
       "phone" : "0507-1362-1988",
-      "isOpen" : true
+      "isOpen" : true,
+      "thumb_url" : "http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1472/S1500357361500.jpg"
     },
     {
       "name" : "박서방 대전본점",
@@ -43,7 +46,8 @@
         "#피규어"
       ],
       "phone" : "0507-1406-0132",
-      "isOpen" : true
+      "isOpen" : true,
+      "thumb_url" : "http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1472/S1500357361500.jpg"
     },{
       "name" : "하이드론",
       "tag" : [
@@ -54,7 +58,8 @@
         "#세종드론"
       ],
       "phone" : "0507-1405-6157",
-      "isOpen" : false
+      "isOpen" : false,
+      "thumb_url" : "http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1472/S1500357361500.jpg"
     }
   ]
 }

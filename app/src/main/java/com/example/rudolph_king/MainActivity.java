@@ -16,7 +16,6 @@ import android.content.res.AssetManager;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,7 +28,6 @@ import java.io.InputStreamReader;
 public class MainActivity extends AppCompatActivity {
     private Context mContext;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -40,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         VPAdapter adapter = new VPAdapter(getSupportFragmentManager());
         vp.setAdapter(adapter);
         //json file 받기
-
+        assetManager = getResources().getAssets();
 
         // connect view pager with tab layout
         TabLayout tab = findViewById(R.id.tab);

@@ -23,6 +23,7 @@ public class JsonRead extends AppCompatActivity  {
     AssetManager assetManager;
 
 
+
     public JsonRead(){}
     public JSONObject reading(Context context){
 //        this.mContext = context;
@@ -46,79 +47,5 @@ public class JsonRead extends AppCompatActivity  {
         }
         return JObject;
     }
-
-//    public JSONObject create(Bundle savedInstanceState){
-//
-//         AssetManager assetManager = getResources().getAssets();
-//         InputStream source = null;
-//         JSONObject JObject = null;
-//         try{
-//             source = assetManager.open("shop.json");
-//             BufferedReader reader = new BufferedReader(new InputStreamReader(source));
-//
-//             String strResult = "";
-//             String line = "";
-//
-//             while((line=reader.readLine()) != null){
-//                 strResult += line;
-//             }
-//             JObject = new JSONObject(strResult);
-//             return JObject;
-//         }catch (IOException | JSONException e){
-//             e.printStackTrace();
-//         }
-//        return JObject;
-//
-//    }
-
-//    public JSONObject readJson( ){
-////        super.onCreate(savedInstanceState);
-//        JSONObject JArray;
-//            String json = null;
-//            JArray = null;
-//            try {
-//                InputStream is = assetManager.open("json/Numbers.json");
-//                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-//
-//                //파일읽기
-//                String strResult = "";
-//                String line = "";
-//                while((line=reader.readLine()) != null){
-//                    strResult += line;
-//                }
-//                JArray = new JSONObject(strResult);
-//                return JArray;
-//
-//    //            AssetInputStream is;
-//    //            is = (AssetInputStream) assetManager.open("Numbers.json");
-//    //
-//    //            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-//    //            StringBuilder sb = new StringBuilder();
-//    //
-//    //            int bufferSize  = 1024*1024;
-//    //            char readBuf[] = new char[bufferSize];
-//    //            String strResult = "";
-//    //            String line = "";
-//    //            int resultSize = 0;
-//    //            while((resultSize = reader.read(readBuf)) != -1){
-//    //                if(resultSize == bufferSize){
-//    //                    sb.append(readBuf);
-//    //                }else{
-//    //                    for(int i=0;i<resultSize; i++){
-//    //                        sb.append(readBuf[i]);
-//    //                    }
-////    //                }
-////    //            }
-////                JArray = new JSONObject(json);
-////    //            System.out.println(JArray);
-////            } catch (IOException | JSONException e) {
-////                return null;
-////            }
-////
-////        return JArray;
-//
-//    }
-
-
 
 }

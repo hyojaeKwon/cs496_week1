@@ -11,12 +11,14 @@ public class Shops {
     private String title;
     private boolean isOpen;
     private String phone;
+    private String thumb_url;
     private ArrayList<String> tags;
 
     public Shops(JSONObject jsonText) throws JSONException {
         this.title = jsonText.getString("name");
         this.isOpen = jsonText.getBoolean("isOpen");
         this.phone = jsonText.getString("phone");
+        this.thumb_url = jsonText.getString("thumb_url");
         JSONArray JTags = jsonText.getJSONArray("tag");
 
         //Tags array list 생성
@@ -41,5 +43,6 @@ public class Shops {
     public ArrayList<String> getTags(){
         return tags;
     }
+    public String getThumb_url() { return thumb_url;}
 }
 
