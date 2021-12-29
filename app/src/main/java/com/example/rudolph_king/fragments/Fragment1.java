@@ -1,4 +1,4 @@
-package com.example.rudolph_king;
+package com.example.rudolph_king.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import androidx.fragment.app.ListFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
@@ -17,13 +16,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.LinearLayout;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import com.example.rudolph_king.adapters.CustomAdapter;
+import com.example.rudolph_king.activities.JsonRead;
+import com.example.rudolph_king.R;
+import com.example.rudolph_king.Shops;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +40,6 @@ public class Fragment1 extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private LinearLayout listContainer;
 
     // customizing listView
     ArrayList<Shops> shopList;

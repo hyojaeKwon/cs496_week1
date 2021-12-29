@@ -1,11 +1,9 @@
-package com.example.rudolph_king;
+package com.example.rudolph_king.adapters;
 
 import static com.example.rudolph_king.R.*;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.rudolph_king.R;
+import com.example.rudolph_king.Shops;
 
 import java.util.ArrayList;
 
@@ -108,7 +108,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             tagString = tagString + tagList.get(i) + " ";
         }
         viewHolder.iv_tags.setText(tagString);
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)

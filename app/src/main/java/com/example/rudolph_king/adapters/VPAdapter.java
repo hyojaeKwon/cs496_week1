@@ -1,4 +1,4 @@
-package com.example.rudolph_king;
+package com.example.rudolph_king.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -7,6 +7,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.example.rudolph_king.fragments.Fragment1;
+import com.example.rudolph_king.fragments.Fragment2;
+import com.example.rudolph_king.fragments.Fragment3;
 
 import java.util.ArrayList;
 
