@@ -3,17 +3,20 @@
     {
       "where" : "dddddd",
       "what" : "dddddd",
-      "phone" : "dddddd"
+      "phone" : "dddddd",
+      "isOpen" : true
     },
     {
       "where" : "dddddd",
       "what" : "dddddd",
-      "phone" : "dddddd"
+      "phone" : "dddddd",
+      "isOpen" : true
     },
     {
       "where" : "dddddd",
       "what" : "dddddd",
-      "phone" : "dddddd"
+      "phone" : "dddddd",
+      "isOpen" : true
     }
   ]
 }
