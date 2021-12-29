@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         VPAdapter adapter = new VPAdapter(getSupportFragmentManager());
         vp.setAdapter(adapter);
         //json file 받기
-        assetManager = getResources().getAssets();
+        AssetManager assetManager = getResources().getAssets();
 
         // connect view pager with tab layout
         TabLayout tab = findViewById(R.id.tab);
