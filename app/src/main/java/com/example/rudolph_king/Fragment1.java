@@ -20,6 +20,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 /**
@@ -37,7 +40,7 @@ public class Fragment1 extends Fragment {
 
 
     // customizing listView
-    ArrayList<Actor> actors;
+    ArrayList<Shops> shopList;
     RecyclerView mRecyclerView;
     private static CustomAdapter customAdapter;
 
@@ -86,18 +89,22 @@ public class Fragment1 extends Fragment {
 
 
         // add list elements -- test
-        actors = new ArrayList<>();
-        actors.add(new Actor("Robert Downey Jr.", "https://image.tmdb.org/t/p/w600_and_h900_bestv2/5qHNjhtjMD4YWH3UP0rm4tKwxCL.jpg", "010-0000-0000"));
-        actors.add(new Actor("Scarlett Johansson", "https://image.tmdb.org/t/p/w600_and_h900_bestv2/6NsMbJXRlDZuDzatN2akFdGuTvx.jpg", "010-1111-1111"));
-        actors.add(new Actor("Cho Yeo-jeong", "https://image.tmdb.org/t/p/w600_and_h900_bestv2/5MgWM8pkUiYkj9MEaEpO0Ir1FD9.jpg", "010-2222-2222"));
-        actors.add(new Actor("Scarlett Johansson", "https://image.tmdb.org/t/p/w600_and_h900_bestv2/6NsMbJXRlDZuDzatN2akFdGuTvx.jpg", "010-3333-3333"));
-        actors.add(new Actor("Robert Downey Jr.", "https://image.tmdb.org/t/p/w600_and_h900_bestv2/5qHNjhtjMD4YWH3UP0rm4tKwxCL.jpg", "010-4444-4444"));
-        actors.add(new Actor("Robert Downey Jr.", "https://image.tmdb.org/t/p/w600_and_h900_bestv2/5qHNjhtjMD4YWH3UP0rm4tKwxCL.jpg", "010-5555-5555"));
+        shopList = new ArrayList<>();
+        JsonRead jr = new JsonRead();
+        JSONArray ja = jr.getJArray();
+
+        for(int i = 0 ; i < ja.length() ; i++){
+            try {
+                shopList.add(new Shops(ja.getJSONObject(i)));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.listView);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        customAdapter = new CustomAdapter(getContext(),actors);
+        customAdapter = new CustomAdapter(getContext(),shopList);
         mRecyclerView.setAdapter(customAdapter);
 //        customListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -112,27 +119,27 @@ public class Fragment1 extends Fragment {
     }
 
     //data class
-    class Actor {
-        private String name;
-        private String summary;
-        private String thumb_url;
-
-        public Actor(String name, String thumb_url, String summary) {
-            this.name = name;
-            this.summary = summary;
-            this.thumb_url = thumb_url;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getSummary() {
-            return summary;
-        }
-
-        public String getThumb_url() {
-            return thumb_url;
-        }
-    }
+//    class Actor {
+//        private String name;
+//        private String summary;
+//        private String thumb_url;
+//
+//        public Actor(String name, String thumb_url, String summary) {
+//            this.name = name;
+//            this.summary = summary;
+//            this.thumb_url = thumb_url;
+//        }
+//
+//        public String getName() {
+//            return name;
+//        }
+//
+//        public String getSummary() {
+//            return summary;
+//        }
+//
+//        public String getThumb_url() {
+//            return thumb_url;
+//        }
+//    }
 }
