@@ -23,7 +23,7 @@ public class JsonRead extends AppCompatActivity {
         InputStream inputStream = null;
 
         try{
-            InputStream is = assetManager.open("Numbers.json");
+            InputStream is = assetManager.open("/Numbers.json");
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
             String strResult = "";
