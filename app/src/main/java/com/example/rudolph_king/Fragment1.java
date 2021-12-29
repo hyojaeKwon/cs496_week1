@@ -92,12 +92,13 @@ public class Fragment1 extends Fragment {
         shopList = new ArrayList<>();
         JsonRead jr = new JsonRead();
         JSONArray ja = jr.getJArray();
-
-        for(int i = 0 ; i < ja.length() ; i++){
-            try {
-                shopList.add(new Shops(ja.getJSONObject(i)));
-            } catch (JSONException e) {
-                e.printStackTrace();
+        if (ja != null) {
+            for (int i = 0; i < ja.length(); i++) {
+                try {
+                    shopList.add(new Shops(ja.getJSONObject(i)));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -106,40 +107,7 @@ public class Fragment1 extends Fragment {
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         customAdapter = new CustomAdapter(getContext(),shopList);
         mRecyclerView.setAdapter(customAdapter);
-//        customListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
-//                //각 아이템을 분간 할 수 있는 position과 뷰
-//                String selectedItem = (String) view.findViewById(R.id.textView_name).getTag().toString();
-//                Toast.makeText(getContext(), "Clicked: " + position +" " + selectedItem, Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         return view;
     }
-
-    //data class
-//    class Actor {
-//        private String name;
-//        private String summary;
-//        private String thumb_url;
-//
-//        public Actor(String name, String thumb_url, String summary) {
-//            this.name = name;
-//            this.summary = summary;
-//            this.thumb_url = thumb_url;
-//        }
-//
-//        public String getName() {
-//            return name;
-//        }
-//
-//        public String getSummary() {
-//            return summary;
-//        }
-//
-//        public String getThumb_url() {
-//            return thumb_url;
-//        }
-//    }
 }

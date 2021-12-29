@@ -19,11 +19,10 @@ import java.io.InputStreamReader;
 public class JsonRead extends AppCompatActivity {
     private JSONArray JArray;
     public JsonRead(){
-        AssetManager assetManager = null;
         InputStream inputStream = null;
 
         try{
-            InputStream is = assetManager.open("/Numbers.json");
+            InputStream is = MainActivity.assetManager.open("Numbers.json", AssetManager.ACCESS_BUFFER);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
             String strResult = "";
