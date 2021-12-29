@@ -16,11 +16,11 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.InputStream;
-
+import java.nio.channels.AsynchronousFileChannel;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    public static AssetManager assetManager = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         VPAdapter adapter = new VPAdapter(getSupportFragmentManager());
         vp.setAdapter(adapter);
         //json file 받기
-
+        assetManager = getResources().getAssets();
 
         // connect view pager with tab layout
         TabLayout tab = findViewById(R.id.tab);
