@@ -19,9 +19,9 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -91,14 +91,26 @@ public class Fragment1 extends Fragment {
         // add list elements -- test
         shopList = new ArrayList<>();
         JsonRead jr = new JsonRead();
-        JSONArray ja = jr.getJArray();
-
+        JSONObject jo = ((MainActivity)mContext).reading();
+        JSONArray ja = null;
+        try {
+            ja = jo.getJSONArray("Numbers");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         for(int i = 0 ; i < ja.length() ; i++){
+            JSONObject innerJSONObject = null;
             try {
-                shopList.add(new Shops(ja.getJSONObject(i)));
+                innerJSONObject = ja.getJSONObject(i);
             } catch (JSONException e) {
-                e.printStackTrace();
+                innerJSONObject = null;
             }
+            try {
+                shopList.add(new Shops(innerJSONObject));
+            } catch (JSONException e) {
+                continue;
+            }
+
         }
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.listView);
