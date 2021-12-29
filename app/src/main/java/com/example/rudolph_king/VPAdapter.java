@@ -2,6 +2,7 @@ package com.example.rudolph_king;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -39,6 +40,7 @@ public class VPAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position){
+
         return itext.get(position);
     }
 }

@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-
-import androidx.viewpager.widget.ViewPager;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,20 +23,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ViewPager vp = findViewById(R.id.viewpager);
-        VPAdapter adapter;
-        adapter = new VPAdapter(getSupportFragmentManager());
+
+        VPAdapter adapter = new VPAdapter(getSupportFragmentManager());
         vp.setAdapter(adapter);
 
+        // connect view pager with tab layout
         TabLayout tab = findViewById(R.id.tab);
         tab.setupWithViewPager(vp);
 
-        ArrayList<Integer> images = new ArrayList<>();
-//        images.add(R.drawable);
-//        images.add(R.drawable.sea);
-//        images.add(R.drawable.set);
-//
-//        for(int i = 0 ; i < 3 ; i++){
-//            tab.getTabAt(i).setIcon(images.get(i));
-//        }
     }
 }
