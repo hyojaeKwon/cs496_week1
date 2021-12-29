@@ -1,13 +1,17 @@
 package com.example.rudolph_king.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.os.Bundle;
 
-
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 
 /**
@@ -36,7 +41,6 @@ public class Fragment1 extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-
     // customizing listView
     ArrayList<Shops> shopList;
     RecyclerView mRecyclerView;
@@ -50,15 +54,8 @@ public class Fragment1 extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment1.
-     */
-    // TODO: Rename and change types and number of parameters
+
+
 
     public static Fragment1 newInstance(String param1, String param2) {
         Fragment1 fragment = new Fragment1();
@@ -69,6 +66,16 @@ public class Fragment1 extends Fragment {
         return fragment;
     }
 
+//    public void textView(String a){
+//        TextView view1 = new TextView(getContext());
+//        view1.setText(a);
+//        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+//        lp.gravity= Gravity.CENTER;
+//        lp.leftMargin=20;
+//        view1.setLayoutParams(lp);
+//
+//        listContainer.addView(view1);
+//    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +83,8 @@ public class Fragment1 extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
+//        setContentView(R.layout.activity_main);
+//        listContainer = listContainer.findViewById(R.id.listView);
     }
 
     @Override
@@ -112,6 +120,8 @@ public class Fragment1 extends Fragment {
 
         }
 
+;
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.listView);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
@@ -120,5 +130,6 @@ public class Fragment1 extends Fragment {
 
         return view;
     }
+
 
 }

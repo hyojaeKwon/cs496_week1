@@ -22,8 +22,6 @@ public class JsonRead extends AppCompatActivity  {
     TextView txtData;
     AssetManager assetManager;
 
-
-
     public JsonRead(){}
     public JSONObject reading(Context context){
 //        this.mContext = context;
@@ -41,7 +39,9 @@ public class JsonRead extends AppCompatActivity  {
                 strResult += line;
             }
             JObject = new JSONObject(strResult);
+
             return JObject;
+
         }catch (IOException | JSONException e){
             e.printStackTrace();
         }
