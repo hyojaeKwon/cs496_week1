@@ -12,29 +12,6 @@
         android:id="@+id/tv_tag_id"
         >
 
-
-
-
     </LinearLayout>
 
 </LinearLayout>
-<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto">-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/textview_tag_list"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="4dp"-->
-<!--        android:layout_marginTop="52dp"-->
-<!--        android:layout_weight="1"-->
-<!--        android:text="@{item}"-->
-<!--        tools:text="#장난감"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent-->
-<!--/>-->
-
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
