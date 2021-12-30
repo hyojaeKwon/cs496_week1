@@ -4,6 +4,7 @@ import static com.example.rudolph_king.R.*;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -45,11 +47,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
      * (custom ViewHolder).
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        public static RecyclerView rvs;
         public final TextView tv_name;
         public final TextView tv_summary;
         public final ImageView iv_thumb;
         public final TextView iv_open;
-        public final TextView iv_tags;
+
+
+//        public final TextView iv_tags;
 
         public ViewHolder(View view) {
             super(view);
@@ -59,7 +64,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             tv_summary = (TextView) view.findViewById(id.textView_summary);
             iv_thumb = (ImageView) view.findViewById(id.imageView_thumb);
             iv_open = (TextView) view.findViewById(id.textView_isOpen);
-            iv_tags = (TextView) view.findViewById(id.textview_tag_list);
+            rvs = view.findViewById(id.rvChapters);
+//            iv_tags = (TextView) view.findViewById(id.textview_tag_list);
         }
     }
 
@@ -87,27 +93,39 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         viewHolder.tv_summary.setText(shop.getPhone());
         if(shop.getIsOpen()){
             viewHolder.iv_open.setText("영업 중");
-            viewHolder.iv_open.setTextColor(ContextCompat.getColor(context,R.color.open));
+            viewHolder.iv_open.setTextColor(ContextCompat.getColor(context, color.open));
         }else{
             viewHolder.iv_open.setText("영업 종료");
             viewHolder.iv_open.setTextColor(ContextCompat.getColor(context, color.not_open));        }
-//        Glide
-//                .with(context)
-//                .load(shop.getThumb_url())
-//                .centerCrop()
-//                .apply(new RequestOptions().override(250, 250))
-//                .into(viewHolder.iv_thumb);
-////        Log.e( "tag",shop.getThumb_url().toString());
-        viewHolder.iv_thumb.setImageResource(drawable.img);
+        Glide
+                .with(context)
+                .load(shop.getThumb_url())
+                .centerCrop()
+                .apply(new RequestOptions().override(250, 250))
+                .into(viewHolder.iv_thumb);
+                Log.e( "tag",shop.getThumb_url());
+//        viewHolder.iv_thumb.setImageResource(drawable.img);
 
-        ArrayList<String> tagList = new ArrayList<String>();
-        tagList = shop.getTags();
-        String tagString = new String();
-        //해시태그 개별 textview로 구성하기
-        for(int i=0; i<tagList.size();i++){
-            tagString = tagString + tagList.get(i) + " ";
+        ArrayList<String> tag = shop.getTags();
+        ArrayList<TagData> td = new ArrayList<>();
+
+        for(int i = 0 ; i < tag.size() ; i++){
+            TagData tagData = new TagData(tag.get(i));
+            td.add(tagData);
         }
-        viewHolder.iv_tags.setText(tagString);
+
+        Log.e("nammme",td.get(0).toString());
+        TagAdapter ta = new TagAdapter(context,td);
+        LinearLayoutManager manager = new LinearLayoutManager(context);
+
+        ViewHolder.rvs.setLayoutManager(manager);
+        ViewHolder.rvs.setAdapter(ta);
+
+//        TagAdapter ta = new TagAdapter(context,tag);
+//        ta.onBindViewHolder(new ta.onCreateViewHolder(parent,),position);
+//        View vh = viewHolder.itemView.findViewById(id.tv_tag_id);
+
+        //해시태그 개별 textview로 구성하기
     }
 
     // Return the size of your dataset (invoked by the layout manager)
