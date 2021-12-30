@@ -1,4 +1,4 @@
-package com.example.rudolph_king;
+package com.example.rudolph_king.activities;
 
 import org.json.JSONException;
 import org.json.JSONObject;
