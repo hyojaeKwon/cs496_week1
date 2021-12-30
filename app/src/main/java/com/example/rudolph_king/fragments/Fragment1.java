@@ -1,6 +1,8 @@
 package com.example.rudolph_king.fragments;
 
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -85,6 +87,13 @@ public class Fragment1 extends Fragment{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+//        setContentView(R.layout.search_tab);
+//        Intent intent = getIntent();
+//        if(Intent.ACTION_SEARCH .equals(intent.getAction())){
+//            String query = intent.getStringExtra(SearchManager,QUERY);
+//            doMySearch(query);
+//        }
 //        setContentView(R.layout.activity_main);
 //        listContainer = listContainer.findViewById(R.id.listView);
     }
