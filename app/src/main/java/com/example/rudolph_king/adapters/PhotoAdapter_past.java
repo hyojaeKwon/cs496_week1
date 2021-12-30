@@ -3,31 +3,26 @@ package com.example.rudolph_king.adapters;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
-
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.net.Uri;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
-import com.example.rudolph_king.GalleryImage;
 import com.example.rudolph_king.R;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public class PhotoAdapter  extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> {
+public class PhotoAdapter_past extends RecyclerView.Adapter<PhotoAdapter_past.ViewHolder> {
     public interface OnListItemSelectedInterface {
         void onItemSelected(View view, int position);
     }
@@ -36,7 +31,7 @@ public class PhotoAdapter  extends RecyclerView.Adapter<PhotoAdapter.ViewHolder>
     private ArrayList<Uri> mDataset;
     private Context mContext;
 
-    public PhotoAdapter(Context context, ArrayList<Uri> myDataset, OnListItemSelectedInterface listener) {
+    public PhotoAdapter_past(Context context, ArrayList<Uri> myDataset, OnListItemSelectedInterface listener) {
         mDataset = myDataset;
         mContext = context;
         mListener = listener;
@@ -56,6 +51,13 @@ public class PhotoAdapter  extends RecyclerView.Adapter<PhotoAdapter.ViewHolder>
             .load(photo)
             .thumbnail(0.5f)
             .into(holder.img_thumb);
+        Log.e("viewhodler", photo.getPath());
+//        holder.layout_gallery.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mOnItemClickListener.onItemClick(v, albumVO);
+//            }
+//        });
     }
 
     @Override
@@ -89,7 +91,7 @@ public class PhotoAdapter  extends RecyclerView.Adapter<PhotoAdapter.ViewHolder>
                 @Override
                 public boolean onLongClick(View view) {
                     int position = getAdapterPosition();
-                    android.app.AlertDialog.Builder adb = new AlertDialog.Builder(mContext, R.style.AlertDialog_AppCompat_Light);
+                    AlertDialog.Builder adb = new AlertDialog.Builder(mContext, R.style.AlertDialog_AppCompat_Light);
                     adb.setTitle("Delete")
                             .setNeutralButton("CONFIRM", new DialogInterface.OnClickListener() {
                                 @Override

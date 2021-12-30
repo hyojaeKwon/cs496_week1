@@ -1,6 +1,7 @@
 package com.example.rudolph_king.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.MenuInflater;
@@ -36,7 +37,7 @@ public class PhotoActivity extends AppCompatActivity {
         ImageView image = (ImageView) findViewById(R.id.imageView_detail);
         Intent intent = getIntent();
         int position = intent.getIntExtra("pos", 0);
-        String img = intent.getStringExtra("img");
+        Uri img = MainActivity.uriList.get(position);
         Glide.with(this)
             .load(img)
             .thumbnail(0.5f)
