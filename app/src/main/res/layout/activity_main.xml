@@ -11,6 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <?xml version="1.0" encoding="utf-8"?>
+
+
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab"

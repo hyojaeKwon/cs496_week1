@@ -60,6 +60,56 @@
       "phone" : "0507-1405-6157",
       "isOpen" : false,
       "thumb_url" : "https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg"
+    },
+    {
+      "name" : "우리완구",
+      "tag" : [
+        "#대전장난감",
+        "#우리완구",
+        "#장난감백화점",
+        "#장난감할인마트",
+        "#장난감도매"
+
+      ],
+      "phone" : "042-523-9642",
+      "isOpen" : false,
+      "thumb_url" : "https://img4.yna.co.kr/photo/yna/YH/2010/02/01/PYH2010020102450000400_P2.jpg"
+    },
+    {
+      "name" : "토이월드",
+      "tag" : [
+        "#완구",
+        "#판암동장난감",
+        "#물놀이",
+        "#토이대전매장"
+      ],
+      "phone" : "0507-1362-1988",
+      "isOpen" : true,
+      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS45DHF_TPiuCS0Z45fT_HVG6CWyz9-MriO7xR7G_rPa0HtNXhc-qrA_STenFzgL6OC_EE&usqp=CAU"
+    },
+    {
+      "name" : "박서방 대전본점",
+      "tag" : [
+        "#건담프라모델",
+        "#만화책판매",
+        "#애니굿즈",
+        "#피규어"
+      ],
+      "phone" : "0507-1406-0132",
+      "isOpen" : true,
+      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5ozEM_pHXD8tbl2npPYQctwjvWmSaQCfMKMWKYTuPAptV7pECSVLGkfo62S5Y1nqo5nw&usqp=CAU"
+    },{
+      "name" : "하이드론",
+      "tag" : [
+        "#대전드론",
+        "#대전드론수리",
+        "#대전드론교육",
+        "#대전드론매장",
+        "#세종드론"
+      ],
+      "phone" : "0507-1405-6157",
+      "isOpen" : false,
+      "thumb_url" : "https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg"
     }
   ]
 }
