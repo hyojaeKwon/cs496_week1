@@ -1,22 +1,29 @@
 package com.example.rudolph_king.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.rudolph_king.GalleryImage;
 import com.example.rudolph_king.activities.MainActivity;
 import com.example.rudolph_king.activities.PhotoActivity;
 import com.example.rudolph_king.adapters.PhotoAdapter;
 import com.example.rudolph_king.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -33,8 +40,8 @@ public class Fragment2 extends Fragment implements PhotoAdapter.OnListItemSelect
     private static final String ARG_PARAM2 = "param2";
 
     // gallery view
-    public ArrayList<String> photoList;
-    RecyclerView mRecyclerView;
+    public ArrayList<Uri> photoList;
+    static RecyclerView mRecyclerView;
     private static PhotoAdapter photoAdapter;
 
     // TODO: Rename and change types of parameters
@@ -63,6 +70,13 @@ public class Fragment2 extends Fragment implements PhotoAdapter.OnListItemSelect
         return fragment;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    public static void refreshAdapter() {
+        photoAdapter.notifyDataSetChanged();
+        mRecyclerView.setAdapter(photoAdapter);
+        Log.e("refreshed", "true");
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,10 +84,9 @@ public class Fragment2 extends Fragment implements PhotoAdapter.OnListItemSelect
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,31 +94,54 @@ public class Fragment2 extends Fragment implements PhotoAdapter.OnListItemSelect
         View view = inflater.inflate(R.layout.fragment_2, container, false) ;
 
         // temp list
-        photoList = new ArrayList<String>();
-        photoList.add("https://www.artinsight.co.kr/data/tmp/1907/1569b10b9feab87cfaffe39b5cdf065b_VswpdlGWkOdSD9IrCKPSRMk4cY.jpg");
-        photoList.add("https://media.bunjang.co.kr/product/118726183_1_1583395080_w360.jpg");
-        photoList.add("https://lh3.googleusercontent.com/proxy/eI1eRee5msOEqu8YFU0S07ZN0IAuZA3cns0Yxq5AemcUxdbQuwbVxpzwRb6LDjfcILRUIoxmNgT6AMqWpiGjSfdkgSebYDJ8p0B4ClupU-sRfP9NcQ46UoGX");
-        photoList.add("https://cdn.ggumim.co.kr/cache/star/600/20210317170629wybexPof13.jpeg");
-        photoList.add("https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/1578977794_sNqqt.jpeg?gif=1&w=480&h=480&c=c&q=80");
-        photoList.add("https://pbs.twimg.com/media/EZudW4NUwAAcSHA.jpg");
+        photoList = new ArrayList<Uri>();
+
+        // bring images from storage
+        try {
+            // String imgpath = getCacheDir() + "/" + photoList.size();   // 내부 저장소에 저장되어 있는 이미지 경로
+            // photoList.add(imgpath);
+
+        } catch (Exception e) {
+
+        }
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.gallery);
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 3);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
         photoAdapter = new PhotoAdapter(getContext(), photoList, this);
-        mRecyclerView.setAdapter(photoAdapter);
+        refreshAdapter();
+
+        FloatingActionButton fab = view.findViewById(R.id.addPhoto);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Add Photo", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
+
+                // open phone gallery
+                openPhoneGallery();
+            }
+        });
 
         return view;
+    }
+
+    @SuppressLint("IntentReset")
+    private void openPhoneGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+        intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        getActivity().startActivityForResult(intent, 101);
     }
 
     @Override
     public void onItemSelected(View view, int position) {
 //        PhotoAdapter.ViewHolder viewHolder = (PhotoAdapter.ViewHolder) mRecyclerView.findViewHolderForAdapterPosition(position);
-        String image = photoList.get(position);
+        Uri image = photoList.get(position);
         Log.e("Listen", String.valueOf(position));
         Intent intent = new Intent(getActivity(), PhotoActivity.class);
         intent.putExtra("pos", position);
-        intent.putExtra("img", image);
+        intent.putExtra("img", image.getPath());
         startActivity(intent);
     }
 }
