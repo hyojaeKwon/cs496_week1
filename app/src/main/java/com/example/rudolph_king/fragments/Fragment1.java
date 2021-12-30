@@ -27,6 +27,8 @@ import org.json.JSONObject;
 
 import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,7 +36,7 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 
-public class Fragment1 extends Fragment {
+public class Fragment1 extends Fragment{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -104,6 +106,8 @@ public class Fragment1 extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        //shoplist에 JSONObject 추가하기
         for(int i = 0 ; i < ja.length() ; i++){
             JSONObject innerJSONObject = null;
             try {
@@ -119,6 +123,7 @@ public class Fragment1 extends Fragment {
             }
 
         }
+        Collections.sort(shopList,new SortIsOpen());
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.listView);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
@@ -130,4 +135,20 @@ public class Fragment1 extends Fragment {
     }
 
 
+}
+class SortIsOpen implements Comparator<Shops>{
+    @Override
+    public int compare(Shops s1,Shops s2){
+        int s1_open = s1.getIsOpen() ? 1: 0;
+        int s2_open = s2.getIsOpen() ? 1: 0;
+        if (s1_open > s2_open){
+            return -1;
+        }
+        else if(s1_open < s2_open) {
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
 }
