@@ -21,6 +21,8 @@
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        app:fabSize="mini"
         android:src="@android:drawable/ic_input_add"
-        android:contentDescription="TODO" />
+        app:rippleColor="@color/red_500"
+        android:contentDescription="@string/app_name" />
 </FrameLayout>

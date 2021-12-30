@@ -120,8 +120,6 @@ public class Fragment1 extends Fragment {
 
         }
 
-;
-
         mRecyclerView = (RecyclerView) view.findViewById(R.id.listView);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);

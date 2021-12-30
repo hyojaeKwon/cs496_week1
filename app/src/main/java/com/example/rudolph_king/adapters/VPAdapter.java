@@ -28,7 +28,6 @@ public class VPAdapter extends FragmentPagerAdapter {
         itext.add("List");
         itext.add("Gallery");
         itext.add("Map");
-
     }
 
     @NonNull
@@ -45,8 +44,6 @@ public class VPAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position){
-
-
         return itext.get(position);
     }
 }
