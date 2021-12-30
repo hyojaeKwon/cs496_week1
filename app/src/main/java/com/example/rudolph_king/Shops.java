@@ -12,14 +12,14 @@ public class Shops extends Activity {
     private String title;
     private boolean isOpen;
     private String phone;
-    private int thumb_url;
+    private String thumb_url;
     private ArrayList<String> tags;
 
     public Shops(JSONObject jsonText) throws JSONException {
         this.title = jsonText.getString("name");
         this.isOpen = jsonText.getBoolean("isOpen");
         this.phone = jsonText.getString("phone");
-//        this.thumb_url = jsonText.getString("thumb_url");
+        this.thumb_url = jsonText.getString("thumb_url");
         JSONArray JTags = jsonText.getJSONArray("tag");
 
         //Tags array list 생성
@@ -46,6 +46,6 @@ public class Shops extends Activity {
     public ArrayList<String> getTags(){
         return tags;
     }
-    public int getThumb_url() { return thumb_url;}
+    public String getThumb_url() { return thumb_url;}
 }
 
