@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> implements AdapterView.OnItemClickListener {
 
     private final Context context;
-    private final ArrayList<Shops> list;
+    private  ArrayList<Shops> list;
 
     public CustomAdapter(Context context, ArrayList<Shops> shopList) {
         this.context = context;
@@ -79,7 +79,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         return new ViewHolder(view);
     }
-
+    //검색을 통해 필터링하는 부분
+    public void filterList(ArrayList<Shops> filteredShopList){
+        this.list = filteredShopList;
+        notifyDataSetChanged();
+    }
     // Replace the contents of a view (invoked by the layout manager)
     @SuppressLint("ResourceAsColor")
     @Override
