@@ -2,12 +2,9 @@ package com.example.rudolph_king.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,25 +13,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.example.rudolph_king.GalleryImage;
 import com.example.rudolph_king.activities.MainActivity;
 import com.example.rudolph_king.activities.PhotoActivity;
-import com.example.rudolph_king.adapters.PhotoAdapter;
+import com.example.rudolph_king.adapters.ReviewAdapter;
 import com.example.rudolph_king.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Fragment2#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment2 extends Fragment implements PhotoAdapter.OnListItemSelectedInterface {
+public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelectedInterface {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,7 +34,7 @@ public class Fragment2 extends Fragment implements PhotoAdapter.OnListItemSelect
 
     // gallery view
     static RecyclerView mRecyclerView;
-    private static PhotoAdapter photoAdapter;
+    private static ReviewAdapter reviewAdapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -73,8 +64,8 @@ public class Fragment2 extends Fragment implements PhotoAdapter.OnListItemSelect
 
     @SuppressLint("NotifyDataSetChanged")
     public static void refreshAdapter() {
-        photoAdapter.notifyDataSetChanged();
-        mRecyclerView.setAdapter(photoAdapter);
+        reviewAdapter.notifyDataSetChanged();
+        // mRecyclerView.setAdapter(photoAdapter);
         Log.e("refreshed", "true");
     }
 
@@ -97,9 +88,9 @@ public class Fragment2 extends Fragment implements PhotoAdapter.OnListItemSelect
         mRecyclerView = (RecyclerView) view.findViewById(R.id.gallery);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        photoAdapter = new PhotoAdapter(getContext(), MainActivity.uriList, this);
+        reviewAdapter = new ReviewAdapter(getContext(), MainActivity.reviewList, this);
 
-        mRecyclerView.setAdapter(photoAdapter);
+        mRecyclerView.setAdapter(reviewAdapter);
 
         FloatingActionButton fab = view.findViewById(R.id.addPhoto);
         fab.setOnClickListener(new View.OnClickListener() {
