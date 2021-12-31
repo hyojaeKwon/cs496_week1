@@ -6,6 +6,7 @@ import androidx.arch.core.internal.SafeIterableMap;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.ClipData;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.rudolph_king.GalleryImage;
 import com.example.rudolph_king.R;
 import com.example.rudolph_king.adapters.VPAdapter;
 import com.example.rudolph_king.fragments.Fragment2;
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private Context mContext;
     private long backKeyPressedTime = 0;
     private Toast toast;
-    public static ArrayList<Uri> uriList = new ArrayList<>();
+    public static ArrayList<GalleryImage> reviewList = new ArrayList<GalleryImage>();
 
 
     @Override
@@ -86,9 +88,32 @@ public class MainActivity extends AppCompatActivity {
                     // Log.e("no choice: ", String.valueOf(uriList));
                 }
                 else{   // 이미지를 선택한 경우
-                    Uri imageUri = data.getData();
-                    uriList.add(0, imageUri);
-                    // Log.e("single choice: ", String.valueOf(uriList));
+                    ArrayList<Uri> imageUriList = new ArrayList<Uri>();
+                    if (data.getClipData() == null) {
+                        // 이미지를 한 장만 선택한 경우
+                        Uri imageUri = data.getData();
+                        imageUriList.add(imageUri);
+                        // Log.e("single choice: ", String.valueOf(uriList));
+                    } else {
+                        // 이미지를 여러 장 선택한 경우
+                        ClipData clipData = data.getClipData();
+                        if (clipData.getItemCount() > 5) {
+                            Toast.makeText(this, "사진은 5장까지 선택 가능합니다", Toast.LENGTH_LONG).show();
+                        } else {
+                            for (int i = 0; i < clipData.getItemCount(); i++) {
+                                Uri imageUri = clipData.getItemAt(i).getUri();
+
+                                try {
+                                    imageUriList.add(imageUri);
+                                } catch (Exception e) {
+                                }
+                            }
+                        }
+                    }
+
+                    GalleryImage newReview = new GalleryImage();
+                    newReview.setUriList(imageUriList);
+                    reviewList.add(0, newReview);
                 }
 
                 Fragment2.refreshAdapter();

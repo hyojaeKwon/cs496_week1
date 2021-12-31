@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.rudolph_king.R;
 import com.example.rudolph_king.activities.MainActivity;
 import com.example.rudolph_king.activities.PhotoActivity;
-import com.example.rudolph_king.adapters.PhotoAdapter;
+import com.example.rudolph_king.adapters.ReviewAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
@@ -24,7 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
  * Use the {@link Fragment2_past#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment2_past extends Fragment implements PhotoAdapter.OnListItemSelectedInterface {
+public class Fragment2_past extends Fragment implements ReviewAdapter.OnListItemSelectedInterface {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,7 +33,7 @@ public class Fragment2_past extends Fragment implements PhotoAdapter.OnListItemS
 
     // gallery view
     static RecyclerView mRecyclerView;
-    private static PhotoAdapter photoAdapter;
+    private static ReviewAdapter photoAdapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -87,7 +87,7 @@ public class Fragment2_past extends Fragment implements PhotoAdapter.OnListItemS
         mRecyclerView = (RecyclerView) view.findViewById(R.id.gallery);
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 3);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
-        photoAdapter = new PhotoAdapter(getContext(), MainActivity.uriList, this);
+        photoAdapter = new ReviewAdapter(getContext(), MainActivity.reviewList, this);
 
         mRecyclerView.setAdapter(photoAdapter);
 
