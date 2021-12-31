@@ -162,7 +162,7 @@ public class Fragment1 extends Fragment{
 //            Log.e("shopListPrint",shopList.get(i).getTitle().toString());
 //    }
 //        Log.e("shopListPrint",shopList.get(1).getTitle());
-        Log.e("SizeOfShopList",Integer.toString(shopList.size()));
+//        Log.e("SizeOfShopList",Integer.toString(shopList.size()));
         mRecyclerView.setAdapter(customAdapter);
 
 
@@ -187,10 +187,11 @@ public class Fragment1 extends Fragment{
     }
     public void searchFilter(String searchText){
         filteredList.clear();
+//        Log.e("now_searching", shopList.get(0).getTitle().getClass().getName());
 
         for (int i = 0 ; i < shopList.size() ; i++){
 //            Log.e("input_search",shopList.get(i).getTitle().toString());
-            if(String.valueOf(shopList.get(i).getTitle()).contains(searchText)){
+            if(String.valueOf(shopList.get(i).getT()).contains(searchText)){
                 filteredList.add(shopList.get(i));
             }
         }
