@@ -26,9 +26,20 @@ import com.example.rudolph_king.adapters.VPAdapter;
 import com.example.rudolph_king.fragments.Fragment2;
 import com.google.android.material.tabs.TabLayout;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 
@@ -54,14 +65,12 @@ public class MainActivity extends AppCompatActivity {
 
         VPAdapter adapter = new VPAdapter(getSupportFragmentManager());
         vp.setAdapter(adapter);
-        //json file 받기
-        AssetManager assetManager = getResources().getAssets();
+        // 갤러리를 위한 json file 받기
+        // AssetManager assetManager = getResources().getAssets();
 
         // connect view pager with tab layout
         TabLayout tab = findViewById(R.id.tab);
         tab.setupWithViewPager(vp);
-
-//        VPAdapter.setOnItemClickListner(new )
     }
 
     @Override
@@ -99,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                         ClipData clipData = data.getClipData();
                         if (clipData.getItemCount() > 5) {
                             Toast.makeText(this, "사진은 5장까지 선택 가능합니다", Toast.LENGTH_LONG).show();
+                            return;
                         } else {
                             for (int i = 0; i < clipData.getItemCount(); i++) {
                                 Uri imageUri = clipData.getItemAt(i).getUri();
@@ -114,10 +124,69 @@ public class MainActivity extends AppCompatActivity {
                     GalleryImage newReview = new GalleryImage();
                     newReview.setUriList(imageUriList);
                     reviewList.add(0, newReview);
+                    updateJSONImages(newReview);
                 }
 
                 Fragment2.refreshAdapter();
             }
         }
+    }
+
+    private void updateJSONImages(GalleryImage review) {
+        String uriListString = review.getUriList().toString();
+        JsonRead jr = new JsonRead();
+        JSONObject jo = jr.reading(this, "images.json");
+        FileInputStream fis = null;
+        String fileName = "images.json";
+        try {
+            fis = this.openFileInput(fileName);
+            InputStreamReader inputStreamReader =
+                    new InputStreamReader(fis, StandardCharsets.UTF_8);
+            StringBuilder stringBuilder = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
+                String line = reader.readLine();
+                while (line != null) {
+                    stringBuilder.append(line).append('\n');
+                    line = reader.readLine();
+                }
+            } catch (IOException e) {
+                // Error occurred when opening raw file for reading.
+            } finally {
+                String contents = stringBuilder.toString();
+                jo = new JSONObject(contents);
+                Log.e("First load", contents);
+            }
+        } catch (FileNotFoundException | JSONException e) {
+            e.printStackTrace();
+            Log.e("First run", "true");
+        }
+        try {
+            JSONArray ja = jo.getJSONArray("Reviews");
+            JSONObject sObject = new JSONObject();//배열 내에 들어갈 json
+            sObject.put("uriList", uriListString);
+            ja.put(sObject);
+            jo.put("Reviews", ja);
+
+            try {
+                //Get your FilePath and use it to create your File
+
+                //String filePath = String.valueOf(this.getFilesDir());
+                //File jsonFile = new File(filePath);
+                //Create your FileOutputStream, yourFile is part of the constructor
+                FileOutputStream fileOutputStream = this.openFileOutput(fileName, Context.MODE_PRIVATE);
+                //Convert your JSON String to Bytes and write() it
+                fileOutputStream.write(jo.toString().getBytes());
+                //Finally flush and close your FileOutputStream
+                fileOutputStream.flush();
+                fileOutputStream.close();
+                Log.e("File First", jo.toString());
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("Added", "hihihi");
     }
 }

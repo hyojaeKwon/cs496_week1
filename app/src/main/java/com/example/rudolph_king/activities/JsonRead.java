@@ -23,14 +23,14 @@ public class JsonRead extends AppCompatActivity  {
     AssetManager assetManager;
 
     public JsonRead(){}
-    public JSONObject reading(Context context){
+    public JSONObject reading(Context context, String fileName){
 //        this.mContext = context;
 
         AssetManager assetManager = context.getResources().getAssets();
         InputStream source = null;
         JSONObject JObject = null;
         try{
-            source = assetManager.open("shop.json");
+            source = assetManager.open(fileName);
             BufferedReader reader = new BufferedReader(new InputStreamReader(source));
             String strResult = "";
             String line = "";

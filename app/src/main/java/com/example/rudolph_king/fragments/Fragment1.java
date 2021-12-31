@@ -113,7 +113,7 @@ public class Fragment1 extends Fragment{
 
         //json파일 parse 하는 부분
         JsonRead jr = new JsonRead();
-        JSONObject jo = jr.reading(getContext());
+        JSONObject jo = jr.reading(getContext(), "shop.json");
         JSONArray ja = null;
         try {
             ja = jo.getJSONArray("Numbers");
@@ -144,14 +144,10 @@ public class Fragment1 extends Fragment{
         searchET = view.findViewById(R.id.searchFood);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.listView);
 
-
-
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         customAdapter = new CustomAdapter(getContext(),shopList);
         mRecyclerView.setAdapter(customAdapter);
-
-
 
          //textChangeListener part
         searchET.addTextChangedListener(new TextWatcher() {
