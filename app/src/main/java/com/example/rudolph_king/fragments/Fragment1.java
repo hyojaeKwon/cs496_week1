@@ -12,11 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.rudolph_king.adapters.CustomAdapter;
 import com.example.rudolph_king.activities.JsonRead;
@@ -47,8 +50,11 @@ public class Fragment1 extends Fragment{
 
     // customizing listView
     ArrayList<Shops> shopList;
+    ArrayList<Shops> filteredList;
+
     RecyclerView mRecyclerView;
     private static CustomAdapter customAdapter;
+    EditText searchET;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -83,10 +89,15 @@ public class Fragment1 extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
+
 
 //        setContentView(R.layout.search_tab);
 //        Intent intent = getIntent();
@@ -107,6 +118,9 @@ public class Fragment1 extends Fragment{
 
         // add list elements -- test
         shopList = new ArrayList<>();
+        filteredList = new ArrayList<>();
+
+        //json파일 parse 하는 부분
         JsonRead jr = new JsonRead();
         JSONObject jo = jr.reading(getContext());
         JSONArray ja = null;
@@ -132,17 +146,56 @@ public class Fragment1 extends Fragment{
             }
 
         }
+        //영업 상태에 따라 정렬하기
         Collections.sort(shopList,new SortIsOpen());
 
+        //view에서 text들어가는 부분 찾는 부분
+        searchET = view.findViewById(R.id.searchFood);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.listView);
+
+
+
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         customAdapter = new CustomAdapter(getContext(),shopList);
+//        for(int i =0 ; i < shopList.size() ; i++){
+//            Log.e("shopListPrint",shopList.get(i).getTitle().toString());
+//    }
+//        Log.e("shopListPrint",shopList.get(1).getTitle());
+        Log.e("SizeOfShopList",Integer.toString(shopList.size()));
         mRecyclerView.setAdapter(customAdapter);
 
+
+        searchET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String searchText = searchET.getText().toString();
+                searchFilter(searchText);
+            }
+        });
         return view;
     }
+    public void searchFilter(String searchText){
+        filteredList.clear();
 
+        for (int i = 0 ; i < shopList.size() ; i++){
+//            Log.e("input_search",shopList.get(i).getTitle().toString());
+            if(String.valueOf(shopList.get(i).getTitle()).contains(searchText)){
+                filteredList.add(shopList.get(i));
+            }
+        }
+        customAdapter.filterList(filteredList);
+    }
 
 }
 class SortIsOpen implements Comparator<Shops>{
