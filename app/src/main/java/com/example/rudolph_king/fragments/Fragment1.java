@@ -21,10 +21,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.example.rudolph_king.activities.PhotoActivity;
 import com.example.rudolph_king.adapters.CustomAdapter;
 import com.example.rudolph_king.activities.JsonRead;
 import com.example.rudolph_king.R;
 import com.example.rudolph_king.Shops;
+import com.example.rudolph_king.adapters.PhotoAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,16 +78,6 @@ public class Fragment1 extends Fragment{
         return fragment;
     }
 
-//    public void textView(String a){
-//        TextView view1 = new TextView(getContext());
-//        view1.setText(a);
-//        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-//        lp.gravity= Gravity.CENTER;
-//        lp.leftMargin=20;
-//        view1.setLayoutParams(lp);
-//
-//        listContainer.addView(view1);
-//    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,20 +86,19 @@ public class Fragment1 extends Fragment{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
-
-
-
-//        setContentView(R.layout.search_tab);
-//        Intent intent = getIntent();
-//        if(Intent.ACTION_SEARCH .equals(intent.getAction())){
-//            String query = intent.getStringExtra(SearchManager,QUERY);
-//            doMySearch(query);
-//        }
-//        setContentView(R.layout.activity_main);
-//        listContainer = listContainer.findViewById(R.id.listView);
     }
+
+
+
+//    @Override
+//    public void onItemSelected(View view, int position) {
+//
+//        Intent intent = new Intent(getActivity(), PhotoActivity.class);
+//        intent.putExtra("pos", position);
+//        startActivity(intent);
+//    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -158,14 +149,11 @@ public class Fragment1 extends Fragment{
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         customAdapter = new CustomAdapter(getContext(),shopList);
-//        for(int i =0 ; i < shopList.size() ; i++){
-//            Log.e("shopListPrint",shopList.get(i).getTitle().toString());
-//    }
-//        Log.e("shopListPrint",shopList.get(1).getTitle());
-        Log.e("SizeOfShopList",Integer.toString(shopList.size()));
         mRecyclerView.setAdapter(customAdapter);
 
 
+
+         //textChangeListener part
         searchET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -179,25 +167,32 @@ public class Fragment1 extends Fragment{
 
             @Override
             public void afterTextChanged(Editable editable) {
+                //입력한 문자 찾아서 검색  메서드에 전달
                 String searchText = searchET.getText().toString();
                 searchFilter(searchText);
             }
         });
         return view;
     }
+
+    //검색 method
     public void searchFilter(String searchText){
         filteredList.clear();
 
+        //검색 결과 찾는 부분
         for (int i = 0 ; i < shopList.size() ; i++){
-//            Log.e("input_search",shopList.get(i).getTitle().toString());
-            if(String.valueOf(shopList.get(i).getTitle()).contains(searchText)){
+            if(String.valueOf(shopList.get(i).getT()).contains(searchText)){
                 filteredList.add(shopList.get(i));
             }
         }
+        //필터링된 메서드 cA에 다시 전달
         customAdapter.filterList(filteredList);
     }
 
 }
+
+
+//Comparator 구현
 class SortIsOpen implements Comparator<Shops>{
     @Override
     public int compare(Shops s1,Shops s2){

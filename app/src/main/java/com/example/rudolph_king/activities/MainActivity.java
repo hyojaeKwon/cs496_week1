@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         // setting action bar
         ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.setCustomView(R.layout.action_bar_main);
 
@@ -59,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         // connect view pager with tab layout
         TabLayout tab = findViewById(R.id.tab);
         tab.setupWithViewPager(vp);
+
+//        VPAdapter.setOnItemClickListner(new )
     }
 
     @Override
