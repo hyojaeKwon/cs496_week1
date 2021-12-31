@@ -26,48 +26,63 @@ import com.example.rudolph_king.Shops;
 import java.util.ArrayList;
 
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> implements AdapterView.OnItemClickListener {
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> implements OnPersonItemClickListener {
 
     private final Context context;
-    private  ArrayList<Shops> list;
+    private ArrayList<Shops> list;
+    OnPersonItemClickListener listener;
 
     public CustomAdapter(Context context, ArrayList<Shops> shopList) {
         this.context = context;
         this.list = shopList;
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        String selectedItem = (String) view.findViewById(id.textView_name).getTag().toString();
-        Toast.makeText(this.context, "Clicked: " + i +" " + selectedItem, Toast.LENGTH_SHORT).show();
-    }
 
+
+//    @Override
+//    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//        String selectedItem = (String) view.findViewById(id.textView_name).getTag().toString();
+//        Toast.makeText(this.context, "Clicked: " + i +" " + selectedItem, Toast.LENGTH_SHORT).show();
+//    }
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
         public static RecyclerView rvs;
         public final TextView tv_name;
         public final TextView tv_summary;
         public final ImageView iv_thumb;
         public final TextView iv_open;
 
-
 //        public final TextView iv_tags;
-
-        public ViewHolder(View view) {
+        public ViewHolder(View view, final OnPersonItemClickListener listener) {
             super(view);
             // Define click listener for the ViewHolder's View
-
             tv_name = (TextView) view.findViewById(id.textView_name);
             tv_summary = (TextView) view.findViewById(id.textView_summary);
             iv_thumb = (ImageView) view.findViewById(id.imageView_thumb);
             iv_open = (TextView) view.findViewById(id.textView_isOpen);
             rvs = view.findViewById(id.rvChapters);
+
+            view.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+
+                    if (listener != null){
+                        listener.onItemClick(ViewHolder.this,view,position);
+
+                    }
+                }
+            });
 //            iv_tags = (TextView) view.findViewById(id.textview_tag_list);
         }
+
+
     }
+
 
     // Create new views (invoked by the layout manager)
     @NonNull
@@ -77,14 +92,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(layout.row_item, viewGroup, false);
 
-        return new ViewHolder(view);
+        return new ViewHolder(view,this);
     }
+
     //검색을 통해 필터링하는 부분
-    public void filterList(ArrayList<Shops> filteredShopList){
+
+    public void filterList(ArrayList<Shops> filteredShopList) {
         this.list = filteredShopList;
         notifyDataSetChanged();
     }
     // Replace the contents of a view (invoked by the layout manager)
+
+
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
@@ -95,31 +114,32 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         final Shops shop = (Shops) list.get(position);
         viewHolder.tv_name.setText(shop.getT());
         viewHolder.tv_summary.setText(shop.getPhone());
-        if(shop.getIsOpen()){
+        if (shop.getIsOpen()) {
             viewHolder.iv_open.setText("영업 중");
             viewHolder.iv_open.setTextColor(ContextCompat.getColor(context, color.open));
-        }else{
+        } else {
             viewHolder.iv_open.setText("영업 종료");
-            viewHolder.iv_open.setTextColor(ContextCompat.getColor(context, color.not_open));        }
+            viewHolder.iv_open.setTextColor(ContextCompat.getColor(context, color.not_open));
+        }
         Glide
                 .with(context)
                 .load(shop.getThumb_url())
                 .centerCrop()
                 .apply(new RequestOptions().override(250, 250))
                 .into(viewHolder.iv_thumb);
-                Log.e( "tag",shop.getThumb_url());
+        Log.e("tag", shop.getThumb_url());
 //        viewHolder.iv_thumb.setImageResource(drawable.img);
 
         ArrayList<String> tag = shop.getTags();
         ArrayList<TagData> td = new ArrayList<>();
 
-        for(int i = 0 ; i < tag.size() ; i++){
+        for (int i = 0; i < tag.size(); i++) {
             TagData tagData = new TagData(tag.get(i));
             td.add(tagData);
         }
 
-        Log.e("nammme",td.get(0).toString());
-        TagAdapter ta = new TagAdapter(context,td);
+        Log.e("nammme", td.get(0).toString());
+        TagAdapter ta = new TagAdapter(context, td);
         LinearLayoutManager manager = new LinearLayoutManager(context);
 
         ViewHolder.rvs.setLayoutManager(manager);
@@ -131,10 +151,23 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         //해시태그 개별 textview로 구성하기
     }
-
     // Return the size of your dataset (invoked by the layout manager)
+
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+
+    //아이템이 클릭되면 실행
+    public void setOnItemClickListener(OnPersonItemClickListener listener) {
+        this.listener = listener;
+    }
+    //item클릭 시 실행
+    @Override
+    public void onItemClick(ViewHolder holder, View view, int position) {
+        if (listener != null){
+            listener.onItemClick(holder,view,position);
+        }
     }
 }
