@@ -3,29 +3,28 @@ package com.example.rudolph_king.fragments;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.rudolph_king.R;
 import com.example.rudolph_king.activities.MainActivity;
 import com.example.rudolph_king.activities.PhotoActivity;
 import com.example.rudolph_king.adapters.ReviewAdapter;
-import com.example.rudolph_king.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Fragment2#newInstance} factory method to
+ * Use the {@link Fragment2_past#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelectedInterface {
+public class Fragment2_past extends Fragment implements ReviewAdapter.OnListItemSelectedInterface {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,13 +33,13 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
 
     // gallery view
     static RecyclerView mRecyclerView;
-    private static ReviewAdapter reviewAdapter;
+    private static ReviewAdapter photoAdapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    public Fragment2() {
+    public Fragment2_past() {
         // Required empty public constructor
     }
 
@@ -53,8 +52,8 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
      * @return A new instance of fragment Fragment2.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fragment2 newInstance(String param1, String param2) {
-        Fragment2 fragment = new Fragment2();
+    public static Fragment2_past newInstance(String param1, String param2) {
+        Fragment2_past fragment = new Fragment2_past();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,8 +63,8 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
 
     @SuppressLint("NotifyDataSetChanged")
     public static void refreshAdapter() {
-        reviewAdapter.notifyDataSetChanged();
-        // mRecyclerView.setAdapter(photoAdapter);
+        photoAdapter.notifyDataSetChanged();
+        mRecyclerView.setAdapter(photoAdapter);
         Log.e("refreshed", "true");
     }
 
@@ -86,11 +85,11 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
         View view = inflater.inflate(R.layout.fragment_2, container, false) ;
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.gallery);
-        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        reviewAdapter = new ReviewAdapter(getContext(), MainActivity.reviewList, this);
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 3);
+        mRecyclerView.setLayoutManager(mGridLayoutManager);
+        photoAdapter = new ReviewAdapter(getContext(), MainActivity.reviewList, this);
 
-        mRecyclerView.setAdapter(reviewAdapter);
+        mRecyclerView.setAdapter(photoAdapter);
 
         FloatingActionButton fab = view.findViewById(R.id.addPhoto);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +107,6 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
     private void openPhoneGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         getActivity().startActivityForResult(intent, 101);
     }

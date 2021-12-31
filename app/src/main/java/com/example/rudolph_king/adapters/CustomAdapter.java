@@ -78,6 +78,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                 }
             });
 //            iv_tags = (TextView) view.findViewById(id.textview_tag_list);
+
         }
 
 
@@ -144,12 +145,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         ViewHolder.rvs.setLayoutManager(manager);
         ViewHolder.rvs.setAdapter(ta);
-
-//        TagAdapter ta = new TagAdapter(context,tag);
-//        ta.onBindViewHolder(new ta.onCreateViewHolder(parent,),position);
-//        View vh = viewHolder.itemView.findViewById(id.tv_tag_id);
-
-        //해시태그 개별 textview로 구성하기
     }
     // Return the size of your dataset (invoked by the layout manager)
 
