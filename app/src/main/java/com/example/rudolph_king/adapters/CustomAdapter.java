@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.rudolph_king.Shops;
 import com.example.rudolph_king.activities.CallActivity;
+import com.example.rudolph_king.fragments.Fragment1;
 
 import java.util.ArrayList;
 
@@ -71,6 +72,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     Context context = view.getContext();
+//                    Log.e("position",Integer.toString(position));
+
 
                     if(position != RecyclerView.NO_POSITION){
                         Intent intent = new Intent(context, CallActivity.class)

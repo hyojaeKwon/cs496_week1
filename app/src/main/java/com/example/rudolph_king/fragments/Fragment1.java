@@ -42,8 +42,8 @@ public class Fragment1 extends Fragment{
     private static final String ARG_PARAM2 = "param2";
 
     // customizing listView
-     ArrayList<Shops> shopList;
-     ArrayList<Shops> filteredList;
+    static ArrayList<Shops> shopList;
+     static ArrayList<Shops> filteredList;
 
 
      public boolean isFilteredListEmpty(){
@@ -200,6 +200,11 @@ public class Fragment1 extends Fragment{
     }
     public ArrayList<Shops> getFilteredList(){
         return filteredList;
+    }
+
+    public Shops getInfo(int pos){
+        Log.e("pos",Integer.toString(pos));
+        return (Shops)(shopList.get(pos));
     }
 }
 

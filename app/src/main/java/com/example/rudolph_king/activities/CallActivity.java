@@ -35,24 +35,26 @@ public class CallActivity extends AppCompatActivity {
     private boolean chooseOriginal = f1.isFilteredListEmpty();
 
     public void setItems(){
+
+        Shops shopNow = f1.getInfo(pos);
         this.tv_isOpen = (TextView) findViewById(R.id.call_isOpen);
         this.tv_name = (TextView) findViewById(R.id.title_of_shop_detail);
         this.tv_phone = (TextView) findViewById(R.id.call_phone);
 
-        ArrayList<Shops> nowList = new ArrayList<>();
-        if (getChoose() == true){
-            nowList = f1.getShopList();
-        } else {
-            nowList = f1.getFilteredList();
-        }
-        Log.e("nowList", Integer.toString(nowList.size()));
-//        if (nowList.get(pos).getIsOpen() == true){
-//            tv_isOpen.setText("영업 중");
+//        ArrayList<Shops> nowList = new ArrayList<>();
+//        if (getChoose() == true){
+//            nowList = f1.getShopList();
 //        } else {
-//            tv_isOpen.setText("영업 종료");
+//            nowList = f1.getFilteredList();
 //        }
-//        tv_name.setText(nowList.get(pos).getT());
-//        tv_phone.setText(nowList.get(pos).getPhone());
+//        Log.e("nowList", Integer.toString(nowList.size()));
+        if (shopNow.getIsOpen() == true){
+            tv_isOpen.setText("영업 중");
+        } else {
+            tv_isOpen.setText("영업 종료");
+        }
+        tv_name.setText(shopNow.getT());
+        tv_phone.setText(shopNow.getPhone());
 
     }
     public boolean getChoose(){
