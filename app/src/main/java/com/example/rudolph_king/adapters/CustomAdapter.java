@@ -4,14 +4,13 @@ import static com.example.rudolph_king.R.*;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -20,16 +19,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.rudolph_king.R;
 import com.example.rudolph_king.Shops;
+import com.example.rudolph_king.activities.CallActivity;
 
 import java.util.ArrayList;
 
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> implements OnPersonItemClickListener {
 
-    private final Context context;
-    private ArrayList<Shops> list;
+    private  Context context;
+    private  ArrayList<Shops> list;
     OnPersonItemClickListener listener;
 
     public CustomAdapter(Context context, ArrayList<Shops> shopList) {
@@ -56,7 +55,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         public final ImageView iv_thumb;
         public final TextView iv_open;
 
-//        public final TextView iv_tags;
+
+        //        public final TextView iv_tags;
         public ViewHolder(View view, final OnPersonItemClickListener listener) {
             super(view);
             // Define click listener for the ViewHolder's View
@@ -70,9 +70,15 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
+                    Context context = view.getContext();
 
-                    if (listener != null){
-                        listener.onItemClick(ViewHolder.this,view,position);
+                    if(position != RecyclerView.NO_POSITION){
+                        Intent intent = new Intent(context, CallActivity.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                        intent.putExtra("pos",position);
+
+                        context.startActivity(intent);
 
                     }
                 }
@@ -155,7 +161,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
 
     //아이템이 클릭되면 실행
-    public void setOnItemClickListener(OnPersonItemClickListener listener) {
+    public void OnPersonItemClickListener(OnPersonItemClickListener listener) {
         this.listener = listener;
     }
     //item클릭 시 실행
