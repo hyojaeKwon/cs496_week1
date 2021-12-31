@@ -1,12 +1,16 @@
 package com.example.rudolph_king.adapters;
 
+import static com.example.rudolph_king.fragments.Fragment2.refreshAdapter;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,31 +18,30 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
+import com.example.rudolph_king.GalleryImage;
 import com.example.rudolph_king.R;
+import com.example.rudolph_king.activities.MainActivity;
 
-import java.io.File;
 import java.util.ArrayList;
 
-public class PhotoAdapter_past extends RecyclerView.Adapter<PhotoAdapter_past.ViewHolder> {
+public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
     public interface OnListItemSelectedInterface {
         void onItemSelected(View view, int position);
     }
 
     private OnListItemSelectedInterface mListener;
-    private ArrayList<Uri> mDataset;
+    private ArrayList<GalleryImage> mDataset;
     private Context mContext;
 
-    public PhotoAdapter_past(Context context, ArrayList<Uri> myDataset, OnListItemSelectedInterface listener) {
+    public ReviewAdapter(Context context, ArrayList<GalleryImage> myDataset, OnListItemSelectedInterface listener) {
         mDataset = myDataset;
         mContext = context;
         mListener = listener;
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View convertView = LayoutInflater.from(mContext).inflate(R.layout.photo_item, parent, false);
+        View convertView = LayoutInflater.from(mContext).inflate(R.layout.review_item, parent, false);
         Log.e("onCreateViewHolder", String.valueOf(true));
         return new ViewHolder(convertView);
     }
@@ -46,18 +49,10 @@ public class PhotoAdapter_past extends RecyclerView.Adapter<PhotoAdapter_past.Vi
     @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Uri photo = mDataset.get(position);
-        Glide.with(mContext)
-            .load(photo)
-            .thumbnail(0.5f)
-            .into(holder.img_thumb);
-        Log.e("viewhodler", photo.getPath());
-//        holder.layout_gallery.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mOnItemClickListener.onItemClick(v, albumVO);
-//            }
-//        });
+        GalleryImage review = mDataset.get(position);
+
+        holder.photoAdapter = new PhotoAdapter(mContext, review.getUriList());
+        holder.mRecyclerView.setAdapter(holder.photoAdapter);
     }
 
     @Override
@@ -66,15 +61,13 @@ public class PhotoAdapter_past extends RecyclerView.Adapter<PhotoAdapter_past.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private RelativeLayout layout_gallery;
-        private ImageView img_thumb;
-        public ImageView getImage() {
-            return img_thumb;
-        }
+        RecyclerView mRecyclerView;
+        PhotoAdapter photoAdapter;
         public ViewHolder(View convertView) {
             super(convertView);
-            layout_gallery = (RelativeLayout) convertView.findViewById(R.id.layout_gallery);
-            img_thumb = (ImageView) convertView.findViewById(R.id.imageView_gallery);
+            mRecyclerView = (RecyclerView) convertView.findViewById(R.id.review_photo);
+            LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(mContext, RecyclerView.HORIZONTAL, false);
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 // gallery photo click
@@ -91,24 +84,24 @@ public class PhotoAdapter_past extends RecyclerView.Adapter<PhotoAdapter_past.Vi
                 @Override
                 public boolean onLongClick(View view) {
                     int position = getAdapterPosition();
-                    AlertDialog.Builder adb = new AlertDialog.Builder(mContext, R.style.AlertDialog_AppCompat_Light);
+                    android.app.AlertDialog.Builder adb = new AlertDialog.Builder(mContext, R.style.AlertDialog_AppCompat_Light);
                     adb.setTitle("Delete")
                             .setNeutralButton("CONFIRM", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
-                                    String imagePath = mDataset.get(position).getPath();
+//                                    String imagePath = mDataset.get(position).getPath();
                                     mDataset.remove(position);
 
-                                    File file = new File(imagePath).getAbsoluteFile();
-
-                                    if(file.exists()){
-                                        System.gc();
-                                        System.runFinalization();
-                                        boolean ch = file.delete();
-                                        mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + imagePath)));
-                                    }
-
+//                                    File file = new File(imagePath).getAbsoluteFile();
+//
+//                                    if(file.exists()){
+//                                        System.gc();
+//                                        System.runFinalization();
+//                                        boolean ch = file.delete();
+//                                        mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + imagePath)));
+//                                    }
+                                    refreshAdapter();
                                     // adapter.notifyDataSetChanged();
                                 }
                             })

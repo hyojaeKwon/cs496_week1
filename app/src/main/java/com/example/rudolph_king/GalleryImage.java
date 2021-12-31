@@ -1,16 +1,12 @@
 package com.example.rudolph_king;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
+import java.util.ArrayList;
 
 public class GalleryImage {
-    private String path;
-    private Bitmap d;
-    private Bitmap rd;
+    private ArrayList<Uri> uriList;
 
-    public void setPath(String path) { this.path = path ;}
-    public void setD(Bitmap d) { this.d = d; }
-    public void setRd(Bitmap rd) {this.rd = rd; }
-    public String getPath() {return path;}
-    public Bitmap getD() {return d;}
-    public Bitmap getRd() {return rd;}
+    public void setUriList(ArrayList<Uri> uri) { this.uriList = uri ;}
+    public ArrayList<Uri> getUriList() {return this.uriList;}
 }

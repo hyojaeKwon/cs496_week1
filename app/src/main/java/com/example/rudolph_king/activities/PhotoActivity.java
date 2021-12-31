@@ -16,6 +16,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.rudolph_king.GalleryImage;
 import com.example.rudolph_king.R;
 
 import java.util.ArrayList;
@@ -37,11 +38,11 @@ public class PhotoActivity extends AppCompatActivity {
         ImageView image = (ImageView) findViewById(R.id.imageView_detail);
         Intent intent = getIntent();
         int position = intent.getIntExtra("pos", 0);
-        Uri img = MainActivity.uriList.get(position);
-        Glide.with(this)
-            .load(img)
-            .thumbnail(0.5f)
-            .into(image);
+        GalleryImage review = MainActivity.reviewList.get(position);
+//        Glide.with(this)
+//            .load(img)
+//            .thumbnail(0.5f)
+//            .into(image);
     }
 
     @Override
