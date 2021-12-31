@@ -21,10 +21,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.example.rudolph_king.activities.PhotoActivity;
 import com.example.rudolph_king.adapters.CustomAdapter;
 import com.example.rudolph_king.activities.JsonRead;
 import com.example.rudolph_king.R;
 import com.example.rudolph_king.Shops;
+import com.example.rudolph_king.adapters.PhotoAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -86,6 +88,18 @@ public class Fragment1 extends Fragment{
         }
     }
 
+
+
+//    @Override
+//    public void onItemSelected(View view, int position) {
+//
+//        Intent intent = new Intent(getActivity(), PhotoActivity.class);
+//        intent.putExtra("pos", position);
+//        startActivity(intent);
+//    }
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -138,6 +152,8 @@ public class Fragment1 extends Fragment{
         mRecyclerView.setAdapter(customAdapter);
 
 
+
+         //textChangeListener part
         searchET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -174,6 +190,9 @@ public class Fragment1 extends Fragment{
     }
 
 }
+
+
+//Comparator 구현
 class SortIsOpen implements Comparator<Shops>{
     @Override
     public int compare(Shops s1,Shops s2){
