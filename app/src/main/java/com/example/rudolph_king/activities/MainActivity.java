@@ -1,6 +1,7 @@
 package com.example.rudolph_king.activities;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.arch.core.internal.SafeIterableMap;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,7 +45,7 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
-    private Context mContext;
+    private static Context mContext;
     private long backKeyPressedTime = 0;
     private Toast toast;
     public static ArrayList<GalleryImage> reviewList = new ArrayList<GalleryImage>();
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        mContext = this;
         setContentView(R.layout.activity_main);
 
         // setting action bar
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         // upload photo from gallery
         if (requestCode == 101) {
             if (resultCode == RESULT_OK) {
@@ -121,10 +124,12 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    GalleryImage newReview = new GalleryImage();
-                    newReview.setUriList(imageUriList);
-                    reviewList.add(0, newReview);
-                    updateJSONImages(newReview);
+                    // create new review
+//                    GalleryImage newReview = new GalleryImage();
+//                    newReview.setUriList(imageUriList);
+//                    // reviewList.add(0, newReview);
+//                    updateJSONImages(newReview);
+                    Fragment2.setReviewInfo("", "", "", imageUriList, true);
                 }
 
                 Fragment2.refreshAdapter();
@@ -132,14 +137,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void updateJSONImages(GalleryImage review) {
-        String uriListString = review.getUriList().toString();
+    public static void updateJSONImages(GalleryImage review, int position) {
         JsonRead jr = new JsonRead();
-        JSONObject jo = jr.reading(this, "images.json");
+        JSONObject jo = jr.reading(mContext, "images.json");
         FileInputStream fis = null;
         String fileName = "images.json";
         try {
-            fis = this.openFileInput(fileName);
+            fis = mContext.openFileInput(fileName);
             InputStreamReader inputStreamReader =
                     new InputStreamReader(fis, StandardCharsets.UTF_8);
             StringBuilder stringBuilder = new StringBuilder();
@@ -154,39 +158,48 @@ public class MainActivity extends AppCompatActivity {
             } finally {
                 String contents = stringBuilder.toString();
                 jo = new JSONObject(contents);
-                Log.e("First load", contents);
             }
         } catch (FileNotFoundException | JSONException e) {
             e.printStackTrace();
-            Log.e("First run", "true");
         }
         try {
             JSONArray ja = jo.getJSONArray("Reviews");
-            JSONObject sObject = new JSONObject();//배열 내에 들어갈 json
-            sObject.put("uriList", uriListString);
-            ja.put(sObject);
+            if (position < 0) {
+                JSONObject jsonObject = new JSONObject();//배열 내에 들어갈 json
+                jsonObject.put("uriList", review.getUriList().toString());
+                jsonObject.put("name", review.getReviewName());
+                jsonObject.put("members", review.getReviewMembers());
+                jsonObject.put("date", review.getReviewDate());
+                ja.put(jsonObject);
+                Log.e("newAdded", String.valueOf(ja.length()));
+            } else {
+                if (review != null) {
+                    JSONObject jsonObject = new JSONObject();//배열 내에 들어갈 json
+                    jsonObject.put("uriList", review.getUriList().toString());
+                    jsonObject.put("name", review.getReviewName());
+                    jsonObject.put("members", review.getReviewMembers());
+                    jsonObject.put("date", review.getReviewDate());
+                    ja.put(ja.length() - position - 1, jsonObject);
+                    Log.e("newAdded", String.valueOf(ja.length()));
+                } else {
+                    ja.remove(ja.length() - position - 1);
+                    Log.e("deleted", String.valueOf(ja.length()));
+                }
+            }
             jo.put("Reviews", ja);
 
             try {
-                //Get your FilePath and use it to create your File
-
-                //String filePath = String.valueOf(this.getFilesDir());
-                //File jsonFile = new File(filePath);
-                //Create your FileOutputStream, yourFile is part of the constructor
-                FileOutputStream fileOutputStream = this.openFileOutput(fileName, Context.MODE_PRIVATE);
-                //Convert your JSON String to Bytes and write() it
+                FileOutputStream fileOutputStream = mContext.openFileOutput(fileName, Context.MODE_PRIVATE);
+                //Convert JSON String to Bytes and write() it
                 fileOutputStream.write(jo.toString().getBytes());
-                //Finally flush and close your FileOutputStream
+                //Finally flush and close FileOutputStream
                 fileOutputStream.flush();
                 fileOutputStream.close();
-                Log.e("File First", jo.toString());
             } catch(IOException e) {
                 e.printStackTrace();
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        Log.e("Added", "hihihi");
     }
 }

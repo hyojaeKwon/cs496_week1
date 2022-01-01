@@ -3,14 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/green_500"
     tools:context=".fragments.Fragment2">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/gallery"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addPhoto"
@@ -21,5 +23,8 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:src="@android:drawable/ic_input_add"
-        android:contentDescription="@string/app_name" />
+        android:contentDescription="@string/app_name"
+        app:tint="@color/off_white"
+        app:backgroundTint="@color/red_500"
+        />
 </FrameLayout>

@@ -10,6 +10,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class GalleryImage {
+    private String reviewName;
+    private String reviewMembers;
+    private String reviewDate;
     private ArrayList<Uri> uriList;
 
 //    public GalleryImage(JSONObject jsonText) throws JSONException {
@@ -26,7 +29,24 @@ public class GalleryImage {
 //            this.uriList.add(uri);
 //        }
 //    }
-
     public void setUriList(ArrayList<Uri> uri) { this.uriList = uri ;}
     public ArrayList<Uri> getUriList() {return this.uriList;}
+    public void setReviewName(String reviewName) {
+        this.reviewName = reviewName;
+    }
+    public String getReviewName() {
+        return this.reviewName;
+    }
+    public void setReviewMembers(String reviewMembers) {
+        this.reviewMembers = reviewMembers;
+    }
+    public String getReviewMembers() {
+        return this.reviewMembers;
+    }
+    public void setReviewDate(String reviewDate) {
+        this.reviewDate = reviewDate;
+    }
+    public String getReviewDate() {
+        return this.reviewDate;
+    }
 }
