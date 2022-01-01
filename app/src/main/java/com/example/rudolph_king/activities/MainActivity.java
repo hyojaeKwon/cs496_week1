@@ -1,6 +1,7 @@
 package com.example.rudolph_king.activities;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.arch.core.internal.SafeIterableMap;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,16 +31,27 @@ import com.example.rudolph_king.adapters.VPAdapter;
 import com.example.rudolph_king.fragments.Fragment2;
 import com.google.android.material.tabs.TabLayout;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
-    private Context mContext;
+    private static Context mContext;
     private long backKeyPressedTime = 0;
     private Toast toast;
     public static ArrayList<GalleryImage> reviewList = new ArrayList<GalleryImage>();
@@ -68,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        mContext = this;
         getHashKey();
         setContentView(R.layout.activity_main);
 
@@ -81,14 +94,12 @@ public class MainActivity extends AppCompatActivity {
 
         VPAdapter adapter = new VPAdapter(getSupportFragmentManager());
         vp.setAdapter(adapter);
-        //json file 받기
-        AssetManager assetManager = getResources().getAssets();
+        // 갤러리를 위한 json file 받기
+        // AssetManager assetManager = getResources().getAssets();
 
         // connect view pager with tab layout
         TabLayout tab = findViewById(R.id.tab);
         tab.setupWithViewPager(vp);
-
-//        VPAdapter.setOnItemClickListner(new )
     }
 
     @Override
@@ -107,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         // upload photo from gallery
         if (requestCode == 101) {
             if (resultCode == RESULT_OK) {
@@ -126,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
                         ClipData clipData = data.getClipData();
                         if (clipData.getItemCount() > 5) {
                             Toast.makeText(this, "사진은 5장까지 선택 가능합니다", Toast.LENGTH_LONG).show();
+                            return;
                         } else {
                             for (int i = 0; i < clipData.getItemCount(); i++) {
                                 Uri imageUri = clipData.getItemAt(i).getUri();
@@ -138,13 +151,82 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    GalleryImage newReview = new GalleryImage();
-                    newReview.setUriList(imageUriList);
-                    reviewList.add(0, newReview);
+                    // create new review
+//                    GalleryImage newReview = new GalleryImage();
+//                    newReview.setUriList(imageUriList);
+//                    // reviewList.add(0, newReview);
+//                    updateJSONImages(newReview);
+                    Fragment2.setReviewInfo("", "", "", imageUriList, true);
                 }
 
                 Fragment2.refreshAdapter();
             }
+        }
+    }
+
+    public static void updateJSONImages(GalleryImage review, int position) {
+        JsonRead jr = new JsonRead();
+        JSONObject jo = jr.reading(mContext, "images.json");
+        FileInputStream fis = null;
+        String fileName = "images.json";
+        try {
+            fis = mContext.openFileInput(fileName);
+            InputStreamReader inputStreamReader =
+                    new InputStreamReader(fis, StandardCharsets.UTF_8);
+            StringBuilder stringBuilder = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
+                String line = reader.readLine();
+                while (line != null) {
+                    stringBuilder.append(line).append('\n');
+                    line = reader.readLine();
+                }
+            } catch (IOException e) {
+                // Error occurred when opening raw file for reading.
+            } finally {
+                String contents = stringBuilder.toString();
+                jo = new JSONObject(contents);
+            }
+        } catch (FileNotFoundException | JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            JSONArray ja = jo.getJSONArray("Reviews");
+            if (position < 0) {
+                JSONObject jsonObject = new JSONObject();//배열 내에 들어갈 json
+                jsonObject.put("uriList", review.getUriList().toString());
+                jsonObject.put("name", review.getReviewName());
+                jsonObject.put("members", review.getReviewMembers());
+                jsonObject.put("date", review.getReviewDate());
+                ja.put(jsonObject);
+                Log.e("newAdded", String.valueOf(ja.length()));
+            } else {
+                if (review != null) {
+                    JSONObject jsonObject = new JSONObject();//배열 내에 들어갈 json
+                    jsonObject.put("uriList", review.getUriList().toString());
+                    jsonObject.put("name", review.getReviewName());
+                    jsonObject.put("members", review.getReviewMembers());
+                    jsonObject.put("date", review.getReviewDate());
+                    ja.put(ja.length() - position - 1, jsonObject);
+                    Log.e("newAdded", String.valueOf(ja.length()));
+                } else {
+                    ja.remove(ja.length() - position - 1);
+                    Log.e("deleted", String.valueOf(ja.length()));
+                }
+            }
+            jo.put("Reviews", ja);
+
+            try {
+                FileOutputStream fileOutputStream = mContext.openFileOutput(fileName, Context.MODE_PRIVATE);
+                //Convert JSON String to Bytes and write() it
+                fileOutputStream.write(jo.toString().getBytes());
+                //Finally flush and close FileOutputStream
+                fileOutputStream.flush();
+                fileOutputStream.close();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }

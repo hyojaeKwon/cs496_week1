@@ -2,8 +2,10 @@ package com.example.rudolph_king.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,12 +15,33 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
+import com.example.rudolph_king.GalleryImage;
+import com.example.rudolph_king.activities.JsonRead;
 import com.example.rudolph_king.activities.MainActivity;
 import com.example.rudolph_king.activities.PhotoActivity;
 import com.example.rudolph_king.adapters.ReviewAdapter;
 import com.example.rudolph_king.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,6 +92,59 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
         Log.e("refreshed", "true");
     }
 
+    public static void setReviewInfo(String name, String members, String date, ArrayList<Uri> uriList, Boolean newReview) {
+        if (newReview) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(mRecyclerView.getContext());
+
+            View view = LayoutInflater.from(mRecyclerView.getContext())
+                    .inflate(R.layout.review_info_edit, null, false);
+            builder.setView(view);
+
+            final Button ButtonSubmit = (Button) view.findViewById(R.id.button_review_submit);
+            final EditText editReviewName = (EditText) view.findViewById(R.id.edit_review_name);
+            final EditText editReviewMembers = (EditText) view.findViewById(R.id.edit_review_members);
+
+            ButtonSubmit.setText("삽입");
+
+            final AlertDialog dialog = builder.create();
+
+            // 삽입 버튼을 클릭했을 때
+            ButtonSubmit.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    // 사용자가 입력한 내용 가져오기
+                    String reviewName = editReviewName.getText().toString();
+                    String reviewMembers = editReviewMembers.getText().toString();
+
+                    dialog.dismiss();
+
+                    long now = System.currentTimeMillis(); // 1970년 1월 1일부터 몇 밀리세컨드가 지났는지를 반환함
+                    Date date = new Date(now);
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");//형식 지정
+                    String time = simpleDateFormat.format(date);
+
+                    GalleryImage gi = new GalleryImage();
+                    gi.setUriList(uriList);
+                    gi.setReviewName(reviewName);
+                    gi.setReviewMembers(reviewMembers);
+                    gi.setReviewDate(time);
+                    MainActivity.reviewList.add(0, gi);
+                    refreshAdapter();
+                    MainActivity.updateJSONImages(gi, -1);
+                }
+            });
+
+            dialog.show();
+        } else {
+            GalleryImage gi = new GalleryImage();
+            gi.setUriList(uriList);
+            gi.setReviewName(name);
+            gi.setReviewMembers(members);
+            gi.setReviewDate(date);
+            MainActivity.reviewList.add(0, gi);
+            refreshAdapter();
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,11 +167,15 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
         reviewAdapter = new ReviewAdapter(getContext(), MainActivity.reviewList, this);
 
         mRecyclerView.setAdapter(reviewAdapter);
+        bringPrevReviews();
 
+        // 사진 추가하기 위한 floating button 정의
         FloatingActionButton fab = view.findViewById(R.id.addPhoto);
         fab.setOnClickListener(new View.OnClickListener() {
+            // floating button을 클릭했을 때
             @Override
             public void onClick(View view) {
+                mRecyclerView.smoothScrollToPosition(0);
                 // open phone gallery
                 openPhoneGallery();
             }
@@ -104,15 +184,84 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
         return view;
     }
 
+    private void bringPrevReviews() {
+        // 갤러리를 위한 json 파일 불러오기
+        JSONObject jo = null;
+        String fileName = "images.json";
+        FileInputStream fis = null;
+        // 최초 설치 시 파일 초기화
+//        File file = new File(this.getActivity().getFilesDir(), fileName);
+//        file.delete();
+        try {
+            fis = getContext().openFileInput(fileName);
+            InputStreamReader inputStreamReader =
+                    new InputStreamReader(fis, StandardCharsets.UTF_8);
+            StringBuilder stringBuilder = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
+                String line = reader.readLine();
+                while (line != null) {
+                    stringBuilder.append(line).append('\n');
+                    line = reader.readLine();
+                }
+            } catch (IOException e) {
+                // Error occurred when opening raw file for reading.
+            } finally {
+                String contents = stringBuilder.toString();
+                jo = new JSONObject(contents);
+            }
+        } catch (FileNotFoundException | JSONException e) {
+            e.printStackTrace();
+            JsonRead jr = new JsonRead();
+            jo = jr.reading(getContext(), "images.json");
+        }
+
+        //reviewlist에 JSONObject 추가하기
+        JSONArray ja = null;
+        try {
+            ja = jo.getJSONArray("Reviews");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        for(int i = 0 ; i < ja.length() ; i++){
+            JSONObject innerJSONObject = null;
+            try {
+                innerJSONObject = ja.getJSONObject(i);
+                if (innerJSONObject != null) {
+                    String jsonUriListString = innerJSONObject.getString("uriList");
+                    String jsonNameString = innerJSONObject.getString("name");
+                    String jsonMemString = innerJSONObject.getString("members");
+                    String jsonDateString = innerJSONObject.getString("date");
+                    String[] jsonReview = jsonUriListString.substring(1, jsonUriListString.lastIndexOf("]")).split(", ");
+                    //uriList array list 생성
+                    ArrayList<Uri> uriList = new ArrayList<Uri>();
+                    for(int j = 0 ; j < jsonReview.length; j++){
+                        Uri uri;
+                        uri = Uri.parse(jsonReview[j]);
+                        //찍어보는 방법
+//                        Log.e("First check", uri.toString());
+                        uriList.add(uri);
+                    }
+
+                    setReviewInfo(jsonNameString, jsonMemString, jsonDateString, uriList, false);
+                }
+            } catch (JSONException e) {
+            }
+        }
+    }
+
     @SuppressLint("IntentReset")
     private void openPhoneGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         getActivity().startActivityForResult(intent, 101);
     }
 
+    // review가 클릭되었을 때
     @Override
     public void onItemSelected(View view, int position) {
         Log.e("Listen", String.valueOf(position));
