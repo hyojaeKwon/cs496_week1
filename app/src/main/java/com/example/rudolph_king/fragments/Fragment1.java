@@ -1,38 +1,29 @@
 package com.example.rudolph_king.fragments;
 
-import android.app.Activity;
-import android.app.SearchManager;
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.os.Bundle;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.example.rudolph_king.activities.PhotoActivity;
 import com.example.rudolph_king.adapters.CustomAdapter;
 import com.example.rudolph_king.activities.JsonRead;
 import com.example.rudolph_king.R;
 import com.example.rudolph_king.Shops;
-import com.example.rudolph_king.adapters.PhotoAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -51,9 +42,22 @@ public class Fragment1 extends Fragment{
     private static final String ARG_PARAM2 = "param2";
 
     // customizing listView
-    ArrayList<Shops> shopList;
-    ArrayList<Shops> filteredList;
+    static ArrayList<Shops> shopList;
+     static ArrayList<Shops> filteredList;
 
+
+     public boolean isFilteredListEmpty(){
+         if (this.filteredList == null){
+             return true;
+         }
+         else{
+             if (this.filteredList.isEmpty()){
+                 return true;
+             }else{
+                 return false;
+             }
+         }
+     }
     RecyclerView mRecyclerView;
     private static CustomAdapter customAdapter;
     EditText searchET;
@@ -177,6 +181,7 @@ public class Fragment1 extends Fragment{
 
         //검색 결과 찾는 부분
         for (int i = 0 ; i < shopList.size() ; i++){
+//            Log.e("nowList", Integer.toString(shopList.size()));
             if(String.valueOf(shopList.get(i).getT()).contains(searchText)){
                 filteredList.add(shopList.get(i));
             }
@@ -185,6 +190,18 @@ public class Fragment1 extends Fragment{
         customAdapter.filterList(filteredList);
     }
 
+    public ArrayList<Shops> getShopList(){
+        Log.e("nowList", Integer.toString(shopList.size()));
+        return shopList;
+    }
+    public ArrayList<Shops> getFilteredList(){
+        return filteredList;
+    }
+
+    public Shops getInfo(int pos){
+        Log.e("pos",Integer.toString(pos));
+        return (Shops)(shopList.get(pos));
+    }
 }
 
 

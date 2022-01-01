@@ -9,7 +9,9 @@
       ],
       "phone" : "0507-1442-2930",
       "isOpen" : true,
-      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR9mY0amTpj8PKbWqbu9690h75pbCvRAiaeA&usqp=CAU"
+      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR9mY0amTpj8PKbWqbu9690h75pbCvRAiaeA&usqp=CAU",
+      "placeWi" : 36.35300294057797,
+      "placeKy" : 127.34561561507175
     },
     {
       "name" : "우리완구",
@@ -23,7 +25,9 @@
       ],
       "phone" : "042-523-9642",
       "isOpen" : false,
-      "thumb_url" : "https://img4.yna.co.kr/photo/yna/YH/2010/02/01/PYH2010020102450000400_P2.jpg"
+      "thumb_url" : "https://img4.yna.co.kr/photo/yna/YH/2010/02/01/PYH2010020102450000400_P2.jpg",
+      "placeWi" : 36.35300294057797,
+      "placeKy" : 127.34561561507175
     },
     {
       "name" : "토이월드",
@@ -35,7 +39,9 @@
       ],
       "phone" : "0507-1362-1988",
       "isOpen" : true,
-      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS45DHF_TPiuCS0Z45fT_HVG6CWyz9-MriO7xR7G_rPa0HtNXhc-qrA_STenFzgL6OC_EE&usqp=CAU"
+      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS45DHF_TPiuCS0Z45fT_HVG6CWyz9-MriO7xR7G_rPa0HtNXhc-qrA_STenFzgL6OC_EE&usqp=CAU",
+      "placeWi" : 36.35300294057797,
+      "placeKy" : 127.34561561507175
     },
     {
       "name" : "박서방 대전본점",
@@ -47,7 +53,9 @@
       ],
       "phone" : "0507-1406-0132",
       "isOpen" : true,
-      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5ozEM_pHXD8tbl2npPYQctwjvWmSaQCfMKMWKYTuPAptV7pECSVLGkfo62S5Y1nqo5nw&usqp=CAU"
+      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5ozEM_pHXD8tbl2npPYQctwjvWmSaQCfMKMWKYTuPAptV7pECSVLGkfo62S5Y1nqo5nw&usqp=CAU",
+      "placeWi" : 36.35300294057797,
+      "placeKy" : 127.34561561507175
     },{
       "name" : "하이드론",
       "tag" : [
@@ -59,7 +67,9 @@
       ],
       "phone" : "0507-1405-6157",
       "isOpen" : false,
-      "thumb_url" : "https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg"
+      "thumb_url" : "https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg",
+      "placeWi" : 36.35300294057797,
+      "placeKy" : 127.34561561507175
     },
     {
       "name" : "우리완구",
@@ -73,7 +83,9 @@
       ],
       "phone" : "042-523-9642",
       "isOpen" : false,
-      "thumb_url" : "https://img4.yna.co.kr/photo/yna/YH/2010/02/01/PYH2010020102450000400_P2.jpg"
+      "thumb_url" : "https://img4.yna.co.kr/photo/yna/YH/2010/02/01/PYH2010020102450000400_P2.jpg",
+      "placeWi" : 36.35300294057797,
+      "placeKy" : 127.34561561507175
     },
     {
       "name" : "토이월드",
@@ -85,7 +97,9 @@
       ],
       "phone" : "0507-1362-1988",
       "isOpen" : true,
-      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS45DHF_TPiuCS0Z45fT_HVG6CWyz9-MriO7xR7G_rPa0HtNXhc-qrA_STenFzgL6OC_EE&usqp=CAU"
+      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS45DHF_TPiuCS0Z45fT_HVG6CWyz9-MriO7xR7G_rPa0HtNXhc-qrA_STenFzgL6OC_EE&usqp=CAU",
+      "placeWi" : 36.35300294057797,
+      "placeKy" : 127.34561561507175
     },
     {
       "name" : "박서방 대전본점",
@@ -97,7 +111,9 @@
       ],
       "phone" : "0507-1406-0132",
       "isOpen" : true,
-      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5ozEM_pHXD8tbl2npPYQctwjvWmSaQCfMKMWKYTuPAptV7pECSVLGkfo62S5Y1nqo5nw&usqp=CAU"
+      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5ozEM_pHXD8tbl2npPYQctwjvWmSaQCfMKMWKYTuPAptV7pECSVLGkfo62S5Y1nqo5nw&usqp=CAU",
+      "placeWi" : 36.35300294057797,
+      "placeKy" : 127.34561561507175
     },{
       "name" : "하이드론",
       "tag" : [
@@ -109,7 +125,9 @@
       ],
       "phone" : "0507-1405-6157",
       "isOpen" : false,
-      "thumb_url" : "https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg"
+      "thumb_url" : "https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg",
+      "placeWi" : 36.35300294057797,
+      "placeKy" : 127.34561561507175
     }
   ]
 }
