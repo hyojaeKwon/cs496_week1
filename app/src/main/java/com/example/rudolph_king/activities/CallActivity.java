@@ -13,6 +13,7 @@ import com.example.rudolph_king.fragments.Fragment1;
 
 import com.example.rudolph_king.R;
 
+import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
@@ -32,12 +33,30 @@ public class CallActivity extends AppCompatActivity {
     }
 
     //지도 띄우는 코드
-    private void initView(){
+    private void initView(Shops shop){
         MapView mapView = new MapView(this);
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
-
+        //지도 추가하는 코드
         mapViewContainer.addView(mapView);
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.53737528, 127.00557633), true);
+        //가게 위치를 point로 저장
+        MapPoint mp = MapPoint.mapPointWithGeoCoord(shop.getLatitude(), shop.getLongitude());
+        //가게의 위치를 지도에 추가하는 코드
+        mapView.setMapCenterPoint(mp, true);
+        mapView.setZoomLevel(4,true);
+
+        //줌인 줌아웃 허용
+        mapView.zoomOut(true);
+        mapView.zoomIn(true);
+
+        //마커 생성 코드
+        MapPOIItem marker = new MapPOIItem();
+        marker.setItemName(shop.getT());
+        marker.setTag(0);
+        marker.setMapPoint(mp);
+        //마커 모양 설정
+        marker.setMarkerType(MapPOIItem.MarkerType.YellowPin);
+        marker.setSelectedMarkerType(MapPOIItem.MarkerType.BluePin);
+
     }
 
 
@@ -62,7 +81,7 @@ public class CallActivity extends AppCompatActivity {
         tv_name.setText(shopNow.getT());
         tv_phone.setText(shopNow.getPhone());
 
-        initView();
+        initView(shopNow);
 
     }
     public boolean getChoose(){

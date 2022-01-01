@@ -14,12 +14,16 @@ public class Shops extends Activity {
     private String phone;
     private String thumb_url;
     private ArrayList<String> tags;
+    private double latitude;
+    private double longitude;
 
     public Shops(JSONObject jsonText) throws JSONException {
         this.title = jsonText.getString("name");
         this.isOpen = jsonText.getBoolean("isOpen");
         this.phone = jsonText.getString("phone");
         this.thumb_url = jsonText.getString("thumb_url");
+        this.latitude = jsonText.getDouble("placeWi");
+        this.longitude = jsonText.getDouble("placeKy");
         JSONArray JTags = jsonText.getJSONArray("tag");
 
         //Tags array list 생성
@@ -34,6 +38,13 @@ public class Shops extends Activity {
 //        this.thumb_url = getResources().getIdentifier("com.example.rudolph_king:drawalbe/img",null,null);
     }
 
+
+    public double getLatitude(){
+        return this.latitude;
+    }
+    public double getLongitude(){
+        return this.longitude;
+    }
     public String getT(){
         return title;
     }
