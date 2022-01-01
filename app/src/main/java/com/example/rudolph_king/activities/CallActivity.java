@@ -2,6 +2,7 @@ package com.example.rudolph_king.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.example.rudolph_king.Shops;
+import com.example.rudolph_king.adapters.CustomAdapter;
 import com.example.rudolph_king.fragments.Fragment1;
 
 import com.example.rudolph_king.R;
@@ -36,10 +38,18 @@ public class CallActivity extends AppCompatActivity {
     public TextView tv_name;
     public LinearLayout ll_tag;
     public TextView tv_phone;
+    public  int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //intent로 정보 받는 부분
+        Intent intent = new Intent(getApplicationContext(), CustomAdapter.class);
+        String name = "pos";
+        intent = getIntent();
+        pos = intent.getIntExtra(name,0);
+        Log.e("get_pos",Integer.toString(pos));
         setContentView(R.layout.activity_call);
         setItems();
 
@@ -100,9 +110,7 @@ public class CallActivity extends AppCompatActivity {
     }
 
 
-    Intent intent = new Intent();
-    String name = "pos";
-    private int pos = intent.getIntExtra(name,0);
+
     Fragment1 f1  = new Fragment1();
     private boolean chooseOriginal = f1.isFilteredListEmpty();
 
@@ -118,10 +126,10 @@ public class CallActivity extends AppCompatActivity {
 
         if (shopNow.getIsOpen() == true){
             tv_isOpen.setText("영업 중");
-            tv_isOpen.setTextColor(R.color.open);
+            this.tv_isOpen.setTextColor(getResources().getColor(R.color.open));
         } else {
             tv_isOpen.setText("영업 종료");
-            tv_isOpen.setTextColor(R.color.not_open);
+            this.tv_isOpen.setTextColor(getResources().getColor(R.color.not_open));
         }
         tv_name.setText(shopNow.getT());
         tv_phone.setText(shopNow.getPhone());
@@ -153,7 +161,6 @@ public class CallActivity extends AppCompatActivity {
 
     public String getShopTitle( ){
         String name = "pos";
-        int pos = intent.getIntExtra(name,0);
         Shops shop = f1.getInfo(pos);
         String num = shop.getT();
         //번호에서 - 삭제
@@ -162,7 +169,6 @@ public class CallActivity extends AppCompatActivity {
     //번호 주는 method
     public String getNum( ){
         String name = "pos";
-        int pos = intent.getIntExtra(name,0);
         Shops shop = f1.getInfo(pos);
         String num = shop.getPhone();
         //번호에서 - 삭제
