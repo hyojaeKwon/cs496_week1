@@ -199,8 +199,11 @@ public class Fragment1 extends Fragment{
     }
 
     public Shops getInfo(int pos){
-        Log.e("pos",Integer.toString(pos));
-        return (Shops)(shopList.get(pos));
+        if(filteredList == null){
+            return (Shops)(shopList.get(pos));
+        } else {
+            return (Shops)(filteredList.get(pos));
+        }
     }
 }
 

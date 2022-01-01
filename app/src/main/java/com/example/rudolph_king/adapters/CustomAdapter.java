@@ -78,7 +78,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                     if(position != RecyclerView.NO_POSITION){
                         Intent intent = new Intent(context, CallActivity.class)
                                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
+                        Log.e("position",Integer.toString(position));
                         intent.putExtra("pos",position);
 
                         context.startActivity(intent);
@@ -148,7 +148,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             td.add(tagData);
         }
 
-        Log.e("nammme", td.get(0).toString());
+//        Log.e("nammme", td.get(0).toString());
         TagAdapter ta = new TagAdapter(context, td);
         LinearLayoutManager manager = new LinearLayoutManager(context);
 

@@ -17,6 +17,7 @@
         android:theme="@style/Theme.Rudolph_king">
         <activity
             android:name=".activities.CallActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:exported="false" />
         <activity
             android:name=".activities.MainActivity"
