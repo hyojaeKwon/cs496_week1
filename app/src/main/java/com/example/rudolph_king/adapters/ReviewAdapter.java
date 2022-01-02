@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -20,22 +21,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.rudolph_king.GalleryImage;
 import com.example.rudolph_king.R;
 import com.example.rudolph_king.activities.MainActivity;
+import com.example.rudolph_king.activities.PhotoActivity;
 
-import org.w3c.dom.Text;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
+public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> implements PhotoSmallAdapter.OnListItemSelectedInterface {
+    @Override
+    public void onItemSelected(View view, int position, int position_pic) {
+        Log.e("Listen", String.valueOf(position));
+        Intent intent = new Intent(mContext, PhotoActivity.class);
+        intent.putExtra("pos", position);
+        intent.putExtra("pos_pic", position_pic);
+        mContext.startActivity(intent);
+    }
+
     public interface OnListItemSelectedInterface {
         void onItemSelected(View view, int position);
     }
@@ -61,8 +65,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         GalleryImage review = mDataset.get(position);
 
-        holder.photoAdapter = new PhotoAdapter(mContext, review.getUriList());
-        holder.mRecyclerView.setAdapter(holder.photoAdapter);
+        holder.photoSmallAdapter = new PhotoSmallAdapter(mContext, review.getUriList(), this, position);
+        holder.mRecyclerView.setAdapter(holder.photoSmallAdapter);
         holder.mReviewName.setText(review.getReviewName());
         holder.mReviewMembers.setText(review.getReviewMembers());
         holder.mReviewDate.setText(review.getReviewDate());
@@ -79,7 +83,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         TextView mReviewName;
         TextView mReviewMembers;
         TextView mReviewDate;
-        PhotoAdapter photoAdapter;
+        PhotoSmallAdapter photoSmallAdapter;
         public ViewHolder(View convertView) {
             super(convertView);
 
@@ -101,52 +105,6 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
             });
 
             convertView.setOnCreateContextMenuListener(this);
-
-//            convertView.setOnLongClickListener(new View.OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(View view) {
-//                    int position = getAdapterPosition();
-//                    android.app.AlertDialog.Builder adb = new AlertDialog.Builder(mContext, R.style.AlertDialog_AppCompat_Light);
-//                    adb.setTitle("Delete")
-//                            .setNeutralButton("CONFIRM", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//
-////                                    String imagePath = mDataset.get(position).getPath();
-//                                    mDataset.remove(position);
-//
-////                                    File file = new File(imagePath).getAbsoluteFile();
-////
-////                                    if(file.exists()){
-////                                        System.gc();
-////                                        System.runFinalization();
-////                                        boolean ch = file.delete();
-////                                        mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + imagePath)));
-////                                    }
-//                                    MainActivity.updateJSONImages(null, position);
-//                                    refreshAdapter();
-//                                    // adapter.notifyDataSetChanged();
-//                                }
-//                            })
-//                            .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//
-//                                }
-//                            });
-//                    AlertDialog finalDialog = adb.create();
-//                    finalDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-//                        @Override
-//                        public void onShow(DialogInterface arg0) {
-//                            finalDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#6E6557"));
-//                            finalDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#6E6557"));
-//                            finalDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(Color.parseColor("#6E6557"));
-//                        }
-//                    });
-//                    finalDialog.show();
-//                    return true;
-//                }
-//            });
         }
 
         @Override
@@ -160,7 +118,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
              public boolean onMenuItemClick(MenuItem item) {
                  int position = getAdapterPosition();
                  switch (item.getItemId()) {
-                     case 1001:  // 5. 편집 항목을 선택시
+                     case 1001:  // 편집 항목을 선택 시
                          AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 
                          View view = LayoutInflater.from(mContext)

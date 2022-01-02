@@ -1,45 +1,44 @@
 package com.example.rudolph_king.adapters;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.rudolph_king.R;
 
-import java.io.File;
 import java.util.ArrayList;
 
-public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> {
-//    public interface OnListItemSelectedInterface {
-//        void onItemSelected(View view, int position);
-//    }
+public class PhotoSmallAdapter extends RecyclerView.Adapter<PhotoSmallAdapter.ViewHolder> {
+    public interface OnListItemSelectedInterface {
+        void onItemSelected(View view, int position, int position_pic);
+    }
 
     //private OnListItemSelectedInterface mListener;
     private ArrayList<Uri> mDataset;
     private Context mContext;
+    private OnListItemSelectedInterface mListener;
+    private int mPosition;
 
-    public PhotoAdapter(Context context, ArrayList<Uri> myDataset) {//OnListItemSelectedInterface listener) {
+    public PhotoSmallAdapter(Context context, ArrayList<Uri> myDataset, OnListItemSelectedInterface listener, int pos) {
         mDataset = myDataset;
         mContext = context;
-        //mListener = listener;
+        mListener = listener;
+        mPosition = pos;
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View convertView = LayoutInflater.from(mContext).inflate(R.layout.photo_item, parent, false);
+        View convertView;
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.photo_item_small, parent, false);
         Log.e("onCreateViewHolder", String.valueOf(true));
         return new ViewHolder(convertView);
     }
@@ -50,9 +49,9 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
         Uri photo = mDataset.get(position);
         Glide.with(mContext)
             .load(photo)
-            .thumbnail(0.5f)
+            .override(360, 360)
             .into(holder.img_thumb);
-        Log.e("viewhodler", photo.getPath());
+//        Log.e("viewhodler", photo.getPath());
 //        holder.layout_gallery.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -71,18 +70,18 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
         private ImageView img_thumb;
         public ViewHolder(View convertView) {
             super(convertView);
-            layout_gallery = (ConstraintLayout) convertView.findViewById(R.id.layout_gallery);
-            img_thumb = (ImageView) convertView.findViewById(R.id.imageView_gallery);
+                layout_gallery = (ConstraintLayout) convertView.findViewById(R.id.layout_gallery_small);
+                img_thumb = (ImageView) convertView.findViewById(R.id.imageView_gallery_small);
 
-//            convertView.setOnClickListener(new View.OnClickListener() {
-//                // gallery photo click
-//                @Override
-//                public void onClick(View view) {
-//                    int position = getAdapterPosition();
-//                    mListener.onItemSelected(view, position);
-//                    Log.d("test", "position = " + position);
-//                }
-//            });
+            convertView.setOnClickListener(new View.OnClickListener() {
+                // gallery photo click
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    mListener.onItemSelected(view, mPosition, position);
+                    Log.d("test", "position = " + position);
+                }
+            });
 //
 //
 //            convertView.setOnLongClickListener(new View.OnLongClickListener() {
