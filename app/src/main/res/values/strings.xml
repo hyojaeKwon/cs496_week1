@@ -2,7 +2,7 @@
     <string name="app_name">배달왕 루돌프</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="tab_Item1">List</string>
+    <string name="tab_Item1">Shops</string>
     <string name="tab_Item2">Gallery</string>
     <string name="tab_Item3">Map</string>
 </resources>

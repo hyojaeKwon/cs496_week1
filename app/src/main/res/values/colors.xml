@@ -21,4 +21,6 @@
     <color name="gray_300">#C1C1C1</color>
     <color name="gray_400">#A5A5A5</color>
     <color name="transparent">#00000000</color>
+    <color name="selected_color">@color/off_white</color>
+    <color name="unselected_color">@color/red_500</color>
 </resources>
