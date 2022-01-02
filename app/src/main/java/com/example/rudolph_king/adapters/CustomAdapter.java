@@ -21,7 +21,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.rudolph_king.Shops;
 import com.example.rudolph_king.activities.CallActivity;
-import com.example.rudolph_king.fragments.Fragment1;
 
 import java.util.ArrayList;
 
@@ -61,8 +60,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         public ViewHolder(View view, final OnPersonItemClickListener listener) {
             super(view);
             // Define click listener for the ViewHolder's View
-            tv_name = (TextView) view.findViewById(id.textView_name);
-            tv_summary = (TextView) view.findViewById(id.textView_summary);
+            tv_name = (TextView) view.findViewById(id.tv_ranking);
+            tv_summary = (TextView) view.findViewById(id.tv_productName);
             iv_thumb = (ImageView) view.findViewById(id.imageView_thumb);
             iv_open = (TextView) view.findViewById(id.textView_isOpen);
             rvs = view.findViewById(id.rvChapters);
