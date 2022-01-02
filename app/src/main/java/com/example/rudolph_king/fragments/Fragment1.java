@@ -1,5 +1,7 @@
 package com.example.rudolph_king.fragments;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.example.rudolph_king.adapters.CustomAdapter;
@@ -40,10 +43,11 @@ public class Fragment1 extends Fragment{
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private InputMethodManager imm;
 
     // customizing listView
     static ArrayList<Shops> shopList;
-     static ArrayList<Shops> filteredList;
+    static ArrayList<Shops> filteredList;
 
 
      public boolean isFilteredListEmpty(){
@@ -109,6 +113,7 @@ public class Fragment1 extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_1, container, false) ;
+        imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
 
 
         // add list elements -- test
@@ -143,6 +148,7 @@ public class Fragment1 extends Fragment{
         }
         //영업 상태에 따라 정렬하기
         Collections.sort(shopList,new SortIsOpen());
+        imm.hideSoftInputFromWindow(view.findViewById(R.id.searchCardView).getWindowToken(), 0);
 
         //view에서 text들어가는 부분 찾는 부분
         searchET = view.findViewById(R.id.searchFood);
