@@ -9,4 +9,6 @@
     <dimen name="textContentSize">20dp</dimen>
     <dimen name="textMidSize">16dp</dimen>
     <dimen name="textSmallSize">12dp</dimen>
+    <dimen name="cardCornerRadius">8dp</dimen>
+    <dimen name="cardElevation">12dp</dimen>
 </resources>

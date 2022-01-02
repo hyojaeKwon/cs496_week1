@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.example.rudolph_king.GalleryImage;
@@ -100,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
         // connect view pager with tab layout
         TabLayout tab = findViewById(R.id.tab);
         tab.setupWithViewPager(vp);
+
+        tab.getTabAt(0).setIcon(R.drawable.ic_shops);
+        tab.getTabAt(1).setIcon(R.drawable.ic_gallery);
+        tab.getTabAt(2).setIcon(R.drawable.ic_present);
     }
 
     @Override
