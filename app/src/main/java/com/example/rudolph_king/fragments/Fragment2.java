@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.rudolph_king.GalleryImage;
 import com.example.rudolph_king.activities.JsonRead;
@@ -31,7 +32,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -39,8 +39,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 
 /**
@@ -92,19 +90,18 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
         Log.e("refreshed", "true");
     }
 
-    public static void setReviewInfo(String name, String members, String date, ArrayList<Uri> uriList, Boolean newReview) {
+    public static void setReviewInfo(String name, String members, String date, String desc, ArrayList<Uri> uriList, Boolean newReview) {
         if (newReview) {
             AlertDialog.Builder builder = new AlertDialog.Builder(mRecyclerView.getContext());
 
             View view = LayoutInflater.from(mRecyclerView.getContext())
-                    .inflate(R.layout.review_info_edit, null, false);
+                    .inflate(R.layout.review_info_add, null, false);
             builder.setView(view);
 
             final Button ButtonSubmit = (Button) view.findViewById(R.id.button_review_submit);
             final EditText editReviewName = (EditText) view.findViewById(R.id.edit_review_name);
             final EditText editReviewMembers = (EditText) view.findViewById(R.id.edit_review_members);
-
-            ButtonSubmit.setText("삽입");
+            final EditText editReviewDescription = (EditText) view.findViewById(R.id.edit_review_description);
 
             final AlertDialog dialog = builder.create();
 
@@ -114,22 +111,30 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
                     // 사용자가 입력한 내용 가져오기
                     String reviewName = editReviewName.getText().toString();
                     String reviewMembers = editReviewMembers.getText().toString();
+                    String reviewDescription = editReviewDescription.getText().toString();
+                    reviewName = reviewName.trim();
+                    reviewMembers = reviewMembers.trim();
 
-                    dialog.dismiss();
+                    if(reviewName.getBytes().length <= 0 || reviewMembers.getBytes().length <= 0){//빈값이 넘어올때의 처리
+                        Toast.makeText(dialog.getContext(), "값을 입력하세요.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        dialog.dismiss();
 
-                    long now = System.currentTimeMillis(); // 1970년 1월 1일부터 몇 밀리세컨드가 지났는지를 반환함
-                    Date date = new Date(now);
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");//형식 지정
-                    String time = simpleDateFormat.format(date);
+                        long now = System.currentTimeMillis(); // 1970년 1월 1일부터 몇 밀리세컨드가 지났는지를 반환함
+                        Date date = new Date(now);
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");//형식 지정
+                        String time = simpleDateFormat.format(date);
 
-                    GalleryImage gi = new GalleryImage();
-                    gi.setUriList(uriList);
-                    gi.setReviewName(reviewName);
-                    gi.setReviewMembers(reviewMembers);
-                    gi.setReviewDate(time);
-                    MainActivity.reviewList.add(0, gi);
-                    refreshAdapter();
-                    MainActivity.updateJSONImages(gi, -1);
+                        GalleryImage gi = new GalleryImage();
+                        gi.setUriList(uriList);
+                        gi.setReviewName(reviewName);
+                        gi.setReviewMembers(reviewMembers);
+                        gi.setReviewDescription(reviewDescription);
+                        gi.setReviewDate(time);
+                        MainActivity.reviewList.add(0, gi);
+                        refreshAdapter();
+                        MainActivity.updateJSONImages(gi, -1);
+                    }
                 }
             });
 
@@ -140,6 +145,7 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
             gi.setReviewName(name);
             gi.setReviewMembers(members);
             gi.setReviewDate(date);
+            gi.setReviewDescription(desc);
             MainActivity.reviewList.add(0, gi);
             refreshAdapter();
         }
@@ -232,6 +238,7 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
                     String jsonNameString = innerJSONObject.getString("name");
                     String jsonMemString = innerJSONObject.getString("members");
                     String jsonDateString = innerJSONObject.getString("date");
+                    String jsonDescString = innerJSONObject.getString("desc");
                     String[] jsonReview = jsonUriListString.substring(1, jsonUriListString.lastIndexOf("]")).split(", ");
                     //uriList array list 생성
                     ArrayList<Uri> uriList = new ArrayList<Uri>();
@@ -243,7 +250,7 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
                         uriList.add(uri);
                     }
 
-                    setReviewInfo(jsonNameString, jsonMemString, jsonDateString, uriList, false);
+                    setReviewInfo(jsonNameString, jsonMemString, jsonDateString, jsonDescString, uriList, false);
                 }
             } catch (JSONException e) {
             }
@@ -267,6 +274,7 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
         Log.e("Listen", String.valueOf(position));
         Intent intent = new Intent(getActivity(), PhotoActivity.class);
         intent.putExtra("pos", position);
+        intent.putExtra("pos_pic", 0);
         startActivity(intent);
     }
 }

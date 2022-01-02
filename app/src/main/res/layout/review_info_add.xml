@@ -20,6 +20,23 @@
             android:layout_height="match_parent"
             android:focusableInTouchMode="true">
 
+            <EditText
+                android:id="@+id/edit_review_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:layout_marginVertical="8dp"
+                android:autofillHints="선물에 대한 설명을 적어주세요! (최대 200자)"
+                android:gravity="top|start"
+                android:hint="선물에 대한 설명을 적어주세요! (최대 200자)"
+                android:inputType="textMultiLine"
+                android:maxLength="200"
+                android:scrollHorizontally="false"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_review_members"
+                app:layout_constraintBottom_toTopOf="@id/button_review_submit" />
+
             <Button
                 android:id="@+id/button_review_submit"
                 android:layout_width="0dp"
@@ -28,12 +45,12 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:background="@drawable/btn_main"
-                android:text="수정"
+                android:text="추가"
                 app:cornerRadius="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit_review_members"/>
+                app:layout_constraintTop_toBottomOf="@id/edit_review_description"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
             <EditText
                 android:id="@+id/edit_review_members"
@@ -48,7 +65,8 @@
                 android:singleLine="true"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit_review_name" />
+                app:layout_constraintTop_toBottomOf="@id/edit_review_name"
+                app:layout_constraintBottom_toTopOf="@id/edit_review_description"/>
 
             <EditText
                 android:id="@+id/edit_review_name"

@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 //                    newReview.setUriList(imageUriList);
 //                    // reviewList.add(0, newReview);
 //                    updateJSONImages(newReview);
-                    Fragment2.setReviewInfo("", "", "", imageUriList, true);
+                    Fragment2.setReviewInfo("", "", "", "", imageUriList, true);
                 }
 
                 Fragment2.refreshAdapter();
@@ -197,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
                 jsonObject.put("name", review.getReviewName());
                 jsonObject.put("members", review.getReviewMembers());
                 jsonObject.put("date", review.getReviewDate());
+                jsonObject.put("desc", review.getReviewDescription());
                 ja.put(jsonObject);
                 Log.e("newAdded", String.valueOf(ja.length()));
             } else {
@@ -206,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
                     jsonObject.put("name", review.getReviewName());
                     jsonObject.put("members", review.getReviewMembers());
                     jsonObject.put("date", review.getReviewDate());
+                    jsonObject.put("desc", review.getReviewDescription());
                     ja.put(ja.length() - position - 1, jsonObject);
                     Log.e("newAdded", String.valueOf(ja.length()));
                 } else {

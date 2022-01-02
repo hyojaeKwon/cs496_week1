@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/green_500"
+    android:background="@color/red_000"
     tools:context=".fragments.Fragment2">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -25,6 +25,6 @@
         android:src="@android:drawable/ic_input_add"
         android:contentDescription="@string/app_name"
         app:tint="@color/off_white"
-        app:backgroundTint="@color/red_500"
+        app:backgroundTint="@color/green_500"
         />
 </FrameLayout>

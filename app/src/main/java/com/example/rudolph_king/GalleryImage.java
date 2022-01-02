@@ -13,6 +13,7 @@ public class GalleryImage {
     private String reviewName;
     private String reviewMembers;
     private String reviewDate;
+    private String reviewDescription;
     private ArrayList<Uri> uriList;
 
 //    public GalleryImage(JSONObject jsonText) throws JSONException {
@@ -48,5 +49,11 @@ public class GalleryImage {
     }
     public String getReviewDate() {
         return this.reviewDate;
+    }
+    public void setReviewDescription(String reviewDescription) {
+        this.reviewDescription = reviewDescription;
+    }
+    public String getReviewDescription() {
+        return this.reviewDescription;
     }
 }
