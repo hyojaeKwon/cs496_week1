@@ -98,16 +98,6 @@ public class Fragment1 extends Fragment{
 
 
 
-//    @Override
-//    public void onItemSelected(View view, int position) {
-//
-//        Intent intent = new Intent(getActivity(), PhotoActivity.class);
-//        intent.putExtra("pos", position);
-//        startActivity(intent);
-//    }
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
