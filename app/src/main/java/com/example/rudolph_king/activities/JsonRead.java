@@ -25,7 +25,7 @@ public class JsonRead extends AppCompatActivity  {
     public JsonRead(){}
     public JSONObject reading(Context context, String fileName){
 //        this.mContext = context;
-
+        Log.e("filename",fileName);
         AssetManager assetManager = context.getResources().getAssets();
         InputStream source = null;
         JSONObject JObject = null;
@@ -39,11 +39,12 @@ public class JsonRead extends AppCompatActivity  {
                 strResult += line;
             }
             JObject = new JSONObject(strResult);
-
+            Log.d("jsonread",JObject.toString());
             return JObject;
 
         }catch (IOException | JSONException e){
             e.printStackTrace();
+            Log.d("jsonrnotead","JObject.toString()");
         }
         return JObject;
     }

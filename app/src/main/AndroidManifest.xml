@@ -14,9 +14,6 @@
         android:theme="@style/Theme.Rudolph_king"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activities.F3Activity"
-            android:exported="false" />
-        <activity
             android:name=".activities.CallActivity"
             android:exported="false"
             android:parentActivityName=".activities.MainActivity" />

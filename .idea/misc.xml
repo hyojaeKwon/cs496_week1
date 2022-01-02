@@ -5,13 +5,8 @@
       <map>
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/btn_main.xml" value="0.2171875" />
-        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/ic_gallery.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/ic_main_background.xml" value="0.38229166666666664" />
-        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/layout_background.xml" value="0.221875" />
-        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/tab_background.xml" value="0.2994791666666667" />
-        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/tab_background_selected.xml" value="0.221875" />
-        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/tab_background_unselected.xml" value="0.2994791666666667" />
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/layout/action_bar.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/layout/action_bar_main.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/layout/action_bar_photo.xml" value="0.20520833333333333" />
@@ -40,8 +35,9 @@
         <entry key="..\:/code/cs496/week1/app/src/main/res/drawable/shadow_top.xml" value="0.1" />
         <entry key="..\:/code/cs496/week1/app/src/main/res/layout/action_bar_main.xml" value="0.1" />
         <entry key="..\:/code/cs496/week1/app/src/main/res/layout/activity_call.xml" value="0.28353022932592076" />
+        <entry key="..\:/code/cs496/week1/app/src/main/res/layout/activity_f3.xml" value="0.253125" />
         <entry key="..\:/code/cs496/week1/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/code/cs496/week1/app/src/main/res/layout/f3_item.xml" value="0.25" />
+        <entry key="..\:/code/cs496/week1/app/src/main/res/layout/f3_item.xml" value="0.33" />
         <entry key="..\:/code/cs496/week1/app/src/main/res/layout/fr_row_item.xml" value="0.253125" />
         <entry key="..\:/code/cs496/week1/app/src/main/res/layout/fragment_1.xml" value="0.33" />
         <entry key="..\:/code/cs496/week1/app/src/main/res/layout/fragment_3.xml" value="0.33" />
@@ -50,8 +46,10 @@
         <entry key="..\:/code/cs496/week1/app/src/main/res/layout/photoactivity_main.xml" value="0.253125" />
         <entry key="..\:/code/cs496/week1/app/src/main/res/layout/review_info_edit.xml" value="0.253125" />
         <entry key="..\:/code/cs496/week1/app/src/main/res/layout/review_item.xml" value="0.253125" />
-
         <entry key="..\:/code/cs496/week1/app/src/main/res/layout/row_item.xml" value="0.33" />
+        <entry key="..\:/code/cs496/week1/app/src/main/res/layout/searchable.xml" value="0.1" />
+        <entry key="..\:/code/cs496/week1/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26927083333333335" />
+        <entry key="..\:/code/cs496/week1/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>
     </option>
   </component>

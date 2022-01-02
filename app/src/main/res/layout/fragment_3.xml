@@ -35,6 +35,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
+                android:onClick="btn1Click"
                 android:src="@android:drawable/checkbox_on_background" />
 
             <ImageButton
@@ -44,7 +45,9 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
-                android:src="@android:drawable/checkbox_on_background" />
+                android:onClick="btn2Click"
+                android:src="@android:drawable/checkbox_on_background"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
                 android:id="@+id/imageButton8"
@@ -53,6 +56,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
+                android:onClick="btn3Click"
                 android:src="@android:drawable/checkbox_on_background" />
 
             <ImageButton
@@ -63,6 +67,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
+                android:onClick="btn4Click"
                 android:src="@android:drawable/checkbox_on_background" />
         </LinearLayout>
 
@@ -75,7 +80,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/btn5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|fill_horizontal"
@@ -84,37 +89,35 @@
                 android:textAlignment="center" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/btn6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-
                 android:layout_weight="1"
                 android:text="1-2만원대"
                 android:textAlignment="center" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/btn7"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-
                 android:layout_weight="1"
                 android:text="3-4만원대"
                 android:textAlignment="center" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/btn8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-
                 android:layout_weight="1"
                 android:text="5만원이상"
                 android:textAlignment="center" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/gift_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
