@@ -8,7 +8,7 @@
 
 
     <View
-        android:id="@+id/view2"
+        android:id="@+id/pressView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/cV"
@@ -40,7 +40,7 @@
                 android:layout_marginTop="15dp"
                 android:textColor="@color/black"
                 android:text="Hi"
-                android:textSize="20dp"
+                android:textSize="17dp"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,19 +65,26 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView2">
 
-                <ImageButton
+                <Button
                     android:id="@+id/buy_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_weight="4"
+                    android:layout_margin="5dp"
+                    android:text="구매하기"
+                    android:textColor="@color/red_500"
+                    android:background="@drawable/kakao_layout"
                     app:layout_constraintBottom_toBottomOf="@+id/inner_layout"
                     app:srcCompat="@drawable/btn_main" />
 
                 <ImageButton
                     android:id="@+id/kakao_btn"
+                    android:src="@drawable/ic_kakao"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/button_buy"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:srcCompat="@drawable/btn_main" />
 

@@ -66,15 +66,6 @@ public class PhotoLargeAdapter extends RecyclerView.Adapter<PhotoLargeAdapter.Vi
                 layout_gallery = (ConstraintLayout) convertView.findViewById(R.id.layout_gallery_large);
                 img_thumb = (ImageView) convertView.findViewById(R.id.imageView_gallery_large);
 
-//            convertView.setOnClickListener(new View.OnClickListener() {
-//                // gallery photo click
-//                @Override
-//                public void onClick(View view) {
-//                    int position = getAdapterPosition();
-//                    mListener.onItemSelected(view, mPosition, position);
-//                    Log.d("test", "position = " + position);
-//                }
-//            });
         }
     }
 
