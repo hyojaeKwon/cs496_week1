@@ -30,10 +30,14 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class Fragment3 extends Fragment {
-    ArrayList<Gift> mGiftList = null;
+    public static ArrayList<Gift> mGiftList = null;
+    private static ArrayList<Gift> mSelectedList = null;
+    private static ArrayList<Integer> mGiftIdList = null;
+    public static ArrayList<Integer> mWishList = null;
+    private static int mSelectedListId = 0;
     int[][] mIdArr = new int[16][10];
     GitfAdapter gitfAdapter;
-    private static int nowStatus = 1;
+    RecyclerView recyclerView;
     private static boolean btn1Status  = true;
     private static boolean btn2Status = false;
     private static boolean btn3Status = false;
@@ -63,6 +67,7 @@ public class Fragment3 extends Fragment {
 
         if (mGiftList == null) {
             mGiftList = new ArrayList<Gift>();
+            mGiftIdList = new ArrayList<Integer>();
 
             //json parse
             JsonRead jr = new JsonRead();
@@ -80,7 +85,9 @@ public class Fragment3 extends Fragment {
                 JSONObject innerJsonObj = null;
                 try {
                     innerJsonObj = innerJa.getJSONObject(i);
-                    mGiftList.add(new Gift(innerJsonObj));
+                    Gift g = new Gift(innerJsonObj);
+                    mGiftList.add(g);
+                    mGiftIdList.add(g.getId());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -105,14 +112,20 @@ public class Fragment3 extends Fragment {
                     mIdArr[j * 4 + 0] = parseId(allJoArr1);
                     JSONArray allJoArr2 = jojo.getJSONArray("list1to3");
                     mIdArr[j * 4 + 1] = parseId(allJoArr2);
-                    JSONArray allJoArr3 = jojo.getJSONArray("list0to1");
+                    JSONArray allJoArr3 = jojo.getJSONArray("list3to5");
                     mIdArr[j * 4 + 2] = parseId(allJoArr3);
-                    JSONArray allJoArr4 = jojo.getJSONArray("list3to5");
+                    JSONArray allJoArr4 = jojo.getJSONArray("list5over");
                     mIdArr[j * 4 + 3] = parseId(allJoArr4);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+        if (mSelectedList == null) {
+            mSelectedList = new ArrayList<Gift>();
+        }
+        if (mWishList == null) {
+            mWishList = new ArrayList<Integer>();
         }
     }
 
@@ -121,206 +134,156 @@ public class Fragment3 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_3, container, false);
-        RecyclerView recyclerView;
         recyclerView = (RecyclerView) view.findViewById(R.id.gift_layout);
         ImageButton btn1 = (ImageButton) view.findViewById(R.id.imageButton_all);
         ImageButton btn2 = (ImageButton) view.findViewById(R.id.imageButton_girls);
         ImageButton btn3 = (ImageButton) view.findViewById(R.id.imageButton_boys);
         ImageButton btn4 = (ImageButton) view.findViewById(R.id.imageButton_students);
+
         TextView btn5 =  (TextView) view.findViewById(R.id.btn5);
         btn5.setTextColor(Color.BLUE);
         TextView btn6 =  (TextView) view.findViewById(R.id.btn6);
         TextView btn7 =  (TextView) view.findViewById(R.id.btn7);
         TextView btn8 =  (TextView) view.findViewById(R.id.btn8);
 
-        ArrayList<Gift> changedList = new ArrayList<>();
-        changedList = isMatch(nowStatus, mGiftList, mIdArr);
+        changeList(mSelectedListId);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        gitfAdapter = new GitfAdapter(getContext(),changedList);
+        gitfAdapter = new GitfAdapter(getContext(),mSelectedList);
         recyclerView.setAdapter(gitfAdapter);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btn1Status = true;
-                btn2Status = false;
-                btn3Status = false;
-                btn4Status = false;
+                setStatus(0);
+                setStatus(4);
 
-                btn5Status= true;
-                btn6Status= false;
-                btn7Status= false;
-                btn8Status= false;
-
-                nowStatus = 1;
+                mSelectedListId = 0;
                 btn5.setTextColor(Color.BLUE);
                 btn6.setTextColor(Color.GRAY);
                 btn7.setTextColor(Color.GRAY);
                 btn8.setTextColor(Color.GRAY);
-                ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,mGiftList,mIdArr);
-                gitfAdapter.filterList(changedList);
+                changeList(mSelectedListId);
+                gitfAdapter.filterList(mSelectedList);
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btn1Status = false;
-                btn2Status = true;
-                btn3Status = false;
-                btn4Status = false;
+                setStatus(1);
+                setStatus(4);
 
-                btn5Status= true;
-                btn6Status= false;
-                btn7Status= false;
-                btn8Status= false;
-
-                nowStatus = 5;
+                mSelectedListId = 4;
                 btn5.setTextColor(Color.BLUE);
                 btn6.setTextColor(Color.GRAY);
                 btn7.setTextColor(Color.GRAY);
                 btn8.setTextColor(Color.GRAY);
-                ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,mGiftList,mIdArr);
-                gitfAdapter.filterList(changedList);
+                changeList(mSelectedListId);
+                gitfAdapter.filterList(mSelectedList);
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btn1Status = false;
-                btn2Status = false;
-                btn3Status = true;
-                btn4Status = false;
+                setStatus(2);
+                setStatus(4);
 
-                btn5Status= true;
-                btn6Status= false;
-                btn7Status= false;
-                btn8Status= false;
-
-                nowStatus = 9;
+                mSelectedListId = 8;
                 btn5.setTextColor(Color.BLUE);
                 btn6.setTextColor(Color.GRAY);
                 btn7.setTextColor(Color.GRAY);
                 btn8.setTextColor(Color.GRAY);
-                ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,mGiftList,mIdArr);
-                gitfAdapter.filterList(changedList);
+                changeList(mSelectedListId);
+                gitfAdapter.filterList(mSelectedList);
             }
         });
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btn1Status = false;
-                btn2Status = false;
-                btn3Status = false;
-                btn4Status = true;
+                setStatus(3);
+                setStatus(4);
 
-                btn5Status= true;
-                btn6Status= false;
-                btn7Status= false;
-                btn8Status= false;
-
-                nowStatus = 13;
+                mSelectedListId = 12;
                 btn5.setTextColor(Color.BLUE);
                 btn6.setTextColor(Color.GRAY);
                 btn7.setTextColor(Color.GRAY);
                 btn8.setTextColor(Color.GRAY);
-                ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,mGiftList,mIdArr);
-                gitfAdapter.filterList(changedList);
+                changeList(mSelectedListId);
+                gitfAdapter.filterList(mSelectedList);
             }
         });
 
         btn5.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                btn5Status= true;
-                btn6Status= false;
-                btn7Status= false;
-                btn8Status= false;
+                setStatus(4);
                 btn5.setTextColor(Color.BLUE);
                 btn6.setTextColor(Color.GRAY);
                 btn7.setTextColor(Color.GRAY);
                 btn8.setTextColor(Color.GRAY);
 
-                nowStatus = getStatus() * 4 + 1;
-                ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,mGiftList,mIdArr);
-                gitfAdapter.filterList(changedList);
+                mSelectedListId = getStatus() * 4;
+                changeList(mSelectedListId);
+                gitfAdapter.filterList(mSelectedList);
             }
         });
         btn6.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                btn5Status= false;
-                btn6Status= true;
-                btn7Status= false;
-                btn8Status= false;
+                setStatus(5);
                 btn5.setTextColor(Color.GRAY);
                 btn6.setTextColor(Color.BLUE);
                 btn7.setTextColor(Color.GRAY);
                 btn8.setTextColor(Color.GRAY);
-                nowStatus = getStatus() * 4 + 2;
-                ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,mGiftList,mIdArr);
-                gitfAdapter.filterList(changedList);
+                mSelectedListId = getStatus() * 4 + 1;
+                changeList(mSelectedListId);
+                gitfAdapter.filterList(mSelectedList);
             }
         });
         btn7.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                btn5Status= false;
-                btn6Status= false;
-                btn7Status= true;
-                btn8Status= false;
+                setStatus(6);
                 btn5.setTextColor(Color.GRAY);
                 btn6.setTextColor(Color.GRAY);
                 btn7.setTextColor(Color.BLUE);
                 btn8.setTextColor(Color.GRAY);
-                nowStatus = getStatus() * 4 + 3;
-                ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,mGiftList,mIdArr);
-                gitfAdapter.filterList(changedList);
+                mSelectedListId = getStatus() * 4 + 2;
+                changeList(mSelectedListId);
+                gitfAdapter.filterList(mSelectedList);
             }
         });
         btn8.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                btn5Status= false;
-                btn6Status= false;
-                btn7Status= false;
-                btn8Status= true;
+                setStatus(7);
                 btn5.setTextColor(Color.GRAY);
                 btn6.setTextColor(Color.GRAY);
                 btn7.setTextColor(Color.GRAY);
                 btn8.setTextColor(Color.BLUE);
-                nowStatus = getStatus() * 4 + 4;
-                ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,mGiftList,mIdArr);
-                gitfAdapter.filterList(changedList);
+                mSelectedListId = getStatus() * 4 + 3;
+                changeList(mSelectedListId);
+                gitfAdapter.filterList(mSelectedList);
             }
         });
         return view;
     }
 
-    private ArrayList<Gift> isMatch(int status,ArrayList<Gift>currentArray, int[][] idArr){
-        ArrayList<Gift> newArr = new ArrayList<>();
-        for(int i = 0 ; i < currentArray.size() ; i++){
-            for(int j = 0 ; j < idArr[status-1].length ; j ++){
-                if (currentArray.get(i).getId() == idArr[status-1][j]){
-                    newArr.add(currentArray.get(i));
-                }
+    private void changeList(int listId) {
+        for(int i = 0 ; i < mIdArr[listId].length; i++){
+            int id = mIdArr[listId][i];
+            if (i > mSelectedList.size() - 1) {
+                mSelectedList.add(mGiftList.get(mGiftIdList.indexOf(id)));
+            } else {
+                mSelectedList.set(i, mGiftList.get(mGiftIdList.indexOf(id)));
             }
         }
-        return newArr;
     }
 
     private int[] parseId(JSONArray ja) throws JSONException {
         int[] newInt = new int[10];
-        for(int i = 0 ; i<ja.length() ; i ++ ){
+        for(int i = 0 ; i < ja.length() ; i ++ ){
             String now = ja.getString(i);
             newInt[i] = Integer.parseInt(now);
         }
@@ -339,6 +302,59 @@ public class Fragment3 extends Fragment {
             return 3;
         } else {
             return 5;
+        }
+    }
+    private void setStatus(int status) {
+        recyclerView.smoothScrollToPosition(0);
+        switch (status) {
+            case 0:
+                btn1Status= true;
+                btn2Status= false;
+                btn3Status= false;
+                btn4Status= false;
+                break;
+            case 1:
+                btn1Status= false;
+                btn2Status= true;
+                btn3Status= false;
+                btn4Status= false;
+                break;
+            case 2:
+                btn1Status= false;
+                btn2Status= false;
+                btn3Status= true;
+                btn4Status= false;
+                break;
+            case 3:
+                btn1Status= false;
+                btn2Status= false;
+                btn3Status= false;
+                btn4Status= true;
+                break;
+//            case 4:
+//                btn5Status= true;
+//                btn6Status= false;
+//                btn7Status= false;
+//                btn8Status= false;
+//                break;
+//            case 5:
+//                btn5Status= false;
+//                btn6Status= true;
+//                btn7Status= false;
+//                btn8Status= false;
+//                break;
+//            case 6:
+//                btn5Status= false;
+//                btn6Status= false;
+//                btn7Status= true;
+//                btn8Status= false;
+//                break;
+//            case 7:
+//                btn5Status= false;
+//                btn6Status= false;
+//                btn7Status= false;
+//                btn8Status= true;
+//                break;
         }
     }
 

@@ -132,7 +132,7 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
                         gi.setReviewDescription(reviewDescription);
                         gi.setReviewDate(time);
                         MainActivity.reviewList.add(0, gi);
-                        refreshAdapter();
+                        reviewAdapter.notifyItemInserted(0);
                         MainActivity.updateJSONImages(gi, -1);
                     }
                 }
@@ -147,7 +147,7 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
             gi.setReviewDate(date);
             gi.setReviewDescription(desc);
             MainActivity.reviewList.add(0, gi);
-            refreshAdapter();
+            reviewAdapter.notifyItemInserted(0);
         }
     }
 

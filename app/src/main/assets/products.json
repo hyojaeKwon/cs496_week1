@@ -445,14 +445,14 @@
       {
         "id" : "0",
         "productName" : "",
-        "price" : "",
+        "price" : "0",
         "company" : "",
         "pictureUrl" : ""
       },
       {
         "id" : "0",
         "productName" : "",
-        "price" : "",
+        "price" : "0",
         "company" : "",
         "pictureUrl" : ""
       }
