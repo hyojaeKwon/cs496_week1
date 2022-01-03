@@ -2,6 +2,7 @@ package com.example.rudolph_king.fragments;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -104,6 +105,7 @@ public class Fragment3 extends Fragment {
         ImageButton btn4 = (ImageButton) view.findViewById(R.id.imageButton9);
 
         TextView btn5 =  (TextView) view.findViewById(R.id.btn5);
+        btn5.setTextColor(Color.BLUE);
         TextView btn6 =  (TextView) view.findViewById(R.id.btn6);
         TextView btn7 =  (TextView) view.findViewById(R.id.btn7);
         TextView btn8 =  (TextView) view.findViewById(R.id.btn8);
@@ -212,6 +214,8 @@ public class Fragment3 extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        //Btn Change
+
 
         ArrayList<Gift> changedList = new ArrayList<>();
         changedList = isMatch(nowStatus,giftArrayList,idArr);
@@ -228,7 +232,17 @@ public class Fragment3 extends Fragment {
                 btn2Status = false;
                 btn3Status = false;
                 btn4Status = false;
+
+                btn5Status= true;
+                btn6Status= false;
+                btn7Status= false;
+                btn8Status= false;
+
                 nowStatus = 1;
+                btn5.setTextColor(Color.BLUE);
+                btn6.setTextColor(Color.GRAY);
+                btn7.setTextColor(Color.GRAY);
+                btn8.setTextColor(Color.GRAY);
                 ArrayList<Gift> changedList = new ArrayList<>();
                 changedList = isMatch(nowStatus,giftArrayList,idArr);
                 gitfAdapter.filterList(changedList);
@@ -241,7 +255,17 @@ public class Fragment3 extends Fragment {
                 btn2Status = true;
                 btn3Status = false;
                 btn4Status = false;
+
+                btn5Status= true;
+                btn6Status= false;
+                btn7Status= false;
+                btn8Status= false;
+
                 nowStatus = 5;
+                btn5.setTextColor(Color.BLUE);
+                btn6.setTextColor(Color.GRAY);
+                btn7.setTextColor(Color.GRAY);
+                btn8.setTextColor(Color.GRAY);
                 ArrayList<Gift> changedList = new ArrayList<>();
                 changedList = isMatch(nowStatus,giftArrayList,idArr);
                 gitfAdapter.filterList(changedList);
@@ -254,7 +278,17 @@ public class Fragment3 extends Fragment {
                 btn2Status = false;
                 btn3Status = true;
                 btn4Status = false;
+
+                btn5Status= true;
+                btn6Status= false;
+                btn7Status= false;
+                btn8Status= false;
+
                 nowStatus = 9;
+                btn5.setTextColor(Color.BLUE);
+                btn6.setTextColor(Color.GRAY);
+                btn7.setTextColor(Color.GRAY);
+                btn8.setTextColor(Color.GRAY);
                 ArrayList<Gift> changedList = new ArrayList<>();
                 changedList = isMatch(nowStatus,giftArrayList,idArr);
                 gitfAdapter.filterList(changedList);
@@ -267,7 +301,17 @@ public class Fragment3 extends Fragment {
                 btn2Status = false;
                 btn3Status = false;
                 btn4Status = true;
+
+                btn5Status= true;
+                btn6Status= false;
+                btn7Status= false;
+                btn8Status= false;
+
                 nowStatus = 13;
+                btn5.setTextColor(Color.BLUE);
+                btn6.setTextColor(Color.GRAY);
+                btn7.setTextColor(Color.GRAY);
+                btn8.setTextColor(Color.GRAY);
                 ArrayList<Gift> changedList = new ArrayList<>();
                 changedList = isMatch(nowStatus,giftArrayList,idArr);
                 gitfAdapter.filterList(changedList);
@@ -281,6 +325,11 @@ public class Fragment3 extends Fragment {
                 btn6Status= false;
                 btn7Status= false;
                 btn8Status= false;
+                btn5.setTextColor(Color.BLUE);
+                btn6.setTextColor(Color.GRAY);
+                btn7.setTextColor(Color.GRAY);
+                btn8.setTextColor(Color.GRAY);
+
                 nowStatus = getStatus() * 4 + 1;
                 ArrayList<Gift> changedList = new ArrayList<>();
                 changedList = isMatch(nowStatus,giftArrayList,idArr);
@@ -294,6 +343,10 @@ public class Fragment3 extends Fragment {
                 btn6Status= true;
                 btn7Status= false;
                 btn8Status= false;
+                btn5.setTextColor(Color.GRAY);
+                btn6.setTextColor(Color.BLUE);
+                btn7.setTextColor(Color.GRAY);
+                btn8.setTextColor(Color.GRAY);
                 nowStatus = getStatus() * 4 + 2;
                 ArrayList<Gift> changedList = new ArrayList<>();
                 changedList = isMatch(nowStatus,giftArrayList,idArr);
@@ -307,6 +360,10 @@ public class Fragment3 extends Fragment {
                 btn6Status= false;
                 btn7Status= true;
                 btn8Status= false;
+                btn5.setTextColor(Color.GRAY);
+                btn6.setTextColor(Color.GRAY);
+                btn7.setTextColor(Color.BLUE);
+                btn8.setTextColor(Color.GRAY);
                 nowStatus = getStatus() * 4 + 3;
                 ArrayList<Gift> changedList = new ArrayList<>();
                 changedList = isMatch(nowStatus,giftArrayList,idArr);
@@ -320,6 +377,10 @@ public class Fragment3 extends Fragment {
                 btn6Status= false;
                 btn7Status= false;
                 btn8Status= true;
+                btn5.setTextColor(Color.GRAY);
+                btn6.setTextColor(Color.GRAY);
+                btn7.setTextColor(Color.GRAY);
+                btn8.setTextColor(Color.BLUE);
                 nowStatus = getStatus() * 4 + 4;
                 ArrayList<Gift> changedList = new ArrayList<>();
                 changedList = isMatch(nowStatus,giftArrayList,idArr);
@@ -373,6 +434,8 @@ public class Fragment3 extends Fragment {
         }
         return newInt;
     }
+
+    //상태 반환
     private int getStatus(){
         if(btn1Status == true){
             return 0;
@@ -386,4 +449,5 @@ public class Fragment3 extends Fragment {
             return 5;
         }
     }
+
 }
