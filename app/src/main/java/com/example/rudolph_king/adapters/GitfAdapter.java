@@ -1,9 +1,11 @@
 package com.example.rudolph_king.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.rudolph_king.Gift;
 import com.example.rudolph_king.R;
 import com.example.rudolph_king.Shops;
+import com.example.rudolph_king.activities.MainActivity;
+import com.example.rudolph_king.fragments.Fragment3;
 
 import java.util.ArrayList;
 
@@ -59,20 +63,39 @@ public class GitfAdapter extends RecyclerView.Adapter<GitfAdapter.ItemViewHolder
         private TextView tv1;
         private TextView tv2;
         private TextView tv3;
+        private ImageButton likeBtn;
 
         //ItemViewHolder의 생성자
         ItemViewHolder(View view){
             super(view);
 
             tv1 = view.findViewById(R.id.tv_ranking);
-
-
+            likeBtn = view.findViewById(R.id.f3_like);
         }
 
 
         //상품 이름 집어넣는 코드
         void onBind(Gift gift){
             tv1.setText(gift.getProductName());
+            if (Fragment3.mWishList.contains(gift.getId())) {
+                likeBtn.setSelected(true);
+            }
+            likeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    likeBtn.setSelected(!likeBtn.isSelected());
+
+                    if (likeBtn.isSelected()) {
+                        Fragment3.mWishList.add((Integer) gift.getId());
+                        Log.e("Gift Added", String.valueOf(Fragment3.mWishList.size()));
+                        Log.e("List", Fragment3.mWishList.toString());
+                    } else {
+                        Fragment3.mWishList.remove((Integer) gift.getId());
+                        Log.e("Gift Removed", String.valueOf(Fragment3.mWishList.size()));
+                        Log.e("List", Fragment3.mWishList.toString());
+                    }
+                }
+            });
         }
     }
 }

@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     private long backKeyPressedTime = 0;
     private Toast toast;
     public static ArrayList<GalleryImage> reviewList = new ArrayList<GalleryImage>();
-    public static ArrayList<Gift> giftList = new ArrayList<>();
 
     private void getHashKey(){
         PackageInfo packageInfo = null;
@@ -166,8 +165,6 @@ public class MainActivity extends AppCompatActivity {
 //                    updateJSONImages(newReview);
                     Fragment2.setReviewInfo("", "", "", "", imageUriList, true);
                 }
-
-                Fragment2.refreshAdapter();
             }
         }
     }
