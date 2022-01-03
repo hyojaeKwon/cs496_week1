@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" /> <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/> -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -17,8 +18,11 @@
         <activity
             android:name=".activities.BuyItems"
             android:theme="@style/Transparent"
-            android:parentActivityName=".activities.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".activities.MainActivity">
+
+
+        </activity>
         <activity
             android:name=".activities.CallActivity"
             android:exported="false"
@@ -34,7 +38,6 @@
         <activity
             android:name=".activities.PhotoActivity"
             android:parentActivityName=".activities.MainActivity" />
-
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="f7bbe05a7dd4df86ee8166e2e1a8d6b1" />
