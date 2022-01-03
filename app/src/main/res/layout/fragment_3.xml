@@ -76,6 +76,7 @@
             android:layout_gravity="center"
             android:paddingTop="10dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/text_linear_bottom"
             android:paddingBottom="10dp"
             android:orientation="horizontal">
 
@@ -83,6 +84,7 @@
                 android:id="@+id/btn5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/textinfr3"
                 android:layout_gravity="center|fill_horizontal"
                 android:layout_weight="1"
                 android:text="1만원 미만"
@@ -92,6 +94,7 @@
                 android:id="@+id/btn6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/textinfr3"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="1-2만원대"
@@ -100,6 +103,7 @@
             <TextView
                 android:id="@+id/btn7"
                 android:layout_width="wrap_content"
+                android:background="@drawable/textinfr3"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
@@ -109,6 +113,7 @@
             <TextView
                 android:id="@+id/btn8"
                 android:layout_width="wrap_content"
+                android:background="@drawable/textinfr3"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
