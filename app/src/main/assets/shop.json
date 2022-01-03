@@ -9,7 +9,7 @@
       ],
       "phone" : "0507-1442-2930",
       "isOpen" : true,
-      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR9mY0amTpj8PKbWqbu9690h75pbCvRAiaeA&usqp=CAU",
+      "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200629_262%2F15934114736575MdQ9_JPEG%2FLbfRJmfwF-QBgqlAKAohKGtn.jpg",
       "placeWi" : 36.35300294057797,
       "placeKy" : 127.34561561507175
     },
@@ -25,9 +25,9 @@
       ],
       "phone" : "042-523-9642",
       "isOpen" : false,
-      "thumb_url" : "https://img4.yna.co.kr/photo/yna/YH/2010/02/01/PYH2010020102450000400_P2.jpg",
-      "placeWi" : 36.35300294057797,
-      "placeKy" : 127.34561561507175
+      "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20211221_230%2F1640055807495XTRz3_JPEG%2FKakaoTalk_20211220_164043593_04.jpg",
+      "placeWi" : 36.32410691620855,
+      "placeKy" : 127.37410254211787
     },
     {
       "name" : "토이월드",
@@ -39,9 +39,9 @@
       ],
       "phone" : "0507-1362-1988",
       "isOpen" : true,
-      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS45DHF_TPiuCS0Z45fT_HVG6CWyz9-MriO7xR7G_rPa0HtNXhc-qrA_STenFzgL6OC_EE&usqp=CAU",
-      "placeWi" : 36.35300294057797,
-      "placeKy" : 127.34561561507175
+      "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20181012_48%2F1539323931018NLK9d_JPEG%2F2vzwqBpqagLZRf-P-vZKoDvA.jpg",
+      "placeWi" : 36.349316239862695,
+      "placeKy" : 127.40054450661205
     },
     {
       "name" : "박서방 대전본점",
@@ -53,9 +53,9 @@
       ],
       "phone" : "0507-1406-0132",
       "isOpen" : true,
-      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5ozEM_pHXD8tbl2npPYQctwjvWmSaQCfMKMWKYTuPAptV7pECSVLGkfo62S5Y1nqo5nw&usqp=CAU",
-      "placeWi" : 36.35300294057797,
-      "placeKy" : 127.34561561507175
+      "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210121_20%2F16112153971186PAaB_JPEG%2Fn-fBOGHlDxy2FaE5ww-HP_gO.jpg",
+      "placeWi" : 36.34017455314034,
+      "placeKy" : 127.39046832998011
     },{
       "name" : "하이드론",
       "tag" : [
@@ -67,67 +67,69 @@
       ],
       "phone" : "0507-1405-6157",
       "isOpen" : false,
-      "thumb_url" : "https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg",
-      "placeWi" : 36.35300294057797,
-      "placeKy" : 127.34561561507175
+      "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200507_117%2F1588780565016Ax3lO_JPEG%2FxKIjTpF0YG1YoKro2vEv9REL.jpg",
+      "placeWi" : 36.37472212058984,
+      "placeKy" : 127.32046497720631
     },
     {
-      "name" : "우리완구",
+      "name" : "리틀캐빈",
       "tag" : [
-        "#대전장난감",
-        "#우리완구",
-        "#장난감백화점",
-        "#장난감할인마트",
-        "#장난감도매"
-
+        "#헝겊책",
+        "#촉감책",
+        "#손인형",
+        "#돐선물",
+        "#백일선물"
       ],
-      "phone" : "042-523-9642",
-      "isOpen" : false,
-      "thumb_url" : "https://img4.yna.co.kr/photo/yna/YH/2010/02/01/PYH2010020102450000400_P2.jpg",
-      "placeWi" : 36.35300294057797,
-      "placeKy" : 127.34561561507175
-    },
-    {
-      "name" : "토이월드",
-      "tag" : [
-        "#완구",
-        "#판암동장난감",
-        "#물놀이",
-        "#토이대전매장"
-      ],
-      "phone" : "0507-1362-1988",
+      "phone" : "042-825-8247",
       "isOpen" : true,
-      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS45DHF_TPiuCS0Z45fT_HVG6CWyz9-MriO7xR7G_rPa0HtNXhc-qrA_STenFzgL6OC_EE&usqp=CAU",
+      "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20160217_95%2F1455697866151w2glW_JPEG%2F176162573922903_0.jpeg",
+      "placeWi" : 36.33512375065493,
+      "placeKy" : 127.31113565561246
+    },
+    {
+      "name" : "블럭팡 대전도안점",
+      "tag" : [
+      "#키즈카페",
+      "#레고방",
+      "#블럭방",
+      "#블럭놀이터",
+      "#실내놀이터"
+      ],
+      "phone" : "070-4103-3304",
+      "isOpen" : true,
+      "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20171208_276%2F1512726678657czGiO_JPEG%2FAs_UKIg4WLS60477piWY3NGM.jpg",
       "placeWi" : 36.35300294057797,
       "placeKy" : 127.34561561507175
     },
     {
-      "name" : "박서방 대전본점",
+      "name" : "지피플러스",
       "tag" : [
-        "#건담프라모델",
-        "#만화책판매",
-        "#애니굿즈",
-        "#피규어"
+        "#건담",
+      "#피규어",
+      "#원피스",
+      "#건프라",
+      "#대전건담"
       ],
-      "phone" : "0507-1406-0132",
+      "phone" : "0507-1407-3276",
       "isOpen" : true,
-      "thumb_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5ozEM_pHXD8tbl2npPYQctwjvWmSaQCfMKMWKYTuPAptV7pECSVLGkfo62S5Y1nqo5nw&usqp=CAU",
-      "placeWi" : 36.35300294057797,
-      "placeKy" : 127.34561561507175
+      "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20170405_57%2F1491361161892ufp17_JPEG%2F186355518941425_3.jpeg",
+      "placeWi" : 36.34670122706396,
+      "placeKy" : 127.33477658444791
     },{
-      "name" : "하이드론",
+      "name" : "엑스봇",
       "tag" : [
-        "#대전드론",
-        "#대전드론수리",
-        "#대전드론교육",
-        "#대전드론매장",
-        "#세종드론"
+        "키워드",
+        "#에뽀",
+        "#스크래치",
+        "#교육용로봇",
+        "#아두블럭",
+        "#프로그래밍교육"
       ],
-      "phone" : "0507-1405-6157",
+      "phone" : "070-8244-4810",
       "isOpen" : false,
-      "thumb_url" : "https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg",
-      "placeWi" : 36.35300294057797,
-      "placeKy" : 127.34561561507175
+      "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20150901_19%2F1441109069959ScK00_JPEG%2F166666405155123_0.jpeg",
+      "placeWi" : 36.32616469891875,
+      "placeKy" : 127.33881424211793
     }
   ]
 }
