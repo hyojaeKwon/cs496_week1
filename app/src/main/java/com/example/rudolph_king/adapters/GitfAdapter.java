@@ -61,6 +61,7 @@ public class GitfAdapter extends RecyclerView.Adapter<GitfAdapter.ItemViewHolder
         notifyDataSetChanged();
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull GitfAdapter.ItemViewHolder holder, int position) {
         holder.onBind(giftData.get(position),position);
@@ -89,12 +90,14 @@ public class GitfAdapter extends RecyclerView.Adapter<GitfAdapter.ItemViewHolder
         private TextView tv_company;
         private ImageView iv_picture;
         private TextView tag_number;
+        private View mView;
 
         private ImageButton likeBtn;
 
         //ItemViewHolder의 생성자
         ItemViewHolder(View view, final GitfAdapter listener){
             super(view);
+            mView = view;
             tag_number = view.findViewById(R.id.tv_ranking);
             tv_company = view.findViewById(R.id.tv_company);
             tv1 = view.findViewById(R.id.tv_productName);
@@ -125,8 +128,10 @@ public class GitfAdapter extends RecyclerView.Adapter<GitfAdapter.ItemViewHolder
 
         //상품 이름 집어넣는 코드
         void onBind(Gift gift,int index){
-            index = index + 1;
-            tag_number.setText("# " + Integer.toString(index));
+            tag_number.setText("# " + Integer.toString(index + 1));
+            if(index % 2 == 1) {
+                mView.findViewById(R.id.f3_item_layout).setBackgroundResource(R.color.gray_000);
+            }
             tv_company.setText(gift.getCompany());
             tv1.setText(gift.getProductName());
             int price = gift.getPrice();
