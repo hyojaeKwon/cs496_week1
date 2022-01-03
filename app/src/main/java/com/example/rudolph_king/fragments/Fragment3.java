@@ -1,15 +1,17 @@
 package com.example.rudolph_king.fragments;
 
-import android.graphics.Color;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -35,18 +37,20 @@ public class Fragment3 extends Fragment {
     private static ArrayList<Integer> mGiftIdList = null;
     public static ArrayList<Integer> mWishList = null;
     private static int mSelectedListId = 0;
+    private static final int mSelectedColor = 0xFFDE5F57;
+    private static final int mUnselectedColor = 0xFF888888;
     int[][] mIdArr = new int[16][10];
     GitfAdapter gitfAdapter;
     RecyclerView recyclerView;
-    private static boolean btn1Status  = true;
-    private static boolean btn2Status = false;
-    private static boolean btn3Status = false;
-    private static boolean btn4Status = false;
-
-    private static boolean btn5Status  = true;
-    private static boolean btn6Status = false;
-    private static boolean btn7Status = false;
-    private static boolean btn8Status = false;
+    Button btn1;
+    Button btn2;
+    Button btn3;
+    Button btn4;
+    TextView btn5;
+    TextView btn6;
+    TextView btn7;
+    TextView btn8;
+    TextView btnWishList;
 
     public Fragment3() {
         // Required empty public constructor
@@ -129,41 +133,39 @@ public class Fragment3 extends Fragment {
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_3, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.gift_layout);
-        ImageButton btn1 = (ImageButton) view.findViewById(R.id.imageButton_all);
-        ImageButton btn2 = (ImageButton) view.findViewById(R.id.imageButton_girls);
-        ImageButton btn3 = (ImageButton) view.findViewById(R.id.imageButton_boys);
-        ImageButton btn4 = (ImageButton) view.findViewById(R.id.imageButton_students);
+        btn1 = (Button) view.findViewById(R.id.imageButton_all);
+        btn2 = (Button) view.findViewById(R.id.imageButton_girls);
+        btn3 = (Button) view.findViewById(R.id.imageButton_boys);
+        btn4 = (Button) view.findViewById(R.id.imageButton_students);
 
-        TextView btn5 =  (TextView) view.findViewById(R.id.btn5);
-        btn5.setTextColor(Color.BLUE);
-        TextView btn6 =  (TextView) view.findViewById(R.id.btn6);
-        TextView btn7 =  (TextView) view.findViewById(R.id.btn7);
-        TextView btn8 =  (TextView) view.findViewById(R.id.btn8);
+        btn5 =  (TextView) view.findViewById(R.id.btn5);
+        btn6 =  (TextView) view.findViewById(R.id.btn6);
+        btn7 =  (TextView) view.findViewById(R.id.btn7);
+        btn8 =  (TextView) view.findViewById(R.id.btn8);
 
-        changeList(mSelectedListId);
+        btnWishList = (TextView) view.findViewById(R.id.wishList);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         gitfAdapter = new GitfAdapter(getContext(),mSelectedList);
         recyclerView.setAdapter(gitfAdapter);
 
+        setStatus(0);
+        setStatus(4);
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setStatus(0);
                 setStatus(4);
-
                 mSelectedListId = 0;
-                btn5.setTextColor(Color.BLUE);
-                btn6.setTextColor(Color.GRAY);
-                btn7.setTextColor(Color.GRAY);
-                btn8.setTextColor(Color.GRAY);
                 changeList(mSelectedListId);
                 gitfAdapter.filterList(mSelectedList);
             }
@@ -173,12 +175,7 @@ public class Fragment3 extends Fragment {
             public void onClick(View view) {
                 setStatus(1);
                 setStatus(4);
-
                 mSelectedListId = 4;
-                btn5.setTextColor(Color.BLUE);
-                btn6.setTextColor(Color.GRAY);
-                btn7.setTextColor(Color.GRAY);
-                btn8.setTextColor(Color.GRAY);
                 changeList(mSelectedListId);
                 gitfAdapter.filterList(mSelectedList);
             }
@@ -188,12 +185,7 @@ public class Fragment3 extends Fragment {
             public void onClick(View view) {
                 setStatus(2);
                 setStatus(4);
-
                 mSelectedListId = 8;
-                btn5.setTextColor(Color.BLUE);
-                btn6.setTextColor(Color.GRAY);
-                btn7.setTextColor(Color.GRAY);
-                btn8.setTextColor(Color.GRAY);
                 changeList(mSelectedListId);
                 gitfAdapter.filterList(mSelectedList);
             }
@@ -203,12 +195,7 @@ public class Fragment3 extends Fragment {
             public void onClick(View view) {
                 setStatus(3);
                 setStatus(4);
-
                 mSelectedListId = 12;
-                btn5.setTextColor(Color.BLUE);
-                btn6.setTextColor(Color.GRAY);
-                btn7.setTextColor(Color.GRAY);
-                btn8.setTextColor(Color.GRAY);
                 changeList(mSelectedListId);
                 gitfAdapter.filterList(mSelectedList);
             }
@@ -218,11 +205,6 @@ public class Fragment3 extends Fragment {
             @Override
             public void onClick(View v){
                 setStatus(4);
-                btn5.setTextColor(Color.BLUE);
-                btn6.setTextColor(Color.GRAY);
-                btn7.setTextColor(Color.GRAY);
-                btn8.setTextColor(Color.GRAY);
-
                 mSelectedListId = getStatus() * 4;
                 changeList(mSelectedListId);
                 gitfAdapter.filterList(mSelectedList);
@@ -232,10 +214,6 @@ public class Fragment3 extends Fragment {
             @Override
             public void onClick(View v){
                 setStatus(5);
-                btn5.setTextColor(Color.GRAY);
-                btn6.setTextColor(Color.BLUE);
-                btn7.setTextColor(Color.GRAY);
-                btn8.setTextColor(Color.GRAY);
                 mSelectedListId = getStatus() * 4 + 1;
                 changeList(mSelectedListId);
                 gitfAdapter.filterList(mSelectedList);
@@ -245,10 +223,6 @@ public class Fragment3 extends Fragment {
             @Override
             public void onClick(View v){
                 setStatus(6);
-                btn5.setTextColor(Color.GRAY);
-                btn6.setTextColor(Color.GRAY);
-                btn7.setTextColor(Color.BLUE);
-                btn8.setTextColor(Color.GRAY);
                 mSelectedListId = getStatus() * 4 + 2;
                 changeList(mSelectedListId);
                 gitfAdapter.filterList(mSelectedList);
@@ -258,16 +232,28 @@ public class Fragment3 extends Fragment {
             @Override
             public void onClick(View v){
                 setStatus(7);
-                btn5.setTextColor(Color.GRAY);
-                btn6.setTextColor(Color.GRAY);
-                btn7.setTextColor(Color.GRAY);
-                btn8.setTextColor(Color.BLUE);
                 mSelectedListId = getStatus() * 4 + 3;
                 changeList(mSelectedListId);
                 gitfAdapter.filterList(mSelectedList);
             }
         });
+        btnWishList.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+            }
+        });
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        setStatus(0);
+        setStatus(4);
+        mSelectedListId = 0;
+        changeList(mSelectedListId);
+        gitfAdapter.filterList(mSelectedList);
+        super.onResume();
     }
 
     private void changeList(int listId) {
@@ -292,69 +278,72 @@ public class Fragment3 extends Fragment {
 
     //상태 반환
     private int getStatus(){
-        if(btn1Status == true){
+        if(btn1.isSelected() == true){
             return 0;
-        }else if(btn2Status == true){
+        }else if(btn2.isSelected() == true){
             return 1;
-        } else if(btn3Status == true){
+        } else if(btn3.isSelected() == true){
             return 2;
-        } else if(btn4Status == true){
+        } else if(btn4.isSelected() == true){
             return 3;
         } else {
             return 5;
         }
     }
+
     private void setStatus(int status) {
         recyclerView.smoothScrollToPosition(0);
         switch (status) {
             case 0:
-                btn1Status= true;
-                btn2Status= false;
-                btn3Status= false;
-                btn4Status= false;
+                btn1.setSelected(true);
+                btn2.setSelected(false);
+                btn3.setSelected(false);
+                btn4.setSelected(false);
                 break;
             case 1:
-                btn1Status= false;
-                btn2Status= true;
-                btn3Status= false;
-                btn4Status= false;
+                btn1.setSelected(false);
+                btn2.setSelected(true);
+                btn3.setSelected(false);
+                btn4.setSelected(false);
                 break;
             case 2:
-                btn1Status= false;
-                btn2Status= false;
-                btn3Status= true;
-                btn4Status= false;
+                btn1.setSelected(false);
+                btn2.setSelected(false);
+                btn3.setSelected(true);
+                btn4.setSelected(false);
                 break;
             case 3:
-                btn1Status= false;
-                btn2Status= false;
-                btn3Status= false;
-                btn4Status= true;
+                btn1.setSelected(false);
+                btn2.setSelected(false);
+                btn3.setSelected(false);
+                btn4.setSelected(true);
                 break;
-//            case 4:
-//                btn5Status= true;
-//                btn6Status= false;
-//                btn7Status= false;
-//                btn8Status= false;
-//                break;
-//            case 5:
-//                btn5Status= false;
-//                btn6Status= true;
-//                btn7Status= false;
-//                btn8Status= false;
-//                break;
-//            case 6:
-//                btn5Status= false;
-//                btn6Status= false;
-//                btn7Status= true;
-//                btn8Status= false;
-//                break;
-//            case 7:
-//                btn5Status= false;
-//                btn6Status= false;
-//                btn7Status= false;
-//                btn8Status= true;
-//                break;
+            case 4:
+                btn5.setSelected(true);
+                btn6.setSelected(false);
+                btn7.setSelected(false);
+                btn8.setSelected(false);
+                break;
+            case 5:
+                btn5.setSelected(false);
+                btn6.setSelected(true);
+                btn7.setSelected(false);
+                btn8.setSelected(false);
+                break;
+            case 6:
+                btn5.setSelected(false);
+                btn6.setSelected(false);
+                btn7.setSelected(true);
+                btn8.setSelected(false);
+                break;
+            case 7:
+                btn5.setSelected(false);
+                btn6.setSelected(false);
+                btn7.setSelected(false);
+                btn8.setSelected(true);
+                break;
+            default:
+                break;
         }
     }
 

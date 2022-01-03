@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_selected="true"
-        android:drawable="@drawable/ic_heart_filled" />
-    <!-- 눌러졌을때 이미지 -->
-    <!--item
+    <item
+        android:state_selected="true"
         android:state_pressed="true"
         android:drawable="@drawable/ic_heart_focus"
-        /-->
+        />
+    <item
+    android:state_pressed="true"
+    android:drawable="@drawable/ic_heart_focus"
+    />
+    <item android:state_selected="true"
+        android:drawable="@drawable/ic_heart_filled" />
 
     <!-- 위젯에 포커스가 와 있을때 이미지 -->
     <!--item
