@@ -28,6 +28,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.example.rudolph_king.GalleryImage;
+import com.example.rudolph_king.Gift;
 import com.example.rudolph_king.R;
 import com.example.rudolph_king.adapters.VPAdapter;
 import com.example.rudolph_king.fragments.Fragment2;
@@ -57,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private long backKeyPressedTime = 0;
     private Toast toast;
     public static ArrayList<GalleryImage> reviewList = new ArrayList<GalleryImage>();
-
-
+    public static ArrayList<Gift> giftList = new ArrayList<>();
 
     private void getHashKey(){
         PackageInfo packageInfo = null;
