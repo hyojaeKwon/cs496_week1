@@ -12,107 +12,161 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-            android:textSize="@dimen/textMidSize"
-            android:layout_marginBottom="8dp"
             android:layout_height="wrap_content"
-            android:text="@string/fragment3_intro" />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:textSize="@dimen/textContentSize"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment3_intro" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/wishList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="28dp"
+                android:padding="4dp"
+                android:text="@string/fragment3_wishList"
+                android:textColor="@color/green_500"
+                android:textAlignment="center"
+                android:clickable="true"
+                android:textSize="@dimen/textMidSize" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginVertical="8dp"
             android:layout_gravity="center"
-
+            android:background="@color/transparent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageButton
+            <android.widget.Button
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:id="@+id/imageButton_all"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
                 android:layout_weight="1"
                 android:onClick="btn1Click"
-                android:src="@android:drawable/checkbox_on_background" />
+                android:text="All"
+                android:textSize="@dimen/textSmallSize"
+                android:layout_gravity="center"
+                android:textColor="@color/text_color_selector"
+                android:background="@drawable/btn_color"
+                android:drawableTop="@drawable/ic_laugh" />
 
-            <ImageButton
+            <android.widget.Button
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:id="@+id/imageButton_girls"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
                 android:layout_weight="1"
                 android:onClick="btn2Click"
-                android:src="@android:drawable/checkbox_on_background"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:text="Girls"
+                android:textSize="@dimen/textSmallSize"
+                android:layout_gravity="center"
+                android:textColor="@color/text_color_selector"
+                android:background="@drawable/btn_color"
+                android:drawableTop="@drawable/ic_girl" />
 
-            <ImageButton
+            <android.widget.Button
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:id="@+id/imageButton_boys"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
                 android:layout_weight="1"
                 android:onClick="btn3Click"
-                android:src="@android:drawable/checkbox_on_background" />
+                android:text="Boys"
+                android:textSize="@dimen/textSmallSize"
+                android:layout_gravity="center"
+                android:textColor="@color/text_color_selector"
+                android:background="@drawable/btn_color"
+                android:drawableTop="@drawable/ic_boy"/>
 
-            <ImageButton
+            <android.widget.Button
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:id="@+id/imageButton_students"
 
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
                 android:layout_weight="1"
                 android:onClick="btn4Click"
-                android:src="@android:drawable/checkbox_on_background" />
+                android:text="Students"
+                android:textSize="@dimen/textSmallSize"
+                android:layout_gravity="center"
+                android:textColor="@color/text_color_selector"
+                android:background="@drawable/btn_color"
+                android:drawableTop="@drawable/ic_student" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:paddingTop="10dp"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
+            android:layout_gravity="center"
+            android:background="@drawable/text_linear_bottom"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/btn5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:background="@drawable/btn_pushable"
                 android:layout_gravity="center|fill_horizontal"
                 android:layout_weight="1"
                 android:text="1만원 미만"
+                android:textColor="@color/text_selector"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/btn6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:paddingVertical="8dp"
+                android:background="@drawable/btn_pushable"
+                android:layout_gravity="center|fill_horizontal"
                 android:layout_weight="1"
                 android:text="1-2만원대"
+                android:textColor="@color/text_selector"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/btn7"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:background="@drawable/btn_pushable"
+                android:layout_gravity="center|fill_horizontal"
                 android:layout_weight="1"
                 android:text="3-4만원대"
+                android:textColor="@color/text_selector"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/btn8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:paddingVertical="8dp"
+                android:background="@drawable/btn_pushable"
+                android:layout_gravity="center|fill_horizontal"
                 android:layout_weight="1"
                 android:text="5만원이상"
+                android:textColor="@color/text_selector"
                 android:textAlignment="center" />
         </LinearLayout>
 

@@ -56,6 +56,15 @@ public class GitfAdapter extends RecyclerView.Adapter<GitfAdapter.ItemViewHolder
         return giftData.size();
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
     //RecyclerView의 핵심인 ViewHolder생성
     //subView를 set한다.
 

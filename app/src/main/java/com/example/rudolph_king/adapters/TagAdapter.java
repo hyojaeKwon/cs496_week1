@@ -47,9 +47,10 @@ public class TagAdapter extends RecyclerView.Adapter<TagAdapter.CustomViewHolder
                 tv.setText(arrayList.get(i).getTv_tag().toString());
                 count = count + currentCount;
                 LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                param.leftMargin = 7;
+                param.leftMargin = 12;
                 tv.setLayoutParams(param);
-                tv.setBackgroundColor(Color.rgb(240,240,240));
+                tv.setPadding(4, 2, 4, 2);
+                tv.setBackgroundColor(0xFFF0F0F0);
                 holder.tv_tag.addView(tv);
 
             }

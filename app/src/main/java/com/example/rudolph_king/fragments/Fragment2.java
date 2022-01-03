@@ -133,6 +133,7 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
                         gi.setReviewDate(time);
                         MainActivity.reviewList.add(0, gi);
                         reviewAdapter.notifyItemInserted(0);
+                        mRecyclerView.smoothScrollToPosition(0);
                         MainActivity.updateJSONImages(gi, -1);
                     }
                 }
