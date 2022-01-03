@@ -125,7 +125,6 @@ public class PhotoActivity extends AppCompatActivity {// implements PhotoLargeAd
 //    public void onItemSelected(View view, int position, int position_pic) {
 //
 //    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu) ;

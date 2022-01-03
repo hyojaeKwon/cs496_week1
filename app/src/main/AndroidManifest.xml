@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rudolph_king"
         android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".activities.BuyItems"
+            android:theme="@style/Transparent"
+            android:parentActivityName=".activities.MainActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.CallActivity"
             android:exported="false"
@@ -22,7 +28,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
