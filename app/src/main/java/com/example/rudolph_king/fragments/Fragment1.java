@@ -27,61 +27,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Fragment1#newInstance} factory method to
- * create an instance of this fragment.
- */
-
 public class Fragment1 extends Fragment{
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    // fields
+    private static ArrayList<Shops> mShopList = null;
+    private static ArrayList<Shops> mFilteredList = null;
     private InputMethodManager imm;
-
-    // customizing listView
-    static ArrayList<Shops> shopList;
-    static ArrayList<Shops> filteredList;
-
-
-     public boolean isFilteredListEmpty(){
-         if (this.filteredList == null){
-             return true;
-         }
-         else{
-             if (this.filteredList.isEmpty()){
-                 return true;
-             }else{
-                 return false;
-             }
-         }
-     }
-    RecyclerView mRecyclerView;
+    private static RecyclerView mRecyclerView;
     private static CustomAdapter customAdapter;
-    EditText searchET;
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static EditText searchET;
 
     public Fragment1() {
         // Required empty public constructor
     }
 
-
-
-
-    public static Fragment1 newInstance(String param1, String param2) {
+    public static Fragment1 newInstance() {
         Fragment1 fragment = new Fragment1();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -90,13 +56,41 @@ public class Fragment1 extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        // 변수 초기화
+        if (mShopList == null) {
+            mShopList = new ArrayList<Shops>();
+
+            // shop.json에서 parsing을 통해 데이터 가져오기
+            JsonRead jr = new JsonRead();
+            JSONObject jo = jr.reading(getContext(), "shop.json");
+            JSONArray ja = null;
+            try {
+                ja = jo.getJSONArray("Numbers");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            //shoplist에 JSONObject 추가하기
+            for(int i = 0 ; i < ja.length() ; i++) {
+                JSONObject innerJSONObject = null;
+                try {
+                    innerJSONObject = ja.getJSONObject(i);
+                } catch (JSONException e) {
+                    innerJSONObject = null;
+                }
+                try {
+                    mShopList.add(new Shops(innerJSONObject));
+                } catch (JSONException e) {
+                    continue;
+                }
+            }
+            //영업 상태에 따라 정렬하기
+            Collections.sort(mShopList,new SortIsOpen());
+        }
+        if (mFilteredList == null) {
+            mFilteredList = new ArrayList<>();
         }
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,41 +98,9 @@ public class Fragment1 extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_1, container, false) ;
         imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
-
-
-        // add list elements -- test
-        shopList = new ArrayList<>();
-        filteredList = new ArrayList<>();
-
-        //json파일 parse 하는 부분
-        JsonRead jr = new JsonRead();
-        JSONObject jo = jr.reading(getContext(), "shop.json");
-        JSONArray ja = null;
-        try {
-            ja = jo.getJSONArray("Numbers");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        //shoplist에 JSONObject 추가하기
-        for(int i = 0 ; i < ja.length() ; i++){
-            JSONObject innerJSONObject = null;
-            try {
-                innerJSONObject = ja.getJSONObject(i);
-            } catch (JSONException e) {
-                innerJSONObject = null;
-
-            }
-            try {
-                shopList.add(new Shops(innerJSONObject));
-            } catch (JSONException e) {
-                continue;
-            }
-
-        }
-        //영업 상태에 따라 정렬하기
-        Collections.sort(shopList,new SortIsOpen());
         imm.hideSoftInputFromWindow(view.findViewById(R.id.searchCardView).getWindowToken(), 0);
+
+        mFilteredList.clear();
 
         //view에서 text들어가는 부분 찾는 부분
         searchET = view.findViewById(R.id.searchFood);
@@ -146,7 +108,7 @@ public class Fragment1 extends Fragment{
 
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        customAdapter = new CustomAdapter(getContext(),shopList);
+        customAdapter = new CustomAdapter(getContext(),mShopList);
         mRecyclerView.setAdapter(customAdapter);
 
          //textChangeListener part
@@ -173,36 +135,48 @@ public class Fragment1 extends Fragment{
 
     //검색 method
     public void searchFilter(String searchText){
-        filteredList.clear();
+        mFilteredList.clear();
 
         //검색 결과 찾는 부분
-        for (int i = 0 ; i < shopList.size() ; i++){
+        for (int i = 0 ; i < mShopList.size() ; i++){
 //            Log.e("nowList", Integer.toString(shopList.size()));
-            if(String.valueOf(shopList.get(i).getT()).contains(searchText)){
-                filteredList.add(shopList.get(i));
+            if(String.valueOf(mShopList.get(i).getT()).contains(searchText)){
+                mFilteredList.add(mShopList.get(i));
             }
         }
         //필터링된 메서드 cA에 다시 전달
-        customAdapter.filterList(filteredList);
+        customAdapter.filterList(mFilteredList);
     }
 
     public ArrayList<Shops> getShopList(){
-        Log.e("nowList", Integer.toString(shopList.size()));
-        return shopList;
+        // Log.e("nowList", Integer.toString(mShopList.size()));
+        return mShopList;
     }
     public ArrayList<Shops> getFilteredList(){
-        return filteredList;
+        return mFilteredList;
     }
 
     public Shops getInfo(int pos){
-        if(filteredList == null){
-            return (Shops)(shopList.get(pos));
+        if(mFilteredList == null){
+            return (Shops)(mShopList.get(pos));
         } else {
-            return (Shops)(filteredList.get(pos));
+            return (Shops)(mFilteredList.get(pos));
+        }
+    }
+
+    public boolean isFilteredListEmpty(){
+        if (this.mFilteredList == null){
+            return true;
+        }
+        else{
+            if (this.mFilteredList.isEmpty()){
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 }
-
 
 //Comparator 구현
 class SortIsOpen implements Comparator<Shops>{

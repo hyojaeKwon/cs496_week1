@@ -1,7 +1,5 @@
 package com.example.rudolph_king.fragments;
 
-import android.content.Context;
-import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -9,11 +7,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -26,13 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,8 +30,8 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class Fragment3 extends Fragment {
-
-    ArrayList<Gift> giftArrayList;
+    ArrayList<Gift> mGiftList = null;
+    int[][] mIdArr = new int[16][10];
     GitfAdapter gitfAdapter;
     private static int nowStatus = 1;
     private static boolean btn1Status  = true;
@@ -54,171 +44,97 @@ public class Fragment3 extends Fragment {
     private static boolean btn7Status = false;
     private static boolean btn8Status = false;
 
-
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public Fragment3() {
         // Required empty public constructor
     }
 
-
-    public static Fragment3 newInstance(String param1, String param2) {
+    public static Fragment3 newInstance() {
         Fragment3 fragment = new Fragment3();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
         return fragment;
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+        if (mGiftList == null) {
+            mGiftList = new ArrayList<Gift>();
+
+            //json parse
+            JsonRead jr = new JsonRead();
+            JSONObject jo = jr.reading(getContext(), "products.json");
+            JSONObject innerJo = null;
+            JSONArray innerJa = null;
+            try {
+                innerJo = jo.getJSONObject("Products");
+                innerJa = innerJo.getJSONArray("productList");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            for(int i = 0 ; i <innerJa.length() ; i++){
+                JSONObject innerJsonObj = null;
+                try {
+                    innerJsonObj = innerJa.getJSONObject(i);
+                    mGiftList.add(new Gift(innerJsonObj));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            ArrayList<JSONObject> joList = new ArrayList<JSONObject>();
+
+            try {
+                joList.add(innerJo.getJSONObject("all"));
+                joList.add(innerJo.getJSONObject("girls"));
+                joList.add(innerJo.getJSONObject("boys"));
+                joList.add(innerJo.getJSONObject("students"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            //parse Id
+            try {
+                for (int j = 0; j < joList.size(); j++) {
+                    JSONObject jojo = joList.get(j);
+                    JSONArray allJoArr1 = jojo.getJSONArray("list0to1");
+                    mIdArr[j * 4 + 0] = parseId(allJoArr1);
+                    JSONArray allJoArr2 = jojo.getJSONArray("list1to3");
+                    mIdArr[j * 4 + 1] = parseId(allJoArr2);
+                    JSONArray allJoArr3 = jojo.getJSONArray("list0to1");
+                    mIdArr[j * 4 + 2] = parseId(allJoArr3);
+                    JSONArray allJoArr4 = jojo.getJSONArray("list3to5");
+                    mIdArr[j * 4 + 3] = parseId(allJoArr4);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        giftArrayList = new ArrayList<>();
         // Inflate the layout for this fragment
-         View view = inflater.inflate(R.layout.fragment_3, container, false);
-         RecyclerView recyclerView;
-         recyclerView = (RecyclerView) view.findViewById(R.id.gift_layout);
-        ImageButton btn1 = (ImageButton) view.findViewById(R.id.imageButton6);
-        ImageButton btn2 = (ImageButton) view.findViewById(R.id.imageButton7);
-        ImageButton btn3 = (ImageButton) view.findViewById(R.id.imageButton8);
-        ImageButton btn4 = (ImageButton) view.findViewById(R.id.imageButton9);
-
+        View view = inflater.inflate(R.layout.fragment_3, container, false);
+        RecyclerView recyclerView;
+        recyclerView = (RecyclerView) view.findViewById(R.id.gift_layout);
+        ImageButton btn1 = (ImageButton) view.findViewById(R.id.imageButton_all);
+        ImageButton btn2 = (ImageButton) view.findViewById(R.id.imageButton_girls);
+        ImageButton btn3 = (ImageButton) view.findViewById(R.id.imageButton_boys);
+        ImageButton btn4 = (ImageButton) view.findViewById(R.id.imageButton_students);
         TextView btn5 =  (TextView) view.findViewById(R.id.btn5);
         btn5.setTextColor(Color.BLUE);
         TextView btn6 =  (TextView) view.findViewById(R.id.btn6);
         TextView btn7 =  (TextView) view.findViewById(R.id.btn7);
         TextView btn8 =  (TextView) view.findViewById(R.id.btn8);
 
-
-
-         //json parse
-        String jsonStr = getJsonString();
-        JSONObject jo = null;
-        try {
-            jo = new JSONObject(jsonStr);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JSONObject innerJo = null;
-        try {
-            innerJo = jo.getJSONObject("Products");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JSONArray innerJa = null;
-        try {
-            innerJa = innerJo.getJSONArray("productList");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        for(int i = 0 ; i <innerJa.length() ; i++){
-            JSONObject innerJsonObj = null;
-            try {
-                innerJsonObj = innerJa.getJSONObject(i);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                giftArrayList.add(new Gift(innerJsonObj));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        JSONObject allJo = null;
-        JSONObject girlsJo = null;
-        JSONObject boysJo =null;
-        JSONObject studentsJo =null;
-        int[][] idArr = new int[16][10];
-
-        try {
-            allJo = innerJo.getJSONObject("all");
-            girlsJo = innerJo.getJSONObject("girls");
-            boysJo = innerJo.getJSONObject("boys");
-            studentsJo = innerJo.getJSONObject("students");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        //parse Id
-        try {
-            JSONArray allJoArr1 = allJo.getJSONArray("list0to1");
-            idArr[0] = parseId(allJoArr1);
-            JSONArray allJoArr2 = allJo.getJSONArray("list1to3");
-            idArr[1] = parseId(allJoArr2);
-            JSONArray allJoArr3 = allJo.getJSONArray("list0to1");
-            idArr[2] = parseId(allJoArr3);
-            JSONArray allJoArr4 = allJo.getJSONArray("list3to5");
-            idArr[3] = parseId(allJoArr4);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            JSONArray allJoArr1 = girlsJo.getJSONArray("list0to1");
-            idArr[4] = parseId(allJoArr1);
-            JSONArray allJoArr2 = girlsJo.getJSONArray("list1to3");
-            idArr[5] = parseId(allJoArr2);
-            JSONArray allJoArr3 = girlsJo.getJSONArray("list0to1");
-            idArr[6] = parseId(allJoArr3);
-            JSONArray allJoArr4 = girlsJo.getJSONArray("list3to5");
-            idArr[7] = parseId(allJoArr4);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            JSONArray allJoArr1 = boysJo.getJSONArray("list0to1");
-            idArr[8] = parseId(allJoArr1);
-            JSONArray allJoArr2 = boysJo.getJSONArray("list1to3");
-            idArr[9] = parseId(allJoArr2);
-            JSONArray allJoArr3 = boysJo.getJSONArray("list0to1");
-            idArr[10] = parseId(allJoArr3);
-            JSONArray allJoArr4 = boysJo.getJSONArray("list3to5");
-            idArr[11] = parseId(allJoArr4);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            JSONArray allJoArr1 = studentsJo.getJSONArray("list0to1");
-            idArr[12] = parseId(allJoArr1);
-            JSONArray allJoArr2 = studentsJo.getJSONArray("list1to3");
-            idArr[13] = parseId(allJoArr2);
-            JSONArray allJoArr3 = studentsJo.getJSONArray("list0to1");
-            idArr[14] = parseId(allJoArr3);
-            JSONArray allJoArr4 = studentsJo.getJSONArray("list3to5");
-            idArr[15] = parseId(allJoArr4);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        //Btn Change
-
-
         ArrayList<Gift> changedList = new ArrayList<>();
-        changedList = isMatch(nowStatus,giftArrayList,idArr);
+        changedList = isMatch(nowStatus, mGiftList, mIdArr);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -244,7 +160,7 @@ public class Fragment3 extends Fragment {
                 btn7.setTextColor(Color.GRAY);
                 btn8.setTextColor(Color.GRAY);
                 ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,giftArrayList,idArr);
+                changedList = isMatch(nowStatus,mGiftList,mIdArr);
                 gitfAdapter.filterList(changedList);
             }
         });
@@ -267,7 +183,7 @@ public class Fragment3 extends Fragment {
                 btn7.setTextColor(Color.GRAY);
                 btn8.setTextColor(Color.GRAY);
                 ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,giftArrayList,idArr);
+                changedList = isMatch(nowStatus,mGiftList,mIdArr);
                 gitfAdapter.filterList(changedList);
             }
         });
@@ -290,7 +206,7 @@ public class Fragment3 extends Fragment {
                 btn7.setTextColor(Color.GRAY);
                 btn8.setTextColor(Color.GRAY);
                 ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,giftArrayList,idArr);
+                changedList = isMatch(nowStatus,mGiftList,mIdArr);
                 gitfAdapter.filterList(changedList);
             }
         });
@@ -313,7 +229,7 @@ public class Fragment3 extends Fragment {
                 btn7.setTextColor(Color.GRAY);
                 btn8.setTextColor(Color.GRAY);
                 ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,giftArrayList,idArr);
+                changedList = isMatch(nowStatus,mGiftList,mIdArr);
                 gitfAdapter.filterList(changedList);
             }
         });
@@ -332,7 +248,7 @@ public class Fragment3 extends Fragment {
 
                 nowStatus = getStatus() * 4 + 1;
                 ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,giftArrayList,idArr);
+                changedList = isMatch(nowStatus,mGiftList,mIdArr);
                 gitfAdapter.filterList(changedList);
             }
         });
@@ -349,7 +265,7 @@ public class Fragment3 extends Fragment {
                 btn8.setTextColor(Color.GRAY);
                 nowStatus = getStatus() * 4 + 2;
                 ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,giftArrayList,idArr);
+                changedList = isMatch(nowStatus,mGiftList,mIdArr);
                 gitfAdapter.filterList(changedList);
             }
         });
@@ -366,7 +282,7 @@ public class Fragment3 extends Fragment {
                 btn8.setTextColor(Color.GRAY);
                 nowStatus = getStatus() * 4 + 3;
                 ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,giftArrayList,idArr);
+                changedList = isMatch(nowStatus,mGiftList,mIdArr);
                 gitfAdapter.filterList(changedList);
             }
         });
@@ -383,36 +299,12 @@ public class Fragment3 extends Fragment {
                 btn8.setTextColor(Color.BLUE);
                 nowStatus = getStatus() * 4 + 4;
                 ArrayList<Gift> changedList = new ArrayList<>();
-                changedList = isMatch(nowStatus,giftArrayList,idArr);
+                changedList = isMatch(nowStatus,mGiftList,mIdArr);
                 gitfAdapter.filterList(changedList);
             }
         });
         return view;
     }
-
-    private String getJsonString(){
-//        String json = "";
-        String strResult = "";
-        AssetManager assetManager = getContext().getResources().getAssets();
-        try {
-            InputStream is = assetManager.open("products.json");
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-            String line = "";
-
-            while((line=reader.readLine()) != null){
-                strResult += line;
-            }
-
-//            json = new String(strResult,"UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("errorJson","hi");
-        }
-
-        return strResult;
-    }
-
 
     private ArrayList<Gift> isMatch(int status,ArrayList<Gift>currentArray, int[][] idArr){
         ArrayList<Gift> newArr = new ArrayList<>();

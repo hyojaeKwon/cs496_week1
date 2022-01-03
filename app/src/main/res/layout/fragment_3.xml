@@ -14,12 +14,12 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
-            android:textSize="20dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:textSize="@dimen/textMidSize"
             android:layout_marginBottom="8dp"
             android:layout_height="wrap_content"
-            android:text="고민될 땐 선물랭킹!" />
+            android:text="@string/fragment3_intro" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/imageButton6"
+                android:id="@+id/imageButton_all"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="15dp"
@@ -39,7 +39,7 @@
                 android:src="@android:drawable/checkbox_on_background" />
 
             <ImageButton
-                android:id="@+id/imageButton7"
+                android:id="@+id/imageButton_girls"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="15dp"
@@ -50,7 +50,7 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
-                android:id="@+id/imageButton8"
+                android:id="@+id/imageButton_boys"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="15dp"
@@ -60,7 +60,7 @@
                 android:src="@android:drawable/checkbox_on_background" />
 
             <ImageButton
-                android:id="@+id/imageButton9"
+                android:id="@+id/imageButton_students"
 
                 android:layout_width="60dp"
                 android:layout_height="60dp"
