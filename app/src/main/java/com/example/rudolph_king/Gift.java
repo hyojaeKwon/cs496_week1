@@ -13,7 +13,7 @@ public class Gift {
     public Gift(JSONObject jsonObject) throws JSONException {
         this.id = jsonObject.getInt("id");
         this.productName = jsonObject.getString("productName");
-        this.price = jsonObject.getInt("price");
+        this.price = Integer.parseInt(jsonObject.getString("price"));
         this.company = jsonObject.getString("company");
         this.pictureUrl = jsonObject.getString("pictureUrl");
     }
