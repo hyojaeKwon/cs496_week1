@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +28,8 @@ import com.example.rudolph_king.adapters.PhotoLargeAdapter;
 
 public class PhotoActivity extends AppCompatActivity {// implements PhotoLargeAdapter.OnListItemSelectedInterface {
     RecyclerView mRecyclerView;
+    CardView mReviewInfo;
+    CardView mReviewInfoEdit;
     TextView mReviewMembers;
     TextView mReviewDate;
     TextView mReviewDescription;
@@ -58,6 +61,8 @@ public class PhotoActivity extends AppCompatActivity {// implements PhotoLargeAd
         onEditMode = false;
 
         photoLargeAdapter = new PhotoLargeAdapter(this, review.getUriList(), position); //this, position);
+        mReviewInfo = (CardView) findViewById(R.id.cardView);
+        mReviewInfoEdit = (CardView) findViewById(R.id.cardView_edit);
         mRecyclerView = (RecyclerView) findViewById(R.id.photo_list);
         mReviewMembers = (TextView) findViewById(R.id.photo_members);
         mReviewDate = (TextView) findViewById(R.id.photo_date);
@@ -86,15 +91,13 @@ public class PhotoActivity extends AppCompatActivity {// implements PhotoLargeAd
             case R.id.menu_edit:
                 if (onEditMode) {
                     item.setIcon(R.drawable.ic_edit_24);
-                    mReviewMembersEdit.setVisibility(View.GONE);
-                    mReviewDescriptionEdit.setVisibility(View.GONE);
+                    mReviewInfoEdit.setVisibility(View.GONE);
 
                     String reviewMembers = mReviewMembersEdit.getText().toString();
                     String reviewDescription = mReviewDescriptionEdit.getText().toString();
                     mReviewMembers.setText(reviewMembers);
                     mReviewDescription.setText(reviewDescription);
-                    mReviewMembers.setVisibility(View.VISIBLE);
-                    mReviewDescription.setVisibility(View.VISIBLE);
+                    mReviewInfo.setVisibility(View.VISIBLE);
 
                     GalleryImage gi = MainActivity.reviewList.get(position);
                     gi.setReviewMembers(reviewMembers);
@@ -106,10 +109,8 @@ public class PhotoActivity extends AppCompatActivity {// implements PhotoLargeAd
                     onEditMode = false;
                 } else {
                     item.setIcon(R.drawable.ic_check_24);
-                    mReviewMembers.setVisibility(View.GONE);
-                    mReviewDescription.setVisibility(View.GONE);
-                    mReviewMembersEdit.setVisibility(View.VISIBLE);
-                    mReviewDescriptionEdit.setVisibility(View.VISIBLE);
+                    mReviewInfo.setVisibility(View.GONE);
+                    mReviewInfoEdit.setVisibility(View.VISIBLE);
 
                     mReviewMembersEdit.setText(mReviewMembers.getText());
                     mReviewDescriptionEdit.setText(mReviewDescription.getText());

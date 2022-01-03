@@ -446,6 +446,8 @@
         "id" : "0",
         "productName" : "",
         "price" : "3",
+        "price" : "0",
+
         "company" : "",
         "pictureUrl" : ""
       },

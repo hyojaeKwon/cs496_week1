@@ -11,8 +11,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:contentDescription="TODO"
         android:foregroundGravity="center"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:text="1"
-        android:textSize="20dp"
+        android:textSize="@dimen/textContentSize"
 
         app:layout_constraintStart_toEndOf="@+id/imageView_product"
         app:layout_constraintTop_toTopOf="@+id/imageView_product" />
@@ -36,10 +36,11 @@
         android:id="@+id/tv_productName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_weight="1"
-        android:textSize="14dp"
+        android:textSize="@dimen/textSmallSize"
         android:text="어쩌고어쩌고 상품"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -52,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="10dp"
+        android:textSize="@dimen/textTinySize"
         android:layout_marginEnd="8dp"
         android:layout_weight="1"
         android:text="회사 이름"
@@ -65,22 +66,28 @@
         android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_weight="1"
         android:text="20,000원"
+        android:textStyle="bold"
+        android:textSize="@dimen/textMidSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView_product"
         app:layout_constraintTop_toBottomOf="@+id/tv_productName" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="21dp"
-        android:layout_height="20dp"
+    <ImageButton
+        android:id="@+id/f3_like"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="16dp"
+        android:background="@color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView_product"
-        app:srcCompat="@android:drawable/btn_star" />
+
+        app:layout_constraintBottom_toBottomOf="@+id/tv_price"
+        app:srcCompat="@drawable/likebtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
