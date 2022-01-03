@@ -62,7 +62,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             // Define click listener for the ViewHolder's View
             tv_name = (TextView) view.findViewById(id.tv_ranking);
             tv_summary = (TextView) view.findViewById(id.tv_productName);
-            iv_thumb = (ImageView) view.findViewById(id.imageView_thumb);
+            iv_thumb = (ImageView) view.findViewById(id.imageView_product);
             iv_open = (TextView) view.findViewById(id.textView_isOpen);
             rvs = view.findViewById(id.rvChapters);
 

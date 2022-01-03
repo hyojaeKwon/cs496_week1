@@ -445,14 +445,16 @@
       {
         "id" : "0",
         "productName" : "",
+        "price" : "3",
         "price" : "0",
+
         "company" : "",
         "pictureUrl" : ""
       },
       {
         "id" : "0",
         "productName" : "",
-        "price" : "0",
+        "price" : "3",
         "company" : "",
         "pictureUrl" : ""
       }

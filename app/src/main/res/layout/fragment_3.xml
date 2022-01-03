@@ -12,14 +12,34 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-            android:textSize="@dimen/textMidSize"
-            android:layout_marginBottom="8dp"
             android:layout_height="wrap_content"
-            android:text="@string/fragment3_intro" />
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="12dp"
+                android:text="@string/fragment3_intro"
+                android:textSize="18dp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="right"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="12dp"
+                android:src="@drawable/ic_edit_24" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
