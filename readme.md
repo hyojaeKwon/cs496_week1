@@ -63,7 +63,37 @@ OR
 
 <img src="gifs\2.gif" style="zoom:50%; align:left"/>
 
- JSON parse를 통해 가게 정보을 recyclerView에 나타낸다.
+1.  JSON parse를 통해 가게 정보를 recyclerView에 나타낸다.
+
+   - JSON을 읽는 코드
+
+   - ```java
+     public JSONObject reading(Context context, String fileName){ // filename을 변수로 받아 다른 JSON 파일도 로드할 수 있음.
+             Log.e("filename",fileName);
+             AssetManager assetManager = context.getResources().getAssets();
+             InputStream source = null;
+             JSONObject JObject = null;
+             try{
+                 source = assetManager.open(fileName);
+                 BufferedReader reader = new BufferedReader(new InputStreamReader(source));
+                 String strResult = "";
+                 String line = "";
+     
+                 while((line=reader.readLine()) != null){
+                     strResult += line;
+                 }
+                 JObject = new JSONObject(strResult);
+                 return JObject;
+     
+             }catch (IOException | JSONException e){
+                 e.printStackTrace();
+             }
+             return JObject;
+         }
+     ```
+
+   - 
+
 
  Shops라는 Class를 이용해 가게 정보들을 객체화해서 나타냈다.
 
@@ -73,7 +103,12 @@ OR
 
 2. 가게를 누르면 가게 위치와 전화 거는 기능을 제공
 
+<<<<<<< HEAD
 <img src="gifs\1.gif" style="zoom:50%; align:left"/> *UX : 사용자가 앱을 한손으로 이용할 수 있도록 전화걸기 버튼을 비롯한 정보들을 아래에 배치*
+=======
+![](gifs\1.gif) *UX : 사용자가 앱을 한손으로 이용할 수 있도록 전화걸기 버튼을 비롯한 정보들을 아래에 배치*
+
+>>>>>>> 708469cf3689ef7ad2be9e442aed4c955b105721
 
 
 
@@ -87,7 +122,12 @@ OR
 
 3. 검색 기능 제공
 
+<<<<<<< HEAD
 <img src="gifs\search.gif" style="zoom:50%; align:left"/> *UX : 검색 버튼을 따로 만들지 않아, 사용자가 더욱 빠른 검색을 할 수 있도록 함.*
+=======
+![](gifs\search.gif) *UX : 검색 버튼을 따로 만들지 않아, 사용자가 더욱 빠른 검색을 할 수 있도록 함.*
+
+>>>>>>> 708469cf3689ef7ad2be9e442aed4c955b105721
 
  Edit text를 이용하여 가게 검색 기능을 제공했다.
 
@@ -101,15 +141,20 @@ Intent에 arraylist의 position을 전달해 activity가 이동해도 정확한 
 
 ---
 
-<img src="gifs\changePicContent.gif" style="zoom:50%; align:left"/>
+![](gifs\changePicContent.gif)
 
-<img src="gifs\changePicName.gif" style="zoom:50%; align:left"/>
+![changePicName](gifs\changePicName.gif)
 
+<<<<<<< HEAD
 <img src="gifs\deletePic.gif" style="zoom:50%; align:left" />
+=======
+<img src="gifs\deletePic.gif" alt="deletePic" style="zoom:50%;" />
+>>>>>>> 708469cf3689ef7ad2be9e442aed4c955b105721
 
-<img src="gifs\inPic.gif" style="zoom:50%; align:left"/>
+![inPic](gifs\inPic.gif)
 
-<img src="gifs\uploadPic.gif" style="zoom:50%; align:left"/>
+![uploadPic](gifs\uploadPic.gif)
+
 
 
 
@@ -135,7 +180,12 @@ Intent에 arraylist의 position을 전달해 activity가 이동해도 정확한 
 
 1. 기본적인 TAB 3 레이아웃 구현
 
+<<<<<<< HEAD
 <img src="gifs\gift.gif" style="zoom:50%; align:left"/>*UX : 직관적인 아이콘을 통해 사용자가 빠르게 선택할 수 있도록 함.*
+=======
+![](gifs\gift.gif)*UX : 직관적인 아이콘을 통해 사용자가 빠르게 선택할 수 있도록 함.*
+
+>>>>>>> 708469cf3689ef7ad2be9e442aed4c955b105721
 
 recyclerView를 이용하여 선물들을 로드할 수 있도록 함.
 
@@ -145,7 +195,12 @@ recyclerView를 이용하여 선물들을 로드할 수 있도록 함.
 
 2. 구매하기 버튼 클릭 시 구매 페이지로 이동기능
 
+<<<<<<< HEAD
 <img src="gifs\buyGift.gif" style="zoom:50%; align:left"/>*UX : 구매하기 버튼을 아래쪽에 배치해  한손으로도 구매할 수 있도록 함. 버튼 이외의 부분을 누르면 뒤로 돌아가는 기능 구현함.*
+=======
+![](gifs\buyGift.gif)*UX : 구매하기 버튼을 아래쪽에 배치해  한손으로도 구매할 수 있도록 함. 버튼 이외의 부분을 누르면 뒤로 돌아가는 기능 구현함.*
+
+>>>>>>> 708469cf3689ef7ad2be9e442aed4c955b105721
 
 상품에 id값을 적용시켜 상품을 눌렀을 때 정확한 상품이 눌리도록 함.
 
@@ -159,11 +214,30 @@ intent에 id값을 넣은 후 activity를 전환시켜 옆 activity로 잘 넘�
 
 3. 카카오톡 이미지 클릭 시 카카오톡 및 문자로 공유하기 기능
 
+<<<<<<< HEAD
 <img src="gifs\giftKakao.gif" style="zoom:50%; align:left"/>*UX : 공유하기 버튼을 아래쪽에 배치해  한손으로도 구매할 수 있도록 함. 사용자가 원하는 공유 매체를 선택할 수 있음*
+=======
+![](gifs\giftKakao.gif)*UX : 공유하기 버튼을 아래쪽에 배치해  한손으로도 구매할 수 있도록 함. 사용자가 원하는 공유 매체를 선택할 수 있음*
+
+기본적 기능의 구성은 앞선 2(구매 페이지 이동)와 같음
+
+공유 text를 만들어 사용자가 원하는 공유 형태로 공유할 수 있음
+
+>>>>>>> 708469cf3689ef7ad2be9e442aed4c955b105721
 
 
 
 4. 찜 기능 제공
 
+<<<<<<< HEAD
 <img src="gifs\zzim_column.gif" style="zoom:50%; align:left"/>*UX : 찜 버튼의 색상을 계속 교체할 수 있도록 하여, 본 상품이 찜한 상품인지 쉽게 확인할 수 있도록 함.*
+=======
+![](gifs\zzim_column.gif)*UX : 찜 버튼의 색상을 계속 교체할 수 있도록 하여, 본 상품이 찜한 상품인지 쉽게 확인할 수 있도록 함.*
 
+하트를 클릭하면 찜되도록 수정함
+
+눌린 찜들은 json파일에 저장하여 휴대폰이 꺼져도 다시 불러올 수 있도록 함.
+
+>>>>>>> 708469cf3689ef7ad2be9e442aed4c955b105721
+
+찜목록으로 이동하면 새로운 activity로 이동하여 recyclerView에 요소들을 다시 불러옴
