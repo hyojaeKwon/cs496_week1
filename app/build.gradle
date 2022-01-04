@@ -35,10 +35,7 @@ android {
 }
 
 dependencies {
-//    implementation "com.kakao.sdk:v2-user:2.8.4" // 카카오 로그인
-//    implementation "com.kakao.sdk:v2-talk:2.8.4" // 친구, 메시지(카카오톡)
-//    implementation "com.kakao.sdk:v2-story:2.8.4" // 카카오스토리
-//    implementation "com.kakao.sdk:v2-link:2.8.4" // 메시지(카카오링크)
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
