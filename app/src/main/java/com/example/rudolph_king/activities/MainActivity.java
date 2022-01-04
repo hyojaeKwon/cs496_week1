@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -190,58 +191,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static void updateJSONWishList(GalleryImage review, int position) {
+    public static void updateJSONWishList(ArrayList<Integer> wishIdList) {
         JsonRead jr = new JsonRead();
-        JSONObject jo = jr.reading(mContext, "images.json");
-        FileInputStream fis = null;
-        String fileName = "images.json";
+        JSONObject jo = jr.reading(mContext, "wishes.json");
+        String fileName = "wishes.json";
+        File file = new File(mContext.getFilesDir(), fileName);
+        file.delete();
         try {
-            fis = mContext.openFileInput(fileName);
-            InputStreamReader inputStreamReader =
-                    new InputStreamReader(fis, StandardCharsets.UTF_8);
-            StringBuilder stringBuilder = new StringBuilder();
-            try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
-                String line = reader.readLine();
-                while (line != null) {
-                    stringBuilder.append(line).append('\n');
-                    line = reader.readLine();
-                }
-            } catch (IOException e) {
-                // Error occurred when opening raw file for reading.
-            } finally {
-                String contents = stringBuilder.toString();
-                jo = new JSONObject(contents);
+            JSONArray ja = jo.getJSONArray("Wishes");
+            for (int j = 0; j < wishIdList.size(); j++) {
+                ja.put(String.valueOf(wishIdList.get(j)));
+                Log.e("added wishList", String.valueOf(ja.length()));
             }
-        } catch (FileNotFoundException | JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            JSONArray ja = jo.getJSONArray("Reviews");
-            if (position < 0) {
-                JSONObject jsonObject = new JSONObject();//배열 내에 들어갈 json
-                jsonObject.put("uriList", review.getUriList().toString());
-                jsonObject.put("name", review.getReviewName());
-                jsonObject.put("members", review.getReviewMembers());
-                jsonObject.put("date", review.getReviewDate());
-                jsonObject.put("desc", review.getReviewDescription());
-                ja.put(jsonObject);
-                Log.e("newAdded", String.valueOf(ja.length()));
-            } else {
-                if (review != null) {
-                    JSONObject jsonObject = new JSONObject();//배열 내에 들어갈 json
-                    jsonObject.put("uriList", review.getUriList().toString());
-                    jsonObject.put("name", review.getReviewName());
-                    jsonObject.put("members", review.getReviewMembers());
-                    jsonObject.put("date", review.getReviewDate());
-                    jsonObject.put("desc", review.getReviewDescription());
-                    ja.put(ja.length() - position - 1, jsonObject);
-                    Log.e("newAdded", String.valueOf(ja.length()));
-                } else {
-                    ja.remove(ja.length() - position - 1);
-                    Log.e("deleted", String.valueOf(ja.length()));
-                }
-            }
-            jo.put("Reviews", ja);
+            jo.put("Wishes", ja);
 
             try {
                 FileOutputStream fileOutputStream = mContext.openFileOutput(fileName, Context.MODE_PRIVATE);
