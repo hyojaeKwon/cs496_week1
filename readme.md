@@ -103,12 +103,8 @@ OR
 
 2. 가게를 누르면 가게 위치와 전화 거는 기능을 제공
 
-<<<<<<< HEAD
-<img src="gifs\1.gif" style="zoom:50%; align:left"/> *UX : 사용자가 앱을 한손으로 이용할 수 있도록 전화걸기 버튼을 비롯한 정보들을 아래에 배치*
-=======
 ![](gifs\1.gif) *UX : 사용자가 앱을 한손으로 이용할 수 있도록 전화걸기 버튼을 비롯한 정보들을 아래에 배치*
 
->>>>>>> 708469cf3689ef7ad2be9e442aed4c955b105721
 
 
 
@@ -122,12 +118,8 @@ OR
 
 3. 검색 기능 제공
 
-<<<<<<< HEAD
-<img src="gifs\search.gif" style="zoom:50%; align:left"/> *UX : 검색 버튼을 따로 만들지 않아, 사용자가 더욱 빠른 검색을 할 수 있도록 함.*
-=======
 ![](gifs\search.gif) *UX : 검색 버튼을 따로 만들지 않아, 사용자가 더욱 빠른 검색을 할 수 있도록 함.*
 
->>>>>>> 708469cf3689ef7ad2be9e442aed4c955b105721
 
  Edit text를 이용하여 가게 검색 기능을 제공했다.
 
@@ -141,21 +133,195 @@ Intent에 arraylist의 position을 전달해 activity가 이동해도 정확한 
 
 ---
 
-![](gifs\changePicContent.gif)
 
-![changePicName](gifs\changePicName.gif)
+#### 주요 기능
 
-<<<<<<< HEAD
-<img src="gifs\deletePic.gif" style="zoom:50%; align:left" />
-=======
-<img src="gifs\deletePic.gif" alt="deletePic" style="zoom:50%;" />
->>>>>>> 708469cf3689ef7ad2be9e442aed4c955b105721
+1. 자녀나 친구, 또는 자신에게 선물해 준 경험을 기록할 수 있는 공간 제공
+2. 사진과 함께 선물 대상과 메모를 남길 수 있는 기능 제공
+3. 여러 장의 사진을 함께 업로드할 수 있는 기능 제공
+
+
+#### 사용 방법
+
+    1. 우측 하단의 + 버튼을 눌러 사진을 선택한다.
+    2. 최대 5장의 사진을 선택한 후, 글의 제목과 선물 대상, 그리고 메모를 입력한다.
+    3. 생성된 카드를 꾹 누르면 글의 제목과 선물 대상을 편집하거나 카드를 삭제할 수 있다.
+    4. 생성된 카드를 클릭하여 자세한 정보를 확인하고, 선물 대상과 메모를 수정할 수 있다.
+    5. 함께 업로드된 여러 장의 사진은 기본적으로 수평 스크롤을 통해 확인할 수 있다.
+
+
+#### 기능 구현
+
+1. 자녀나 친구, 또는 자신에게 선물해 준 경험을 기록할 수 있는 공간 제공
+
+![uploadPic](gifs\newPic.gif)
+
+갤러리 접근 권한을 허용하여, 실제 사용자의 휴대폰 갤러리에서 최대 5장의 사진을 선택할 수 있도록 함.
+
+선택을 완료하면 사진과 함께 글의 제목과 선물 대상, 그리고 관련 설명을 적을 수 있도록 함.
+
+다 작성한 후 '추가' 버튼을 누르면 오늘 날짜를 가진 카드가 갤러리에 추가됨.
+
+- 앱을 종료한 후 다시 시작했을 때 이전의 정보를 불러오기 위하여 앱 내에 json 파일을 생성하는 알고리즘을 구현함
+    - 이후 소개할 '찜 목록' 저장을 위해서도 같은 알고리즘을 사용함
+    - 코드는 다음과 같다.
+        ```java
+        private void bringPrevReviews() {
+            // 갤러리를 위한 jso`n 파일 불러오기
+            JSONObject jo = null;
+            String fileName = "images.json";
+            FileInputStream fis = null;
+            // 최초 설치 시 파일 초기화
+            // File file = new File(this.getActivity().getFilesDir(), fileName);
+            // file.delete();
+            try {
+                fis = getContext().openFileInput(fileName);
+                InputStreamReader inputStreamReader =
+                        new InputStreamReader(fis, StandardCharsets.UTF_8);
+                StringBuilder stringBuilder = new StringBuilder();
+                try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
+                    String line = reader.readLine();
+                    while (line != null) {
+                        stringBuilder.append(line).append('\n');
+                        line = reader.readLine();
+                    }
+                } catch (IOException e) {
+                    // Error occurred when opening raw file for reading.
+                } finally {
+                    String contents = stringBuilder.toString();
+                    jo = new JSONObject(contents);
+                }
+            } catch (FileNotFoundException | JSONException e) {
+                e.printStackTrace();
+                JsonRead jr = new JsonRead();
+                jo = jr.reading(getContext(), "images.json");
+            }
+
+            // reviewlist에 JSONObject 추가하기
+            JSONArray ja = null;
+            try {
+                ja = jo.getJSONArray("Reviews");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            for(int i = 0 ; i < ja.length() ; i++){
+                JSONObject innerJSONObject = null;
+                try {
+                    innerJSONObject = ja.getJSONObject(i);
+                    if (innerJSONObject != null) {
+                        // innerJSONObject에서 정보 가져오기
+                    }
+                } catch (JSONException e) {
+                }
+            }
+        }
+        ```
+- Alert Dialog를 커스터마이징하기 위해 CardView를 활용함
+    - 다만 여전히 기본 Alert Dialog의 배경이 남아있는 버그가 발생하였음
+    - 이를 해결하기 위해 dialog를 만들 때 아래의 코드를 추가함
+        ```java
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+
+        View view = LayoutInflater.from(mContext)
+                .inflate(R.layout.review_info_edit, null, false);
+        builder.setView(view);
+
+        // 해당 줄에 입력되어 있던 데이터를 불러와서 다이얼로그에 보여주기
+        editReviewName.setText(mDataset.get(position).getReviewName());
+        editReviewMembers.setText(mDataset.get(position).getReviewMembers());
+
+        final AlertDialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setView(view, 0, 0, 0, 0);
+        ...
+        ```
+
+
+2. 카드를 클릭하여 자세한 정보를 확인 및 편집할 수 있는 기능 제공
 
 ![inPic](gifs\inPic.gif)
+![changePicContent](gifs\changePicContent.gif)
 
-![uploadPic](gifs\uploadPic.gif)
+갤러리의 카드를 클릭하면 사진과 함께 이전에 작성한 설명을 확인할 수 있도록 함
+
+사진을 좌우로 드래그하여 함께 업로드한 사진을 확인할 수 있도록 함
+
+우측 상단의 편집 버튼을 눌러 선물 대상과 설명을 수정할 수 있으며, 확인 버튼을 눌러 수정된 내용이 반영되도록 함
+
+여러 장의 사진 중 하나를 클릭하면 그 사진이 중앙에 오도록 함
+
+- actionBar 관련 문제가 많았음
+    - 카드를 클릭하면 새로운 액티비티로 이동하는데, 여기서 actionBar의 up 버튼을 누르면 탭 1으로 이동하는 문제가 발생함
+        - 버튼이 눌렸을 때 수행하는 작업을 수정하여 해결함
+        - 코드는 다음과 같다.
+            ```java
+            public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case android.R.id.home:
+                        this.finish();
+                        return true;
+                }
+            }
+            ```
+
+    - 기본 actionBar에 원하는 버튼을 추가하기 위해 menu.xml을 생성한 후, 관련 함수를 Override 함
+        - 편집 버튼을 넣는 코드
+            ```java
+            @Override
+            public boolean onCreateOptionsMenu(Menu menu) {
+                getMenuInflater().inflate(R.menu.menu, menu) ;
+
+                return true ;
+            }   
+            ```
+        - 편집 버튼이 눌렸을 때 수행하는 작업 코드
+            ```java
+            @Override
+            public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_edit:
+                        if (onEditMode) {
+                            item.setIcon(R.drawable.ic_edit_24);
+                            // 편집 버튼을 눌렀을 때 수행할 작업
+                            // ...
+                            onEditMode = false;
+                        } else {
+                            item.setIcon(R.drawable.ic_check_24);
+                            // 확인 버튼을 눌렀을 때 수행할 작업
+                            // ...
+                            onEditMode = true;
+                        }
+                        return true;
+                }
+                return super.onOptionsItemSelected(item);
+            }
+            ```
+            
+    - 기본 actionBar에 그림자가 존재해 의도한 디자인과 맞지 않았음
+        - 이를 해결하기 위해 actionBar을 생성할 때 아래의 코드를 추가함
+            ```java
+            // setting action bar
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setTitle(review.getReviewName());
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            // 그림자 없애는 코드
+            actionBar.setElevation(0);
+            ```
 
 
+3. 카드를 꾹 눌러 편집 및 삭제할 수 있는 기능 제공
+
+![changePicName](gifs\changePicName.gif)
+![deletePic](gifs\deletePic.gif)
+
+갤러리의 카드를 꾹 눌러서 편집 또는 삭제 기능을 선택할 수 있도록 함
+
+편집 기능을 선택하면 카드의 제목과 선물 대상을 수정할 수 있도록 함
+
+삭제 기능을 선택하면 다시 한 번 삭제를 할 것인지 묻는 창이 나오고, 확인을 누르면 삭제되도록 함
+
+- 앞서 카드를 추가할 때와 마찬가지로 Alert Dialog를 커스터마이징함
 
 
 ### 어떤 선물을 사주지? 적합한 선물을 골라보자! (TAB 3)
@@ -180,12 +346,8 @@ Intent에 arraylist의 position을 전달해 activity가 이동해도 정확한 
 
 1. 기본적인 TAB 3 레이아웃 구현
 
-<<<<<<< HEAD
-<img src="gifs\gift.gif" style="zoom:50%; align:left"/>*UX : 직관적인 아이콘을 통해 사용자가 빠르게 선택할 수 있도록 함.*
-=======
 ![](gifs\gift.gif)*UX : 직관적인 아이콘을 통해 사용자가 빠르게 선택할 수 있도록 함.*
 
->>>>>>> 708469cf3689ef7ad2be9e442aed4c955b105721
 
 recyclerView를 이용하여 선물들을 로드할 수 있도록 함.
 
@@ -195,12 +357,8 @@ recyclerView를 이용하여 선물들을 로드할 수 있도록 함.
 
 2. 구매하기 버튼 클릭 시 구매 페이지로 이동기능
 
-<<<<<<< HEAD
-<img src="gifs\buyGift.gif" style="zoom:50%; align:left"/>*UX : 구매하기 버튼을 아래쪽에 배치해  한손으로도 구매할 수 있도록 함. 버튼 이외의 부분을 누르면 뒤로 돌아가는 기능 구현함.*
-=======
 ![](gifs\buyGift.gif)*UX : 구매하기 버튼을 아래쪽에 배치해  한손으로도 구매할 수 있도록 함. 버튼 이외의 부분을 누르면 뒤로 돌아가는 기능 구현함.*
 
->>>>>>> 708469cf3689ef7ad2be9e442aed4c955b105721
 
 상품에 id값을 적용시켜 상품을 눌렀을 때 정확한 상품이 눌리도록 함.
 
@@ -214,30 +372,22 @@ intent에 id값을 넣은 후 activity를 전환시켜 옆 activity로 잘 넘�
 
 3. 카카오톡 이미지 클릭 시 카카오톡 및 문자로 공유하기 기능
 
-<<<<<<< HEAD
-<img src="gifs\giftKakao.gif" style="zoom:50%; align:left"/>*UX : 공유하기 버튼을 아래쪽에 배치해  한손으로도 구매할 수 있도록 함. 사용자가 원하는 공유 매체를 선택할 수 있음*
-=======
 ![](gifs\giftKakao.gif)*UX : 공유하기 버튼을 아래쪽에 배치해  한손으로도 구매할 수 있도록 함. 사용자가 원하는 공유 매체를 선택할 수 있음*
 
 기본적 기능의 구성은 앞선 2(구매 페이지 이동)와 같음
 
 공유 text를 만들어 사용자가 원하는 공유 형태로 공유할 수 있음
 
->>>>>>> 708469cf3689ef7ad2be9e442aed4c955b105721
 
 
 
 4. 찜 기능 제공
 
-<<<<<<< HEAD
-<img src="gifs\zzim_column.gif" style="zoom:50%; align:left"/>*UX : 찜 버튼의 색상을 계속 교체할 수 있도록 하여, 본 상품이 찜한 상품인지 쉽게 확인할 수 있도록 함.*
-=======
 ![](gifs\zzim_column.gif)*UX : 찜 버튼의 색상을 계속 교체할 수 있도록 하여, 본 상품이 찜한 상품인지 쉽게 확인할 수 있도록 함.*
 
 하트를 클릭하면 찜되도록 수정함
 
 눌린 찜들은 json파일에 저장하여 휴대폰이 꺼져도 다시 불러올 수 있도록 함.
 
->>>>>>> 708469cf3689ef7ad2be9e442aed4c955b105721
 
 찜목록으로 이동하면 새로운 activity로 이동하여 recyclerView에 요소들을 다시 불러옴
