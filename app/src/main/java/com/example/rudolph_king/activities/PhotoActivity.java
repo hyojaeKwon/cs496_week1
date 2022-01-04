@@ -30,6 +30,7 @@ public class PhotoActivity extends AppCompatActivity {// implements PhotoLargeAd
     RecyclerView mRecyclerView;
     CardView mReviewInfo;
     CardView mReviewInfoEdit;
+    CardView mReviewPicture;
     TextView mReviewMembers;
     TextView mReviewDate;
     TextView mReviewDescription;
@@ -57,12 +58,14 @@ public class PhotoActivity extends AppCompatActivity {// implements PhotoLargeAd
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(review.getReviewName());
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setElevation(0);
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         onEditMode = false;
 
         photoLargeAdapter = new PhotoLargeAdapter(this, review.getUriList(), position); //this, position);
         mReviewInfo = (CardView) findViewById(R.id.cardView);
         mReviewInfoEdit = (CardView) findViewById(R.id.cardView_edit);
+        mReviewPicture = (CardView) findViewById(R.id.cardView_edit_bkgd);
         mRecyclerView = (RecyclerView) findViewById(R.id.photo_list);
         mReviewMembers = (TextView) findViewById(R.id.photo_members);
         mReviewDate = (TextView) findViewById(R.id.photo_date);
@@ -98,6 +101,7 @@ public class PhotoActivity extends AppCompatActivity {// implements PhotoLargeAd
                     mReviewMembers.setText(reviewMembers);
                     mReviewDescription.setText(reviewDescription);
                     mReviewInfo.setVisibility(View.VISIBLE);
+                    mReviewPicture.setVisibility(View.VISIBLE);
 
                     GalleryImage gi = MainActivity.reviewList.get(position);
                     gi.setReviewMembers(reviewMembers);
@@ -110,6 +114,7 @@ public class PhotoActivity extends AppCompatActivity {// implements PhotoLargeAd
                 } else {
                     item.setIcon(R.drawable.ic_check_24);
                     mReviewInfo.setVisibility(View.GONE);
+                    mReviewPicture.setVisibility(View.GONE);
                     mReviewInfoEdit.setVisibility(View.VISIBLE);
 
                     mReviewMembersEdit.setText(mReviewMembers.getText());

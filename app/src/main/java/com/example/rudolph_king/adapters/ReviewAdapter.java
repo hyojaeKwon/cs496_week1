@@ -135,6 +135,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
 
                          final AlertDialog dialog = builder.create();
                          dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                         dialog.setView(view, 0, 0, 0, 0);
                          ButtonSubmit.setOnClickListener(new View.OnClickListener() {
                              // 수정 버튼을 클릭하면 현재 UI에 입력되어 있는 내용으로 변환
                              public void onClick(View v) {
