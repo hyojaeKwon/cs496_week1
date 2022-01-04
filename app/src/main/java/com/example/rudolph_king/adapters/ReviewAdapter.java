@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> implements PhotoSmallAdapter.OnListItemSelectedInterface {
     @Override
     public void onItemSelected(View view, int position, int position_pic) {
-        Log.e("Listen", String.valueOf(position));
+//        Log.e("Listen", String.valueOf(position));
         Intent intent = new Intent(mContext, PhotoActivity.class);
         intent.putExtra("pos", position);
         intent.putExtra("pos_pic", position_pic);
@@ -56,7 +57,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View convertView = LayoutInflater.from(mContext).inflate(R.layout.review_item, parent, false);
-        Log.e("onCreateViewHolder", String.valueOf(true));
+//        Log.e("onCreateViewHolder", String.valueOf(true));
         return new ViewHolder(convertView);
     }
 
@@ -100,7 +101,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     mListener.onItemSelected(view, position);
-                    Log.d("test", "position = " + position);
+//                    Log.d("test", "position = " + position);
                 }
             });
 
@@ -133,6 +134,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
                          editReviewMembers.setText(mDataset.get(position).getReviewMembers());
 
                          final AlertDialog dialog = builder.create();
+                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                          ButtonSubmit.setOnClickListener(new View.OnClickListener() {
                              // 수정 버튼을 클릭하면 현재 UI에 입력되어 있는 내용으로 변환
                              public void onClick(View v) {
@@ -152,32 +154,36 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
                          break;
 
                      case 1002:
-                         android.app.AlertDialog.Builder adb = new AlertDialog.Builder(mContext, R.style.AlertDialog_AppCompat_Light);
-                         adb.setTitle("Delete")
-                                .setNeutralButton("CONFIRM", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        mDataset.remove(position);
-                                        MainActivity.updateJSONImages(null, position);
-                                        refreshAdapter();
-                                    }
-                                })
-                                .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                    }
-                                });
-                        AlertDialog finalDialog = adb.create();
-                        finalDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                         android.app.AlertDialog.Builder adb = new AlertDialog.Builder(mContext);
+
+                         View view2 = LayoutInflater.from(mContext)
+                                 .inflate(R.layout.review_delete, null);
+                         adb.setView(view2);
+                         final Button buttonDelete = (Button) view2.findViewById(R.id.button_review_delete_confirm);
+                         final Button buttonCancel = (Button) view2.findViewById(R.id.button_review_delete_cancel);
+
+                         AlertDialog finalDialog = adb.create();
+
+                         finalDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                         finalDialog.setView(view2, 0, 0, 0, 0);
+
+                         buttonDelete.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onShow(DialogInterface arg0) {
-                                finalDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#6E6557"));
-                                finalDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#6E6557"));
-                                finalDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(Color.parseColor("#6E6557"));
+                            public void onClick(View view) {
+                                mDataset.remove(position);
+                                MainActivity.updateJSONImages(null, position);
+                                refreshAdapter();
+                                finalDialog.dismiss();
+                            }
+                         });
+                         buttonCancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                finalDialog.dismiss();
                             }
                         });
-                        finalDialog.show();
-                         break;
+                         finalDialog.show();
+                        break;
                  }
                  return true;
              }

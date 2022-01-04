@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.rudolph_king.R;
 import com.example.rudolph_king.Shops;
 import com.example.rudolph_king.activities.CallActivity;
 
@@ -49,6 +50,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         public final TextView tv_summary;
         public final ImageView iv_thumb;
         public final TextView iv_open;
+        public View mView = null;
 
 
         //        public final TextView iv_tags;
@@ -60,6 +62,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             iv_thumb = (ImageView) view.findViewById(id.imageView_product);
             iv_open = (TextView) view.findViewById(id.textView_isOpen);
             rvs = view.findViewById(id.rvChapters);
+            mView = view;
 
             view.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -154,6 +157,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         ViewHolder.rvs.setLayoutManager(manager);
         ViewHolder.rvs.setAdapter(ta);
+
+        if(position % 2 == 1) {
+            viewHolder.mView.findViewById(id.row_item_layout).setBackgroundResource(R.color.gray_000);
+        }
     }
     // Return the size of your dataset (invoked by the layout manager)
 

@@ -5,6 +5,18 @@
       <map>
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/btn_main.xml" value="0.2171875" />
+        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/ic_gallery.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/ic_heart.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/ic_heart_basic.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/ic_heart_filled.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/ic_heart_focus.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/ic_main_background.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/layout_background.xml" value="0.221875" />
+        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/likebtn.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/tab_background.xml" value="0.2994791666666667" />
+        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/tab_background_selected.xml" value="0.221875" />
+        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/tab_background_unselected.xml" value="0.2994791666666667" />
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/drawable/ic_main_background.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/layout/action_bar.xml" value="0.20520833333333333" />
@@ -24,6 +36,7 @@
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/layout/photo_item_past.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/layout/photo_item_small.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/layout/photoactivity_main.xml" value="0.33" />
+        <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/layout/review_delete.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/layout/review_info_add.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/layout/review_info_edit.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/hotsu/cs496/week1/app/src/main/res/layout/review_item.xml" value="0.36614583333333334" />
