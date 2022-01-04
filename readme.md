@@ -95,6 +95,7 @@ OR
      ```
     
 
+
  Shops라는 Class를 이용해 가게 정보들을 객체화해서 나타냈다.
 
 - Shops Class의 생성자에서 Json에서 정보를 추출한다.
@@ -188,6 +189,7 @@ OR
   ```
 
   
+
 
  Daum Kakao api를 이용하여 가게 위치를 지도로 나타낸다.
 
@@ -286,6 +288,7 @@ EditText의 값이 바뀌면 계속 recyclerView의 구성을 바꿔서 빠른 �
           });
   ```
 
+
 - SearchFilter함수를 실행해 입력한 값에 대한 결과를 새로운 ArrayList에 대입하여 Adapter에 전달한다.
 
 - ```java
@@ -350,6 +353,7 @@ Intent에 arraylist의 position을 전달해 activity가 이동해도 정확한 
 
 
 
+
 ### 어떤 선물을 사주지? 적합한 선물을 골라보자! (TAB 3)
 
 ---
@@ -375,6 +379,7 @@ Intent에 arraylist의 position을 전달해 activity가 이동해도 정확한 
 <img src="gifs\gift.gif" width="200" height="400"/>
 
 *UX : 직관적인 아이콘을 통해 사용자가 빠르게 선택할 수 있도록 함.*
+
 
 recyclerView를 이용하여 선물들을 로드할 수 있도록 함.
 
@@ -463,6 +468,7 @@ recyclerView를 이용하여 선물들을 로드할 수 있도록 함.
 
 *UX : 구매하기 버튼을 아래쪽에 배치해  한손으로도 구매할 수 있도록 함. 버튼 이외의 부분을 누르면 뒤로 돌아가는 기능 구현함.*
 
+
 상품에 id값을 적용시켜 상품을 눌렀을 때 정확한 상품이 눌리도록 함.
 
 - 상품을 눌렀을 때 구매 activity으로 넘어가는 코드
@@ -520,6 +526,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 
 
+
 4. 찜 기능 제공
 
 <img src="gifs\zzim_column.gif" width="200" height="400"/>*UX : 찜 버튼의 색상을 계속 교체할 수 있도록 하여, 본 상품이 찜한 상품인지 쉽게 확인할 수 있도록 함.*
@@ -527,5 +534,6 @@ protected void onCreate(Bundle savedInstanceState) {
 하트를 클릭하면 찜되도록 수정함
 
 눌린 찜들은 json파일에 저장하여 휴대폰이 꺼져도 다시 불러올 수 있도록 함.
+
 
 찜목록으로 이동하면 새로운 activity로 이동하여 recyclerView에 요소들을 다시 불러옴
