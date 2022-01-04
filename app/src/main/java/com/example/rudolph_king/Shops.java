@@ -1,11 +1,15 @@
 package com.example.rudolph_king;
 
 import android.app.Activity;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Shops extends Activity {
@@ -20,9 +24,11 @@ public class Shops extends Activity {
     private double latitude;
     private double longitude;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Shops(JSONObject jsonText) throws JSONException {
+        
+        //JSON Parse하는 코드
         this.title = jsonText.getString("name");
-//        this.isOpen = jsonText.getBoolean("isOpen");
         this.open = jsonText.getInt("open");
         this.close = jsonText.getInt("close");
         this.phone = jsonText.getString("phone");
@@ -31,16 +37,25 @@ public class Shops extends Activity {
         this.longitude = jsonText.getDouble("placeKy");
         JSONArray JTags = jsonText.getJSONArray("tag");
 
+        
+        //현재의 시간을 LocalTime을 이용하여 받는다.
+        //현재 시간과 가게 영업 시간을 비교하여 open상태 결정 후 isOpen에 bool로 대입.
+        LocalTime now = LocalTime.now();
+        int nowHour = now.getHour();
+        if (nowHour>=open && nowHour<close){
+            this.isOpen = true;
+        } else {
+            this.isOpen = false;
+        }
+
         //Tags array list 생성
         tags = new ArrayList<String>();
         for(int i = 0 ; i < JTags.length() ; i++){
             String tag;
             tag = JTags.getString(i);
-            //찍어보는 방법
-//            Log.e("check", tag.toString());
+            //tags라는 linear layout에 append
             this.tags.add(tag);
         }
-//        this.thumb_url = getResources().getIdentifier("com.example.rudolph_king:drawalbe/img",null,null);
     }
 
 

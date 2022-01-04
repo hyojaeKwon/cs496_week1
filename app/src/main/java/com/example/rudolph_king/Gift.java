@@ -16,6 +16,7 @@ public class Gift {
         this.price = Integer.parseInt(jsonObject.getString("price"));
         this.company = jsonObject.getString("company");
         this.pictureUrl = jsonObject.getString("pictureUrl");
+
     }
 
     public String getProductName() {
