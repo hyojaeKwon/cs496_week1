@@ -1,34 +1,18 @@
 package com.example.rudolph_king.activities;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.arch.core.internal.SafeIterableMap;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.ClipData;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
-import 	android.content.res.AssetManager;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.example.rudolph_king.GalleryImage;
-import com.example.rudolph_king.Gift;
 import com.example.rudolph_king.R;
 import com.example.rudolph_king.adapters.VPAdapter;
 import com.example.rudolph_king.fragments.Fragment2;
@@ -39,17 +23,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 
@@ -59,32 +38,12 @@ public class MainActivity extends AppCompatActivity {
     private Toast toast;
     public static ArrayList<GalleryImage> reviewList = new ArrayList<GalleryImage>();
 
-    private void getHashKey(){
-        PackageInfo packageInfo = null;
-        try {
-            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        if (packageInfo == null)
-            Log.e("KeyHash", "KeyHash:null");
 
-        for (Signature signature : packageInfo.signatures) {
-            try {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            } catch (NoSuchAlgorithmException e) {
-                Log.e("KeyHash", "Unable to get MessageDigest. signature=" + signature, e);
-            }
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         mContext = this;
-        getHashKey();
         setContentView(R.layout.activity_main);
 
         // setting action bar
@@ -109,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         tab.getTabAt(2).setIcon(R.drawable.ic_present);
     }
 
+
+    //어플리케이션 종료하는 버튼
     @Override
     public void onBackPressed() {
         if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
@@ -158,11 +119,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    // create new review
-//                    GalleryImage newReview = new GalleryImage();
-//                    newReview.setUriList(imageUriList);
-//                    // reviewList.add(0, newReview);
-//                    updateJSONImages(newReview);
                     Fragment2.setReviewInfo("", "", "", "", imageUriList, true);
                 }
             }
