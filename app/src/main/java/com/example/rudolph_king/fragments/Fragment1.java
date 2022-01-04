@@ -3,12 +3,6 @@ package com.example.rudolph_king.fragments;
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,16 +12,19 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.example.rudolph_king.adapters.CustomAdapter;
-import com.example.rudolph_king.activities.JsonRead;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.rudolph_king.R;
 import com.example.rudolph_king.Shops;
+import com.example.rudolph_king.activities.JsonRead;
+import com.example.rudolph_king.adapters.CustomAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -157,9 +154,10 @@ public class Fragment1 extends Fragment{
     }
 
     public Shops getInfo(int pos){
-        if(mFilteredList == null){
+        if(mFilteredList == null || mFilteredList.size() == 0 ){
             return (Shops)(mShopList.get(pos));
         } else {
+            Log.e("filteredList",Integer.toString(mFilteredList.size()));
             return (Shops)(mFilteredList.get(pos));
         }
     }

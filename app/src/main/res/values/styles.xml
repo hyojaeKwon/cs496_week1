@@ -17,4 +17,7 @@
         -->
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+    <style name="customTextViewFontStyle" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/applesdgothicbeol</item>
+    </style>
 </resources>
