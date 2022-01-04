@@ -1,10 +1,13 @@
 package com.example.rudolph_king.adapters;
 
-import static com.example.rudolph_king.R.*;
+import static com.example.rudolph_king.R.color;
+import static com.example.rudolph_king.R.id;
+import static com.example.rudolph_king.R.layout;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +27,7 @@ import com.example.rudolph_king.R;
 import com.example.rudolph_king.Shops;
 import com.example.rudolph_king.activities.CallActivity;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 
@@ -38,16 +43,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     }
 
 
-
-//    @Override
-//    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//        String selectedItem = (String) view.findViewById(id.textView_name).getTag().toString();
-//        Toast.makeText(this.context, "Clicked: " + i +" " + selectedItem, Toast.LENGTH_SHORT).show();
-//    }
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public static RecyclerView rvs;
@@ -116,6 +111,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     // Replace the contents of a view (invoked by the layout manager)
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
@@ -126,13 +122,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         final Shops shop = (Shops) list.get(position);
         viewHolder.tv_name.setText(shop.getT());
         viewHolder.tv_summary.setText(shop.getPhone());
-        if (shop.getIsOpen()) {
+
+
+        LocalTime now = LocalTime.now();
+        int nowHour = now.getHour();
+        if (nowHour>=shop.getOpen() && nowHour<shop.getClose()){
             viewHolder.iv_open.setText("영업 중");
             viewHolder.iv_open.setTextColor(ContextCompat.getColor(context, color.open));
         } else {
             viewHolder.iv_open.setText("영업 종료");
             viewHolder.iv_open.setTextColor(ContextCompat.getColor(context, color.not_open));
         }
+        
         Glide
                 .with(context)
                 .load(shop.getThumb_url())

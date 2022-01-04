@@ -1,9 +1,10 @@
 package com.example.rudolph_king;
 
 import android.app.Activity;
-import android.util.Log;
 
-import org.json.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -13,13 +14,17 @@ public class Shops extends Activity {
     private boolean isOpen;
     private String phone;
     private String thumb_url;
+    private int open;
+    private int close;
     private ArrayList<String> tags;
     private double latitude;
     private double longitude;
 
     public Shops(JSONObject jsonText) throws JSONException {
         this.title = jsonText.getString("name");
-        this.isOpen = jsonText.getBoolean("isOpen");
+//        this.isOpen = jsonText.getBoolean("isOpen");
+        this.open = jsonText.getInt("open");
+        this.close = jsonText.getInt("close");
         this.phone = jsonText.getString("phone");
         this.thumb_url = jsonText.getString("thumb_url");
         this.latitude = jsonText.getDouble("placeWi");
@@ -47,6 +52,12 @@ public class Shops extends Activity {
     }
     public String getT(){
         return title;
+    }
+    public int getOpen(){
+        return this.open;
+    }
+    public int getClose(){
+        return this.close;
     }
     public boolean getIsOpen(){
         return isOpen;

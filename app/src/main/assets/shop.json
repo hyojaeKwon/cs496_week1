@@ -8,7 +8,8 @@
         "#재밌는"
       ],
       "phone" : "0507-1442-2930",
-      "isOpen" : true,
+      "open" : 10,
+      "close" : 22,
       "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200629_262%2F15934114736575MdQ9_JPEG%2FLbfRJmfwF-QBgqlAKAohKGtn.jpg",
       "placeWi" : 36.35300294057797,
       "placeKy" : 127.34561561507175
@@ -21,10 +22,10 @@
         "#장난감백화점",
         "#장난감할인마트",
         "#장난감도매"
-
       ],
       "phone" : "042-523-9642",
-      "isOpen" : false,
+      "open" : 9,
+      "close" : 21,
       "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20211221_230%2F1640055807495XTRz3_JPEG%2FKakaoTalk_20211220_164043593_04.jpg",
       "placeWi" : 36.32410691620855,
       "placeKy" : 127.37410254211787
@@ -38,7 +39,8 @@
         "#토이대전매장"
       ],
       "phone" : "0507-1362-1988",
-      "isOpen" : true,
+      "open" : 10,
+      "close" : 21,
       "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20181012_48%2F1539323931018NLK9d_JPEG%2F2vzwqBpqagLZRf-P-vZKoDvA.jpg",
       "placeWi" : 36.349316239862695,
       "placeKy" : 127.40054450661205
@@ -52,7 +54,8 @@
         "#피규어"
       ],
       "phone" : "0507-1406-0132",
-      "isOpen" : true,
+      "open" : 10,
+      "close" : 17,
       "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210121_20%2F16112153971186PAaB_JPEG%2Fn-fBOGHlDxy2FaE5ww-HP_gO.jpg",
       "placeWi" : 36.34017455314034,
       "placeKy" : 127.39046832998011
@@ -66,7 +69,8 @@
         "#세종드론"
       ],
       "phone" : "0507-1405-6157",
-      "isOpen" : false,
+      "open" : 0,
+      "close" : 24,
       "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200507_117%2F1588780565016Ax3lO_JPEG%2FxKIjTpF0YG1YoKro2vEv9REL.jpg",
       "placeWi" : 36.37472212058984,
       "placeKy" : 127.32046497720631
@@ -81,7 +85,8 @@
         "#백일선물"
       ],
       "phone" : "042-825-8247",
-      "isOpen" : true,
+      "open" : 0,
+      "close" : 24,
       "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20160217_95%2F1455697866151w2glW_JPEG%2F176162573922903_0.jpeg",
       "placeWi" : 36.33512375065493,
       "placeKy" : 127.31113565561246
@@ -96,7 +101,8 @@
       "#실내놀이터"
       ],
       "phone" : "070-4103-3304",
-      "isOpen" : true,
+      "open" : 13,
+      "close" : 19,
       "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20171208_276%2F1512726678657czGiO_JPEG%2FAs_UKIg4WLS60477piWY3NGM.jpg",
       "placeWi" : 36.35300294057797,
       "placeKy" : 127.34561561507175
@@ -111,7 +117,8 @@
       "#대전건담"
       ],
       "phone" : "0507-1407-3276",
-      "isOpen" : true,
+      "open" : 11,
+      "close" : 20,
       "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20170405_57%2F1491361161892ufp17_JPEG%2F186355518941425_3.jpeg",
       "placeWi" : 36.34670122706396,
       "placeKy" : 127.33477658444791
@@ -126,7 +133,8 @@
         "#프로그래밍교육"
       ],
       "phone" : "070-8244-4810",
-      "isOpen" : false,
+      "open" : 9,
+      "close" : 18,
       "thumb_url" : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20150901_19%2F1441109069959ScK00_JPEG%2F166666405155123_0.jpeg",
       "placeWi" : 36.32616469891875,
       "placeKy" : 127.33881424211793

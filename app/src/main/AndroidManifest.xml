@@ -14,15 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rudolph_king"
         android:usesCleartextTraffic="true">
-
         <activity
             android:name=".activities.BuyItems"
-            android:theme="@style/Transparent"
             android:exported="false"
-            android:parentActivityName=".activities.MainActivity">
-
-
-        </activity>
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/Transparent"></activity>
         <activity
             android:name=".activities.CallActivity"
             android:exported="false"
@@ -30,17 +26,27 @@
         <activity
             android:name=".activities.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--            <intent-filter>-->
+<!--&lt;!&ndash;                <action android:name="android.intent.action.MAIN" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;                <category android:name="android.intent.category.LAUNCHER" />&ndash;&gt;-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".activities.PhotoActivity"
             android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".activities.WishListActivity"
-            android:parentActivityName=".activities.MainActivity" />
+
+            android:name=".activities.LoadingActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+        </activity>
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="f7bbe05a7dd4df86ee8166e2e1a8d6b1" />
