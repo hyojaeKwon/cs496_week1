@@ -101,15 +101,15 @@ Intent에 arraylist의 position을 전달해 activity가 이동해도 정확한 
 
 ---
 
-<img src="gifs\changePicContent.gif" style="zoom:50%;" align="left"/>
+<img src="gifs\changePicContent.gif" style="zoom:50%; align:left"/>
 
-<img src="gifs\changePicName.gif" style="zoom:50%;" align="left"/>
+<img src="gifs\changePicName.gif" style="zoom:50%; align:left"/>
 
-<img src="D:\code\cs496\week1\gifs\deletePic.gif" alt="deletePic" style="zoom:50%;" />
+<img src="gifs\deletePic.gif" alt="deletePic" style="zoom:50%; align:left" />
 
-<img src="gifs\inPic.gif" style="zoom:50%;" align="left"/>
+<img src="gifs\inPic.gif" style="zoom:50%; align:left"/>
 
-<img src="gifs\uploadPic.gif" style="zoom:50%;" align="left"/>
+<img src="gifs\uploadPic.gif" style="zoom:50%; align:left"/>
 
 
 
