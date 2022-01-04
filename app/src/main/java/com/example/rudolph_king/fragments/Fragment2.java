@@ -33,6 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -66,15 +67,6 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment2.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Fragment2 newInstance(String param1, String param2) {
         Fragment2 fragment = new Fragment2();
         Bundle args = new Bundle();

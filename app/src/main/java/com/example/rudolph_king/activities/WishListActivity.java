@@ -58,6 +58,7 @@ public class WishListActivity extends AppCompatActivity {
             Log.e("index", String.valueOf(index));
             giftWishList.add(Fragment3.mGiftList.get(index));
         }
+        MainActivity.updateJSONWishList(Fragment3.mWishList);
     }
 
     @Override

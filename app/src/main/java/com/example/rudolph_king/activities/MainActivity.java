@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -37,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private long backKeyPressedTime = 0;
     private Toast toast;
     public static ArrayList<GalleryImage> reviewList = new ArrayList<GalleryImage>();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -118,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
-
                     Fragment2.setReviewInfo("", "", "", "", imageUriList, true);
                 }
             }
@@ -177,6 +175,35 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             jo.put("Reviews", ja);
+
+            try {
+                FileOutputStream fileOutputStream = mContext.openFileOutput(fileName, Context.MODE_PRIVATE);
+                //Convert JSON String to Bytes and write() it
+                fileOutputStream.write(jo.toString().getBytes());
+                //Finally flush and close FileOutputStream
+                fileOutputStream.flush();
+                fileOutputStream.close();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateJSONWishList(ArrayList<Integer> wishIdList) {
+        JsonRead jr = new JsonRead();
+        JSONObject jo = jr.reading(mContext, "wishes.json");
+        String fileName = "wishes.json";
+        File file = new File(mContext.getFilesDir(), fileName);
+        file.delete();
+        try {
+            JSONArray ja = jo.getJSONArray("Wishes");
+            for (int j = 0; j < wishIdList.size(); j++) {
+                ja.put(String.valueOf(wishIdList.get(j)));
+                Log.e("added wishList", String.valueOf(ja.length()));
+            }
+            jo.put("Wishes", ja);
 
             try {
                 FileOutputStream fileOutputStream = mContext.openFileOutput(fileName, Context.MODE_PRIVATE);
