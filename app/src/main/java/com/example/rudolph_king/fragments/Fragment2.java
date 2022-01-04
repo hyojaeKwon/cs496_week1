@@ -2,6 +2,7 @@ package com.example.rudolph_king.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -105,6 +106,8 @@ public class Fragment2 extends Fragment implements ReviewAdapter.OnListItemSelec
 
             final AlertDialog dialog = builder.create();
 
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            dialog.setView(view, 0, 0, 0, 0);
             // 삽입 버튼을 클릭했을 때
             ButtonSubmit.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {

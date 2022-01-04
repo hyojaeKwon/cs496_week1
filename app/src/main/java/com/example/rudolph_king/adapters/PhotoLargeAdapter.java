@@ -48,8 +48,9 @@ public class PhotoLargeAdapter extends RecyclerView.Adapter<PhotoLargeAdapter.Vi
         Uri photo = mDataset.get(position);
         Glide.with(mContext)
             .load(photo)
-            .override(1080, 1080)
+            .override(1040, 1040)
             .into(holder.img_thumb);
+        holder.img_thumb.setClipToOutline(true);
 //        Log.e("viewhodler", photo.getPath()
     }
 
