@@ -38,6 +38,9 @@
         <activity
             android:name=".activities.PhotoActivity"
             android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.WishListActivity"
+            android:parentActivityName=".activities.MainActivity" />
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="f7bbe05a7dd4df86ee8166e2e1a8d6b1" />

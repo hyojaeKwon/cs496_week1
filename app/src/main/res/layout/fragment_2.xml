@@ -24,6 +24,6 @@
         android:src="@android:drawable/ic_input_add"
         android:contentDescription="@string/app_name"
         app:tint="@color/off_white"
-        app:backgroundTint="@color/green_500"
+        app:backgroundTint="@color/red_500"
         />
 </FrameLayout>

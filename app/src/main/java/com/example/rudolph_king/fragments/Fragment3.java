@@ -1,6 +1,7 @@
 package com.example.rudolph_king.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import com.example.rudolph_king.Gift;
 import com.example.rudolph_king.R;
 import com.example.rudolph_king.activities.JsonRead;
+import com.example.rudolph_king.activities.PhotoActivity;
+import com.example.rudolph_king.activities.WishListActivity;
 import com.example.rudolph_king.adapters.GitfAdapter;
 
 import org.json.JSONArray;
@@ -34,7 +37,7 @@ import java.util.ArrayList;
 public class Fragment3 extends Fragment {
     public static ArrayList<Gift> mGiftList = null;
     private static ArrayList<Gift> mSelectedList = null;
-    private static ArrayList<Integer> mGiftIdList = null;
+    public static ArrayList<Integer> mGiftIdList = null;
     public static ArrayList<Integer> mWishList = null;
     private static int mSelectedListId = 0;
     private static final int mSelectedColor = 0xFFDE5F57;
@@ -240,7 +243,17 @@ public class Fragment3 extends Fragment {
         btnWishList.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                WishListActivity.refreshWishList();
+                Intent intent = new Intent(getContext(), WishListActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
 
+        gitfAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                recyclerView.setAdapter(gitfAdapter);
             }
         });
         return view;
