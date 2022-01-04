@@ -59,32 +59,10 @@ public class MainActivity extends AppCompatActivity {
     private Toast toast;
     public static ArrayList<GalleryImage> reviewList = new ArrayList<GalleryImage>();
 
-    private void getHashKey(){
-        PackageInfo packageInfo = null;
-        try {
-            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        if (packageInfo == null)
-            Log.e("KeyHash", "KeyHash:null");
-
-        for (Signature signature : packageInfo.signatures) {
-            try {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            } catch (NoSuchAlgorithmException e) {
-                Log.e("KeyHash", "Unable to get MessageDigest. signature=" + signature, e);
-            }
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         mContext = this;
-        getHashKey();
         setContentView(R.layout.activity_main);
 
         // setting action bar
@@ -157,12 +135,6 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
-
-                    // create new review
-//                    GalleryImage newReview = new GalleryImage();
-//                    newReview.setUriList(imageUriList);
-//                    // reviewList.add(0, newReview);
-//                    updateJSONImages(newReview);
                     Fragment2.setReviewInfo("", "", "", "", imageUriList, true);
                 }
             }
@@ -170,6 +142,74 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void updateJSONImages(GalleryImage review, int position) {
+        JsonRead jr = new JsonRead();
+        JSONObject jo = jr.reading(mContext, "images.json");
+        FileInputStream fis = null;
+        String fileName = "images.json";
+        try {
+            fis = mContext.openFileInput(fileName);
+            InputStreamReader inputStreamReader =
+                    new InputStreamReader(fis, StandardCharsets.UTF_8);
+            StringBuilder stringBuilder = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
+                String line = reader.readLine();
+                while (line != null) {
+                    stringBuilder.append(line).append('\n');
+                    line = reader.readLine();
+                }
+            } catch (IOException e) {
+                // Error occurred when opening raw file for reading.
+            } finally {
+                String contents = stringBuilder.toString();
+                jo = new JSONObject(contents);
+            }
+        } catch (FileNotFoundException | JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            JSONArray ja = jo.getJSONArray("Reviews");
+            if (position < 0) {
+                JSONObject jsonObject = new JSONObject();//배열 내에 들어갈 json
+                jsonObject.put("uriList", review.getUriList().toString());
+                jsonObject.put("name", review.getReviewName());
+                jsonObject.put("members", review.getReviewMembers());
+                jsonObject.put("date", review.getReviewDate());
+                jsonObject.put("desc", review.getReviewDescription());
+                ja.put(jsonObject);
+                Log.e("newAdded", String.valueOf(ja.length()));
+            } else {
+                if (review != null) {
+                    JSONObject jsonObject = new JSONObject();//배열 내에 들어갈 json
+                    jsonObject.put("uriList", review.getUriList().toString());
+                    jsonObject.put("name", review.getReviewName());
+                    jsonObject.put("members", review.getReviewMembers());
+                    jsonObject.put("date", review.getReviewDate());
+                    jsonObject.put("desc", review.getReviewDescription());
+                    ja.put(ja.length() - position - 1, jsonObject);
+                    Log.e("newAdded", String.valueOf(ja.length()));
+                } else {
+                    ja.remove(ja.length() - position - 1);
+                    Log.e("deleted", String.valueOf(ja.length()));
+                }
+            }
+            jo.put("Reviews", ja);
+
+            try {
+                FileOutputStream fileOutputStream = mContext.openFileOutput(fileName, Context.MODE_PRIVATE);
+                //Convert JSON String to Bytes and write() it
+                fileOutputStream.write(jo.toString().getBytes());
+                //Finally flush and close FileOutputStream
+                fileOutputStream.flush();
+                fileOutputStream.close();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateJSONWishList(GalleryImage review, int position) {
         JsonRead jr = new JsonRead();
         JSONObject jo = jr.reading(mContext, "images.json");
         FileInputStream fis = null;
