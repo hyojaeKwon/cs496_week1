@@ -6,13 +6,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,8 +18,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.rudolph_king.Gift;
 import com.example.rudolph_king.R;
 import com.example.rudolph_king.activities.BuyItems;
-import com.example.rudolph_king.Shops;
-import com.example.rudolph_king.activities.MainActivity;
 import com.example.rudolph_king.fragments.Fragment3;
 
 import java.text.DecimalFormat;
@@ -153,12 +146,8 @@ public class GitfAdapter extends RecyclerView.Adapter<GitfAdapter.ItemViewHolder
 
                     if (likeBtn.isSelected()) {
                         Fragment3.mWishList.add((Integer) gift.getId());
-                        Log.e("Gift Added", String.valueOf(Fragment3.mWishList.size()));
-                        Log.e("List", Fragment3.mWishList.toString());
                     } else {
                         Fragment3.mWishList.remove((Integer) gift.getId());
-                        Log.e("Gift Removed", String.valueOf(Fragment3.mWishList.size()));
-                        Log.e("List", Fragment3.mWishList.toString());
                     }
                 }
             });

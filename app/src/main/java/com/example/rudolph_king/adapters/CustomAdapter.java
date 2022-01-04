@@ -73,7 +73,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                     if(position != RecyclerView.NO_POSITION){
                         Intent intent = new Intent(context, CallActivity.class)
                                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        Log.e("position",Integer.toString(position));
                         intent.putExtra("pos",position);
 
                         context.startActivity(intent);
