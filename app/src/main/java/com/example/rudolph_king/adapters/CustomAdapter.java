@@ -27,7 +27,6 @@ import com.example.rudolph_king.R;
 import com.example.rudolph_king.Shops;
 import com.example.rudolph_king.activities.CallActivity;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 
@@ -69,9 +68,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     Context context = view.getContext();
-//                    Log.e("position",Integer.toString(position));
 
-
+                    //recyclerview의 index받아서 새로운 activity 구동
                     if(position != RecyclerView.NO_POSITION){
                         Intent intent = new Intent(context, CallActivity.class)
                                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -83,7 +81,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                     }
                 }
             });
-//            iv_tags = (TextView) view.findViewById(id.textview_tag_list);
 
         }
 
@@ -124,9 +121,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         viewHolder.tv_summary.setText(shop.getPhone());
 
 
-        LocalTime now = LocalTime.now();
-        int nowHour = now.getHour();
-        if (nowHour>=shop.getOpen() && nowHour<shop.getClose()){
+        if (shop.getIsOpen() == true){
             viewHolder.iv_open.setText("영업 중");
             viewHolder.iv_open.setTextColor(ContextCompat.getColor(context, color.open));
         } else {
@@ -151,7 +146,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             td.add(tagData);
         }
 
-//        Log.e("nammme", td.get(0).toString());
         TagAdapter ta = new TagAdapter(context, td);
         LinearLayoutManager manager = new LinearLayoutManager(context);
 
