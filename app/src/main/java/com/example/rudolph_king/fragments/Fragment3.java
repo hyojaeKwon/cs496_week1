@@ -2,6 +2,7 @@ package com.example.rudolph_king.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.example.rudolph_king.Gift;
 import com.example.rudolph_king.R;
 import com.example.rudolph_king.activities.JsonRead;
+import com.example.rudolph_king.activities.MainActivity;
 import com.example.rudolph_king.activities.PhotoActivity;
 import com.example.rudolph_king.activities.WishListActivity;
 import com.example.rudolph_king.adapters.GitfAdapter;
@@ -27,6 +29,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -133,6 +142,7 @@ public class Fragment3 extends Fragment {
         }
         if (mWishList == null) {
             mWishList = new ArrayList<Integer>();
+            bringPrevWishList();
         }
     }
 
@@ -259,6 +269,55 @@ public class Fragment3 extends Fragment {
         return view;
     }
 
+    private void bringPrevWishList() {
+        // 위시 리스트를 위한 json 파일 불러오기
+        mWishList.clear();
+        JSONObject jo = null;
+        String fileName = "wishes.json";
+        FileInputStream fis = null;
+        // 최초 설치 시 파일 초기화
+//        File file = new File(this.getActivity().getFilesDir(), fileName);
+//        file.delete();
+        try {
+            fis = getContext().openFileInput(fileName);
+            InputStreamReader inputStreamReader =
+                    new InputStreamReader(fis, StandardCharsets.UTF_8);
+            StringBuilder stringBuilder = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
+                String line = reader.readLine();
+                while (line != null) {
+                    stringBuilder.append(line).append('\n');
+                    line = reader.readLine();
+                }
+            } catch (IOException e) {
+                // Error occurred when opening raw file for reading.
+            } finally {
+                String contents = stringBuilder.toString();
+                jo = new JSONObject(contents);
+            }
+        } catch (FileNotFoundException | JSONException e) {
+            e.printStackTrace();
+            JsonRead jr = new JsonRead();
+            jo = jr.reading(getContext(), "wishes.json");
+        }
+
+        //reviewlist에 JSONObject 추가하기
+        JSONArray ja = null;
+        try {
+            ja = jo.getJSONArray("Wishes");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        for(int i = 0 ; i < ja.length() ; i++){
+            try {
+                int wishId = ja.getInt(i);
+                mWishList.add(wishId);
+            } catch (JSONException e) {
+            }
+        }
+    }
+
     @Override
     public void onResume() {
         setStatus(0);
@@ -266,6 +325,7 @@ public class Fragment3 extends Fragment {
         mSelectedListId = 0;
         changeList(mSelectedListId);
         gitfAdapter.filterList(mSelectedList);
+        MainActivity.updateJSONWishList(mWishList);
         super.onResume();
     }
 

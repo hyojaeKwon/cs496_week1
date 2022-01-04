@@ -94,6 +94,7 @@ OR
 
    - 
 
+
  Shops라는 Class를 이용해 가게 정보들을 객체화해서 나타냈다.
 
  Comparator 를 이용하여 가게의 영업 상태에 따라 정렬했다.
@@ -103,6 +104,7 @@ OR
 2. 가게를 누르면 가게 위치와 전화 거는 기능을 제공
 
 ![](gifs\1.gif) *UX : 사용자가 앱을 한손으로 이용할 수 있도록 전화걸기 버튼을 비롯한 정보들을 아래에 배치*
+
 
 
 
@@ -117,6 +119,7 @@ OR
 3. 검색 기능 제공
 
 ![](gifs\search.gif) *UX : 검색 버튼을 따로 만들지 않아, 사용자가 더욱 빠른 검색을 할 수 있도록 함.*
+
 
  Edit text를 이용하여 가게 검색 기능을 제공했다.
 
@@ -139,6 +142,7 @@ Intent에 arraylist의 position을 전달해 activity가 이동해도 정확한 
 ![inPic](gifs\inPic.gif)
 
 ![uploadPic](gifs\uploadPic.gif)
+
 
 
 
@@ -166,6 +170,7 @@ Intent에 arraylist의 position을 전달해 activity가 이동해도 정확한 
 
 ![](gifs\gift.gif)*UX : 직관적인 아이콘을 통해 사용자가 빠르게 선택할 수 있도록 함.*
 
+
 recyclerView를 이용하여 선물들을 로드할 수 있도록 함.
 
 각각 버튼을 눌렀을 때의 경우의 수를 int로 선언하여 적절한 recyclerView를 불러냄.
@@ -175,6 +180,7 @@ recyclerView를 이용하여 선물들을 로드할 수 있도록 함.
 2. 구매하기 버튼 클릭 시 구매 페이지로 이동기능
 
 ![](gifs\buyGift.gif)*UX : 구매하기 버튼을 아래쪽에 배치해  한손으로도 구매할 수 있도록 함. 버튼 이외의 부분을 누르면 뒤로 돌아가는 기능 구현함.*
+
 
 상품에 id값을 적용시켜 상품을 눌렀을 때 정확한 상품이 눌리도록 함.
 
@@ -196,6 +202,7 @@ intent에 id값을 넣은 후 activity를 전환시켜 옆 activity로 잘 넘�
 
 
 
+
 4. 찜 기능 제공
 
 ![](gifs\zzim_column.gif)*UX : 찜 버튼의 색상을 계속 교체할 수 있도록 하여, 본 상품이 찜한 상품인지 쉽게 확인할 수 있도록 함.*
@@ -203,5 +210,6 @@ intent에 id값을 넣은 후 activity를 전환시켜 옆 activity로 잘 넘�
 하트를 클릭하면 찜되도록 수정함
 
 눌린 찜들은 json파일에 저장하여 휴대폰이 꺼져도 다시 불러올 수 있도록 함.
+
 
 찜목록으로 이동하면 새로운 activity로 이동하여 recyclerView에 요소들을 다시 불러옴
